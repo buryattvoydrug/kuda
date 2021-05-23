@@ -1,0 +1,23 @@
+@import '../Constants';
+.main-page{
+  .items-list{
+    display: flex;
+    flex-wrap: wrap;
+    .item{
+      margin-right: 20px;
+    }
+    .item:nth-child(3n){
+      margin-right: 0;
+    }
+  }
+}
+@media(max-width:1279px){
+  .main-page{
+    .items-list{
+      justify-content: space-between;
+      .item{
+        margin-right: 0;
+      }
+    }
+  }
+}

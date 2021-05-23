@@ -1,0 +1,57 @@
+@import '../Constants';
+.footer-logo{
+  position: absolute;
+  width: 100vw;
+  left:-10px;
+  bottom:100px;
+  font-weight: 800;
+  font-size: 16vw;
+  letter-spacing: -0.065em;
+  strong{
+    font-weight: 300;
+  }
+}
+footer{
+  position: absolute;
+  bottom:25px;
+  .footer{
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  
+
+
+
+  //fonts
+  .footer__text{
+    font-size: 14px;
+    letter-spacing: -0.065em;
+  }
+  .copyright{
+    font-size: 14px;
+    letter-spacing: -0.065em;
+  }
+}
+@media(max-width:1279px){
+  footer{
+    bottom:20px;
+    .footer__text,
+    .footer__text strong{
+      line-height: 100%;
+    }
+    .footer__text{
+      margin-bottom: 35px;
+    }
+    .wrapper{
+      margin: 0;
+    }
+    .footer{
+      align-items: center;
+    }
+  }
+  .footer-logo{
+    left:-3px;
+    bottom:160px;
+  }
+}

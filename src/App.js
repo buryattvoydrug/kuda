@@ -1,8 +1,20 @@
-import './scss/_Fonts.scss'
+import './scss/_Style.scss'
+import Main from './Pages/Main.js'
+import Header from './Components/Header';
+import Footer from './Components/Footer';
+
+
 function App() {
   return (
     <>
-        <h1>Куда пойдем?</h1>
+      <Header/>
+      <div className="wrapper">
+        
+
+        <Main />
+
+        <Footer/>
+      </div>
     </>
   );
 }
