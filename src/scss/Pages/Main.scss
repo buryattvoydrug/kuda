@@ -1,5 +1,12 @@
 @import '../Constants';
 .main-page{
+  .categories{
+    display: flex;
+    margin: 20px 0 15px;
+    .categorie__name{
+      margin-right: 60px;
+    }
+  }
   .items-list{
     display: flex;
     flex-wrap: wrap;
@@ -9,6 +16,15 @@
     .item:nth-child(3n){
       margin-right: 0;
     }
+  }
+
+  //fonts
+  .categorie__name{
+    font-size: 18px;
+    font-weight: 300;
+  }
+  .active_name{
+    font-weight: 800;
   }
 }
 @media(max-width:1279px){

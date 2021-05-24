@@ -20,6 +20,9 @@ body{
 }
 .sidebar-container{
   width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 button{
   background: none;
@@ -29,12 +32,26 @@ button{
   padding: 75px 0 150px;
   display: flex;
 }
-.load-more{
-  display: block;
-  margin: 30px auto 0;
+.button{
   background: #000;
   padding: 12px 30px;
   color:#fff;
+}
+.load-more{
+  display: block;
+  margin: 30px auto 0;
+}
+.right-banner{
+  width: 100%;
+  height: 600px;
+  background: #000;
+  opacity: 0.3;
+}
+.main-banner{
+  width: 100%;
+  height: 60px;
+  background: #000;
+  opacity: 0.3;
 }
 @media (max-width:1279px) {
   .wrapper{
