@@ -17,16 +17,32 @@
   }
   letter-spacing: -0.065em;
 }
+.wide_share{
+  margin: 45px 0 0 0;
+  width: 100%;
+  display: flex;
+  height: 140px;
+}
 @media(max-width:1279px){
   .share{
     height: 300px;
     width: 48%;
     padding: 30px 0 0 20px;
     margin: 0;
+
     //fonts
     .share__title{
       font-size: 20px;
       margin-bottom: 70px;
+    }
+  }
+  .wide_share{
+    margin: 45px 0 25px 0;
+    width: 100%;
+    flex-direction: column;
+    height: 150px;
+    .share__title{
+      margin-bottom: 10px;
     }
   }
 }

@@ -39,3 +39,9 @@
   }
   letter-spacing: -0.065em;
 }
+@media(max-width:1279px){
+  .random{
+    max-width: 100%;
+    padding-left: 20px;
+  }
+}

@@ -5,25 +5,22 @@ import Random from '../Components/Random'
 import Share from '../Components/Share'
 import SocialLinks from '../Components/SocialLinks'
 
-import '../scss/Pages/Main.scss'
+import '../scss/Pages/Favs.scss'
 
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 
-export default function Main() {
+export default function Favs() {
   return (
     <>
-      <div className="main-page page">
+      <div className="favs-page page">
         <div className="container">
           <div className="main-banner"></div>
-          <div className="categories">
-            <span className="categorie__name active_name">Все</span>
-            <span className="categorie__name">Концерты</span>
-            <span className="categorie__name">Фудкорты</span>
-            <span className="categorie__name">Кофе</span>
-            <span className="categorie__name">Секонды</span>
+          <div className="favs-head">
+            <h2 className="favs__title">Избранное</h2>
+            <button className="exit">выйти <br />из профиля</button>
           </div>
           <div className="items-list">
             <CafeItem wide type="Фудкорт"/>
@@ -31,13 +28,12 @@ export default function Main() {
             <CafeItem />
             <CafeItem />
             <CafeItem />
-            <Share/>
-            <CafeItem />
-            {isMobile? <div className="right-banner"></div>:null}
             <CafeItem wide/>
             <CafeItem />
           </div>
           <button className="button load-more">Загрузить ещё</button>
+          <Share wide/>
+          {isMobile? <div className="right-banner"></div>:null}
           {isMobile? <Random/> : null}
         </div>
         {isMobile? null:
