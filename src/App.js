@@ -6,6 +6,8 @@ import Favs from './Pages/Favs';
 import PageNotFound from './Pages/PageNotFound';
 import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
+import Single from './Pages/Single';
+import Foodcort from './Pages/Foodcort';
 
 
 function App() {
@@ -18,7 +20,9 @@ function App() {
         {/* <Main /> */}
         {/* <Favs/> */}
         {/* <PageNotFound/> */}
-        <SignIn/>
+        {/* <SignIn/> */}
+        {/* <Single/> */}
+        <Foodcort/>
 
         <Footer/>
       </div>
