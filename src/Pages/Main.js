@@ -1,6 +1,7 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
 import CafeItem from '../Components/CafeItem'
+import News from '../Components/News'
 import Random from '../Components/Random'
 import Share from '../Components/Share'
 import SocialLinks from '../Components/SocialLinks'
@@ -18,6 +19,7 @@ export default function Main() {
       <div className="main-page page">
         <div className="container">
           <div className="main-banner"></div>
+          <News/>
           <div className="categories">
             <span className="categorie__name active_name">Все</span>
             <span className="categorie__name">Концерты</span>
