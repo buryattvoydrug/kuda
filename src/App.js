@@ -10,6 +10,8 @@ import Single from './Pages/Single';
 import Foodcort from './Pages/Foodcort';
 import Places from './Pages/Places';
 import Route from './Pages/Route';
+import BlogList from './Pages/BlogList';
+import SingleBlog from './Pages/SingleBlog';
 
 
 function App() {
@@ -18,8 +20,10 @@ function App() {
       <Header/>
       <div className="wrapper">
         
+        <SingleBlog/>
 
-        <Main />
+        {/* <Main /> */}
+        {/* <BlogList/> */}
         {/* <Favs/> */}
         {/* <PageNotFound/> */}
         {/* <SignIn/> */}
