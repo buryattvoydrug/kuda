@@ -1,0 +1,20 @@
+@import '../../Constants';
+.nearby{
+  margin: 50px 0 70px;
+  .nearby__title{
+    width: 100%;
+    border-bottom:1px solid #000;
+    font-weight: 300;
+    font-size: 48px;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+  }
+}
+@media(max-width:1279px){
+  .nearby{
+    .nearby__title{
+      font-size: 32px;
+      padding-bottom: 10px;
+    }
+  }
+}

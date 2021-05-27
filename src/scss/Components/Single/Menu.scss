@@ -1,0 +1,51 @@
+@import '../../Constants';
+.menu{
+  margin: 20px 0 60px 140px;
+  width: 270px;
+  .menu__title{
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+  }
+  .menu-block{
+    margin: 15px 10px;
+    .menu__item{
+      margin-bottom: 7px;
+      display: flex;
+      justify-content: space-between;
+      .row-dots{
+        flex:1;
+        display: block;
+        margin: 0 4px;
+        height: 18px;
+        border-bottom: 1px dashed #000;
+      }
+    }
+  }
+  .corners-block{
+    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+    .corner__item{
+      margin-bottom: 7px;
+    }
+    .corner__item:after{
+      content: '•';
+      margin: 0 10px;
+      font-size: 10px;
+    }
+  }
+  .menu__title{
+    font-size: 24px;
+    font-weight: 300;
+  }
+  .menu__item,.corner__item{
+    font-weight: 300;
+    font-size: 18px;
+  }
+}
+@media(max-width:1279px){
+  .menu{
+    margin: 15px 0 55px;
+  }
+}

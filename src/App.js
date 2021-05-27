@@ -8,6 +8,8 @@ import SignIn from './Pages/SignIn';
 import SignUp from './Pages/SignUp';
 import Single from './Pages/Single';
 import Foodcort from './Pages/Foodcort';
+import Places from './Pages/Places';
+import Route from './Pages/Route';
 
 
 function App() {
@@ -17,13 +19,14 @@ function App() {
       <div className="wrapper">
         
 
-        {/* <Main /> */}
+        <Main />
         {/* <Favs/> */}
         {/* <PageNotFound/> */}
         {/* <SignIn/> */}
         {/* <Single/> */}
-        <Foodcort/>
-
+        {/* <Foodcort/> */}
+        {/* <Places/> */}
+        {/* <Route/> */}
         <Footer/>
       </div>
     </>
