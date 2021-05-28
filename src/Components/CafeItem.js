@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import '../scss/Components/CafeItem.scss'
 
-function CafeItem({wide,type}) {
+function CafeItem({wide,type,post}) {
   return (
     <>
       <div className={wide? "item cafe-item cafe-item-wide" : "item cafe-item"}>
@@ -21,10 +22,10 @@ function CafeItem({wide,type}) {
             </div>
             <img src="images/vegan.svg" alt="" className="vegan-icon" />
           </div>
-          <h3 className="item__title">Пицца 22 сантиметра сантиметра</h3>
+          <Link to={`/post/${post.id}`} className="item__title">{post.title.rendered}</Link>
           <div className="address">
             <img src="images/pin.svg" alt="" className="pin" />
-            <span className="address__text">ул. Солянка, 1/2</span>
+            <span className="address__text">{post.acf["cafe-item-address"]}</span>
           </div>
           <button className="fave__button">
             <img src="images/fave.svg" alt="" />

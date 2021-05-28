@@ -1,14 +1,15 @@
 import React from 'react'
-
+import renderHTML from "react-render-html";
 import '../../scss/Components/Single/Menu.scss'
 
-function Menu() {
+function Menu({post}) {
   return (
     <>
       <div className="menu">
                   <h4 className="menu__title">Меню</h4>
                   <ul className="menu-block">
-                    <li className="menu__item">
+                  {renderHTML( post.acf["cafe-item-menu"] )}
+                    {/* <li className="menu__item">
                       <span>Пепперони</span>
                       <span className="row-dots"></span>
                       <span>380 <img src="images/rub.svg" alt=""/></span>
@@ -27,7 +28,7 @@ function Menu() {
                       <span>Пепперони</span>
                       <span className="row-dots"></span>
                       <span>380 <img src="images/rub.svg" alt=""/></span>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
     </>

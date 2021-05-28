@@ -9,10 +9,9 @@ import SignUp from './Pages/SignUp';
 import Single from './Pages/Single';
 import Foodcort from './Pages/Foodcort';
 import Places from './Pages/Places';
-import Route from './Pages/Route';
 import BlogList from './Pages/BlogList';
 import SingleBlog from './Pages/SingleBlog';
-
+import {BrowserRouter ,Route, Switch} from 'react-router-dom'
 
 function App() {
   return (
@@ -20,17 +19,22 @@ function App() {
       <Header/>
       <div className="wrapper">
         
-        <SingleBlog/>
-
-        {/* <Main /> */}
-        {/* <BlogList/> */}
-        {/* <Favs/> */}
-        {/* <PageNotFound/> */}
-        {/* <SignIn/> */}
-        {/* <Single/> */}
-        {/* <Foodcort/> */}
-        {/* <Places/> */}
-        {/* <Route/> */}
+        <BrowserRouter >
+        <Switch>
+          {/* <SingleBlog/> */}
+          {/* <BlogList/> */}
+          {/* <Favs/> */}
+          {/* <PageNotFound/> */}
+          {/* <SignIn/> */}
+          <Route exact path="/" component={Main}/>
+          <Route exact path="/post/:id" component={Single}/>
+          {/* <Foodcort/> */}
+          {/* <Places/> */}
+          {/* <Route/> */}
+        </Switch>
+          
+        </BrowserRouter>
+        
         <Footer/>
       </div>
     </>

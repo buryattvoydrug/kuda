@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
 import Share from '../Components/Share';
@@ -9,9 +10,11 @@ import WideBlock from '../Components/Single/WideBlock';
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
-function SingleBlog() {
-  return (
-    <>
+export default class SingleBlog extends React.Component {
+  
+  render() {
+    return (
+      <>
       <section className="single-page page">
         <div className="container">
           <div className="main-banner"></div>
@@ -39,7 +42,6 @@ function SingleBlog() {
         }
       </section>
     </>
-  )
+    )
+  }
 }
-
-export default SingleBlog

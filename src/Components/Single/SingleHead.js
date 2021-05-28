@@ -5,7 +5,8 @@ import Cornners from './Cornners'
 import Menu from './Menu'
 
 
-function SingleHead({corners}) {
+function SingleHead({corners,post}) {
+  console.log(post)
   return (
     <>
       <section className="single-head">
@@ -17,10 +18,10 @@ function SingleHead({corners}) {
               <div className="col cafe-item">
                 <div className="item-info">
                   
-                  <h3 className="item__title">Пицца 22 сантиметра сантиметра</h3>
+                  <h3 className="item__title">{post.acf["cafe-item-title"]}</h3>
                   <div className="address">
                     <img src="images/pin.svg" alt="" className="pin" />
-                    <span className="address__text">ул. Солянка, 1/2</span>
+                    <span className="address__text">{post.acf["cafe-item-address"]}</span>
                   </div>
                   <div className="prefs">
                     <div className="price">
@@ -36,20 +37,20 @@ function SingleHead({corners}) {
                     <img src="images/fave.svg" alt="" />
                   </button>
                 </div>
-                <img className="cafe-item__img" src="images/item.jpg" alt="" />
+                <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />
               </div>
               <div className="col">
-                {corners? <Cornners/>:<Menu/>}
-                <p className="head__text">Вже давно відомо, що <strong>читабельний</strong> зміст буде заважати зосередитись людині, яка оцінює композицію сторінки. Сенс використання Lorem Ipsum <strong>полягає</strong> в тому, що цей текст має більш-менш нормальне розподілення літер на відміну від, наприклад, <strong>"Тут іде текст. Тут іде текст."</strong> </p>
-                <p className="accent__text"><strong>Класичний текст</strong>, використовуваний <strong>з XVI сторіччя, наведено нижче для всіх</strong> зацікавлених.</p>
+                {corners? <Cornners/>:<Menu post={post}/>}
+                <p className="head__text">{post.acf["cafe-item-head__text"]}</p>
+                <p className="accent__text">{post.acf["cafe-item-accent__text"]}</p>
                 <button className="map__button">
                   <img src="images/tomap.png" alt="" />
                   <span>Как добраться?</span>
                 </button>
-                <button className="web__button">
+                <a href={post.acf["cafe-item-site__link"]} className="web__button">
                   <img src="images/web.png" alt="" />
                   <span>Сайт</span>
-                </button>
+                </a>
               </div>
             </div>
           </section>

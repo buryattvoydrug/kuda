@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
 import Random from '../Components/Random';
@@ -14,28 +15,58 @@ import '../scss/Pages/Single.scss'
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
-function Single() {
-  return (
-    <>
+export default class Single extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      loading:false,
+      post:{},
+      error:''
+    }
+  }
+  
+
+  componentDidMount(){
+    const wordPressSiteUrl="http://127.0.0.1/wordpress";
+    this.setState({loading:true},
+      ()=>{
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts/${this.props.match.params.id}`)
+        .then(res=>{this.setState({loading:false, post:res.data})})
+        .catch(error=>this.setState({loading:false,error:error.response.data}))
+      }
+    );
+  }
+
+  render() {
+    const {post}=this.state
+    return (
+      <>
       <section className="single-page page">
-        <div className="container">
+      <div className="container">
+
+      { Object.keys( post ).length ? (
+          <>
           <div className="main-banner"></div>
-          <SingleHead/>
+          <SingleHead post={post}/>
           {isMobile? 
           <div className="main-banner"></div>
           :null
           }
-          <WideBlock/>
+          <WideBlock post={post}/>
           {isMobile? 
           <Share wide/>
           :<div className="main-banner"></div>
           }
-          <SlimBlock/>
+          <SlimBlock post={post}/>
           {isMobile? 
           <div className="right-banner"></div> : null
           }
-          <SingleBottom/>
-        </div>
+          <SingleBottom post={post}/>
+          </>
+      
+      ):""}
+      </div>
+        
         {isMobile? null:
           <div className="sidebar-container">
             <Share/>
@@ -44,7 +75,6 @@ function Single() {
         }
       </section>
     </>
-  )
+    )
+  }
 }
-
-export default Single
