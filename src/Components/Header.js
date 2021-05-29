@@ -24,13 +24,13 @@ function Header() {
           <div className="search">
             <button className="to-search__button">
               <span>поиск</span>
-              {isMobile? null : <img src="images/search.svg" alt="" />}
+              {isMobile? null : <img src="http://localhost:3000/images/search.svg" alt="" />}
             </button>
           </div>
         </div>
         <div className="sidebar-container">
           <button className="fave__button">
-            <img src="images/fave.svg" alt="" />
+            <img src="http://localhost:3000/images/fave.svg" alt="" />
           </button>
         </div>
         <div className="row"></div>

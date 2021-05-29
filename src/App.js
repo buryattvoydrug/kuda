@@ -14,6 +14,8 @@ import SingleBlog from './Pages/SingleBlog';
 import {BrowserRouter ,Route, Switch} from 'react-router-dom'
 
 function App() {
+  const tmpLocation=window.location.href;
+  console.log(tmpLocation)
   return (
     <>
       <Header/>
@@ -27,7 +29,10 @@ function App() {
           {/* <PageNotFound/> */}
           {/* <SignIn/> */}
           <Route exact path="/" component={Main}/>
+          <Route exact path="/blog/" component={BlogList}/>
           <Route exact path="/post/:id" component={Single}/>
+          <Route exact path="/news/:id" component={SingleBlog}/>
+          <Route exact path="/foodcort/:id" component={Foodcort}/>
           {/* <Foodcort/> */}
           {/* <Places/> */}
           {/* <Route/> */}

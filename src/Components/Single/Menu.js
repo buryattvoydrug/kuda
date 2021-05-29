@@ -12,22 +12,22 @@ function Menu({post}) {
                     {/* <li className="menu__item">
                       <span>Пепперони</span>
                       <span className="row-dots"></span>
-                      <span>380 <img src="images/rub.svg" alt=""/></span>
+                      <span>380 <img src="http://localhost:3000/images/rub.svg" alt=""/></span>
                     </li>
                     <li className="menu__item">
                       <span>Пепперони</span>
                       <span className="row-dots"></span>
-                      <span>380 <img src="images/rub.svg" alt=""/></span>
+                      <span>380 <img src="http://localhost:3000/images/rub.svg" alt=""/></span>
                     </li>
                     <li className="menu__item">
                       <span>Пепперони</span>
                       <span className="row-dots"></span>
-                      <span>380 <img src="images/rub.svg" alt=""/></span>
+                      <span>380 <img src="http://localhost:3000/images/rub.svg" alt=""/></span>
                     </li>
                     <li className="menu__item">
                       <span>Пепперони</span>
                       <span className="row-dots"></span>
-                      <span>380 <img src="images/rub.svg" alt=""/></span>
+                      <span>380 <img src="http://localhost:3000/images/rub.svg" alt=""/></span>
                     </li> */}
                   </ul>
                 </div>

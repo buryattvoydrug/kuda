@@ -10,23 +10,23 @@ function Random() {
         <div className="random-block">
           <button className=" random__button active_button">
             <span>Еда</span>
-            <img src="images/icon.png" alt="" />
+            <img src="http://localhost:3000/images/icon.png" alt="" />
           </button>
           <button className="random__button">
             <span>Место <br />встречи</span>
-            <img src="images/icon.png" alt="" />
+            <img src="http://localhost:3000/images/icon.png" alt="" />
           </button>
           <button className="random__button">
             <span>Маршрут <br />прогулки</span>
-            <img src="images/icon.png" alt="" />
+            <img src="http://localhost:3000/images/icon.png" alt="" />
           </button>
           <button className="random__button">
             <span>Кофе</span>
-            <img src="images/icon.png" alt="" />
+            <img src="http://localhost:3000/images/icon.png" alt="" />
           </button>
           <button className="random__button">
             <span>Место <br />встречи</span>
-            <img src="images/icon.png" alt="" />
+            <img src="http://localhost:3000/images/icon.png" alt="" />
           </button>
         </div>
         <button className="button random__generate">Сгенерировать</button>

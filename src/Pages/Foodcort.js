@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
 import Random from '../Components/Random';
@@ -13,22 +14,47 @@ import '../scss/Pages/Single.scss'
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
-function Foodcort() {
-  return (
-    <>
+
+export default class Foodcort extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      loading:false,
+      foodcort:{},
+      error:''
+    }
+  }
+  
+  componentDidMount(){
+    window.scrollTo(0, 0)
+    const wordPressSiteUrl="https://localhost/wordpress";
+    this.setState({loading:true},
+      ()=>{
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/foodcorts/${this.props.match.params.id}`)
+        .then(res=>{this.setState({loading:false, foodcort:res.data})})
+        .catch(error=>this.setState({loading:false,error:error.response}))
+      }
+    );
+  }
+  render() {
+    const {foodcort}=this.state
+    
+    return (
+      <>
       <section className="single-page page">
         <div className="container">
+      { Object.keys( foodcort ).length ? (
+          <>
+          {console.log(foodcort.acf.corners)}
+
           <div className="main-banner"></div>
-          <SingleHead corners/>
+          <SingleHead post={foodcort} corners/>
           <section className="corners-page">
             <h2 className="corners__title">Корнеры</h2>
             <div className="corners">
-              <CornerItem/>
-              <CornerItem/>
-              <CornerItem/>
+              <CornerItem data={foodcort.acf.corners}/>
             </div>
           </section>
-
 
 
           {isMobile? 
@@ -41,7 +67,10 @@ function Foodcort() {
           {isMobile? 
           <div className="right-banner"></div> : null
           }
-          <SingleBottom/>
+          <SingleBottom post={foodcort} />
+          </>
+      ):""}
+
         </div>
         {isMobile? null:
           <div className="sidebar-container">
@@ -51,7 +80,6 @@ function Foodcort() {
         }
       </section>
     </>
-  )
+    )
+  }
 }
-
-export default Foodcort

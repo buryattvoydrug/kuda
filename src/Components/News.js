@@ -3,17 +3,16 @@ import React from 'react'
 import '../scss/Components/News.scss'
 import NewsItem from './Single/NewsItem'
 
-function News() {
+function News({news}) {
   return (
     <>
       <section className="news">
-        <NewsItem/>
-        <NewsItem/>
-        <NewsItem/>
-        <NewsItem/>
-        <NewsItem/>
-        <NewsItem/>
-        </section>
+      {
+        news.length? (news.map((newsitem,index)=>(
+          <NewsItem key={index} post={newsitem}/>
+        ))):''
+      }
+      </section>
       
     </>
   )

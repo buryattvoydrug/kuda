@@ -19,15 +19,23 @@ export default class Main extends React.Component {
     this.state={
       loading:false,
       posts:[],
+      news:[],
+      foodcorts:[],
       error:''
     }
   }
   componentDidMount(){
-    const wordPressSiteUrl="http://127.0.0.1/wordpress/";
+    const wordPressSiteUrl="https://localhost/wordpress/";
     this.setState({loading:true},
       ()=>{
         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts`)
         .then(res=>{this.setState({loading:false, posts:res.data})})
+        .catch(error=>this.setState({loading:false,error:error.responce.data}))
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/news`)
+        .then(res=>{this.setState({loading:false, news:res.data})})
+        .catch(error=>this.setState({loading:false,error:error.responce.data}))
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/foodcorts`)
+        .then(res=>{this.setState({loading:false, foodcorts:res.data})})
         .catch(error=>this.setState({loading:false,error:error.responce.data}))
       }
     );
@@ -35,12 +43,15 @@ export default class Main extends React.Component {
 
   render() {
     const {posts}=this.state
+    const {news}=this.state
+    const {foodcorts}=this.state
+    console.log(foodcorts)
     return (
       <>
       <div className="main-page page">
         <div className="container">
           <div className="main-banner"></div>
-          <News/>
+          <News news={news}/>
           <div className="categories">
             <span className="categorie__name active_name">Все</span>
             <span className="categorie__name">Концерты</span>
@@ -49,9 +60,22 @@ export default class Main extends React.Component {
             <span className="categorie__name">Секонды</span>
           </div>
           <div className="items-list">
-            {posts.length? (posts.map(post=>(
-              <CafeItem key={post.id} post={post}/>
-            ))):''}
+            {/* { Object.keys( posts ).length ? (
+              <>
+              {posts.length? (posts.map((post,index)=>(
+                    <CafeItem wide={index%4===0} key={post.id} post={post}/>
+                  ))):''}
+              </>
+              ):""} */}
+                  <>
+                  {foodcorts.length? (foodcorts.map((foodcort,index)=>(
+                  <CafeItem type="Фудкорт" wide key={foodcort.id} post={foodcort}/>
+                ))):''}
+                
+                  </>
+                  
+            
+            
             {/* <CafeItem wide type="Фудкорт"/> */}
             {/* <CafeItem /> */}
             {/* <CafeItem /> */}

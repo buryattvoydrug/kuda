@@ -5,7 +5,7 @@ function WidePlaces() {
     <>
       <section className="wide-places-block">
             <div className="wide-image">
-              <img src="images/item.jpg" alt="" />
+              <img src="http://localhost:3000/images/item.jpg" alt="" />
             </div>
             <p className="wide-text">
             На відміну від поширеної думки Lorem Ipsum не є <strong>випадковим</strong> набором літер.На відміну від поширеної думки Lorem Ipsum не є випадковим набором літер.</p>

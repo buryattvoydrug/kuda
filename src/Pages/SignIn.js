@@ -17,7 +17,7 @@ function SignIn() {
           <h1 className="sign__title">Войдите</h1>
           <button className="vk__button">
             <span>Через Вконтакте</span>
-            <img src="images/vk.svg" alt="" />
+            <img src="http://localhost:3000/images/vk.svg" alt="" />
           </button>
           <h3 className="sign__subtitle">Или по логину и паролю</h3>
           <input placeholder="Логин" type="text" className="sign__input" />

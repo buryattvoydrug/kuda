@@ -11,6 +11,10 @@ body{
   position: relative;
   padding-bottom: 320px;
 }
+a{
+  color:inherit;
+  text-decoration: none;
+}
 .wrapper{
   width: 1240px;
   margin: 0 auto;
@@ -109,11 +113,16 @@ li{
       margin-right: 15px;
       span{
         margin-right: 7px;
+        opacity: 0.25;
+      }
+      .active_price{
+        opacity: 1 !important;
       }
       img{
         height: 18px;
       }
     }
+    
   }
 }
 

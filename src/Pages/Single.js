@@ -25,9 +25,9 @@ export default class Single extends React.Component {
     }
   }
   
-
   componentDidMount(){
-    const wordPressSiteUrl="http://127.0.0.1/wordpress";
+    window.scrollTo(0, 0)
+    const wordPressSiteUrl="https://localhost/wordpress";
     this.setState({loading:true},
       ()=>{
         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts/${this.props.match.params.id}`)
