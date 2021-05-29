@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React from 'react'
 import { Dimensions } from 'react-native'
+import { Link } from 'react-router-dom'
 import CafeItem from '../Components/CafeItem'
 import News from '../Components/News'
 import Random from '../Components/Random'
@@ -50,7 +51,7 @@ export default class Main extends React.Component {
       <>
       <div className="main-page page">
         <div className="container">
-          <div className="main-banner"></div>
+          <Link to="/place/107" className="main-banner">хуй</Link>
           <News news={news}/>
           <div className="categories">
             <span className="categorie__name active_name">Все</span>

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
 import Random from '../Components/Random';
@@ -12,26 +13,53 @@ import SocialLinks from '../Components/SocialLinks';
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
-export default function Places() {
-  return (
-    <>
+export default class Places extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      loading:false,
+      place:{},
+      error:''
+    }
+  }
+  componentDidMount(){
+    const wordPressSiteUrl="https://localhost/wordpress/";
+    this.setState({loading:true},
+      ()=>{
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/places/${this.props.match.params.id}`)
+        .then(res=>{this.setState({loading:false, place:res.data})})
+        .catch(error=>this.setState({loading:false,error:error.responce}))
+      }
+    );
+  }
+  render() {
+    const place=this.state.place
+    console.log(place)
+    return (
+      <>
       <section className="single-page page">
         <div className="container">
+      { Object.keys( place ).length ? (
+
+          <>
           <div className="main-banner"></div>
-          <PlaceHead/>
-          <DoubleSlim/>
+          <PlaceHead place={place}/>
+          <DoubleSlim place={place}/>
 
           {isMobile? 
           <div className="main-banner"></div>
           :null
           }
-          <Nearby/>
+          <Nearby data={place.acf["places-nearby"]}/>
           <Share wide/>
 
                     {isMobile? 
           <div className="right-banner"></div> : null
           }
           {isMobile? <Random/> : null}
+          </>
+      ):""}
+
           </div>
         {isMobile? null:
           <div className="sidebar-container">
@@ -42,5 +70,6 @@ export default function Places() {
         }
       </section>
     </>
-  )
+    )
+  }
 }

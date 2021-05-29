@@ -9,6 +9,7 @@ import SignUp from './Pages/SignUp';
 import Single from './Pages/Single';
 import Foodcort from './Pages/Foodcort';
 import Places from './Pages/Places';
+import Routee from './Pages/Routee';
 import BlogList from './Pages/BlogList';
 import SingleBlog from './Pages/SingleBlog';
 import {BrowserRouter ,Route, Switch} from 'react-router-dom'
@@ -33,9 +34,11 @@ function App() {
           <Route exact path="/post/:id" component={Single}/>
           <Route exact path="/news/:id" component={SingleBlog}/>
           <Route exact path="/foodcort/:id" component={Foodcort}/>
+          <Route exact path="/place/:id" component={Places}/>
+          <Route exact path="/route/:id" component={Routee}/>
           {/* <Foodcort/> */}
           {/* <Places/> */}
-          {/* <Route/> */}
+          {/* <Routee/> */}
         </Switch>
           
         </BrowserRouter>

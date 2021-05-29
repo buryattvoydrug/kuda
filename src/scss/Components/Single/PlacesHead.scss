@@ -5,7 +5,14 @@
     margin-bottom: 50px;
   }
   .item-info{
+    width: 100%;
     padding-bottom: 30px;
+    
+  }
+  .cafe-item__img{
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
   }
   .item__title{
     width: 60%;

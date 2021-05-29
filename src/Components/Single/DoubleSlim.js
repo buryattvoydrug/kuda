@@ -3,24 +3,24 @@ import React from 'react'
 import '../../scss/Components/Single/Blocks.scss'
 
 
-function DoubleSlim() {
+function DoubleSlim({place}) {
   return (
     <>
       <section className="double-slim-block">
             <div className="col">
               <div className="slim-image">
-                <img src="http://localhost:3000/images/item.jpg" alt="" />
+                <img src={place.acf["place-img1"]} alt="" />
               </div>
               <p className="slim-text">
-              На відміну від поширеної думки Lorem Ipsum не є випадковим набором літер. Він походить з уривку класичної латинської літератури 45 року до н.е., .
+              {place.acf["place-text-1"]}
               </p>
             </div>
             <div className="col">
               <p className="slim-text">
-              На відміну від поширеної думки Lorem Ipsum не є випадковим набором літер. Він походить з уривку класичної латинської літератури 45 року до н.е., .
+              {place.acf["place-text-2"]}
               </p>
               <div className="slim-image">
-                <img src="http://localhost:3000/images/item.jpg" alt="" />
+                <img src={place.acf["place-img2"]} alt="" />
               </div>
             </div>
       </section>
