@@ -44,7 +44,6 @@ export default class BlogList extends React.Component {
       { Object.keys( news ).length ? (
 
           <>
-          <div className="main-banner"></div>
           <div className="categories">
             <span className="categorie__name active_name">Все</span>
             <span className="categorie__name">Концерты</span>

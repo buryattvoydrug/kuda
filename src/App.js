@@ -12,23 +12,25 @@ import Places from './Pages/Places';
 import Routee from './Pages/Routee';
 import BlogList from './Pages/BlogList';
 import SingleBlog from './Pages/SingleBlog';
-import {BrowserRouter ,Route, Switch} from 'react-router-dom'
+import {Link, Route, Switch, useLocation} from 'react-router-dom'
 
 function App() {
-  const tmpLocation=window.location.href;
-  console.log(tmpLocation)
+
+  const location = useLocation();
+
   return (
     <>
       <Header/>
       <div className="wrapper">
-        
-        <BrowserRouter >
-        <Switch>
+        <Switch location={location} key={location.pathname}>
           {/* <SingleBlog/> */}
           {/* <BlogList/> */}
           {/* <Favs/> */}
           {/* <PageNotFound/> */}
           {/* <SignIn/> */}
+          {/* <Foodcort/> */}
+          {/* <Places/> */}
+          {/* <Routee/> */}
           <Route exact path="/" component={Main}/>
           <Route exact path="/blog/" component={BlogList}/>
           <Route exact path="/post/:id" component={Single}/>
@@ -36,13 +38,7 @@ function App() {
           <Route exact path="/foodcort/:id" component={Foodcort}/>
           <Route exact path="/place/:id" component={Places}/>
           <Route exact path="/route/:id" component={Routee}/>
-          {/* <Foodcort/> */}
-          {/* <Places/> */}
-          {/* <Routee/> */}
         </Switch>
-          
-        </BrowserRouter>
-        
         <Footer/>
       </div>
     </>

@@ -1,7 +1,10 @@
 import React from 'react'
 import { Dimensions } from 'react-native';
+import { Link } from 'react-router-dom';
 
 import '../scss/Components/Header.scss'
+import Nav from './Nav';
+import SocialLinks from './SocialLinks';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -21,14 +24,10 @@ function Header() {
         <div className="wrapper">
         <div className="container">
           <div className="logo">куда <strong>пойдём</strong>?</div>
-          <div className="search">
-            <button className="to-search__button">
-              <span>поиск</span>
-              {isMobile? null : <img src="http://localhost:3000/images/search.svg" alt="" />}
-            </button>
-          </div>
+          <Nav/>
         </div>
         <div className="sidebar-container">
+          <SocialLinks/>
           <button className="fave__button">
             <img src="http://localhost:3000/images/fave.svg" alt="" />
           </button>

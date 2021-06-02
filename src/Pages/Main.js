@@ -51,7 +51,6 @@ export default class Main extends React.Component {
       <>
       <div className="main-page page">
         <div className="container">
-          <Link to="/place/107" className="main-banner">хуй</Link>
           <News news={news}/>
           <div className="categories">
             <span className="categorie__name active_name">Все</span>
@@ -61,17 +60,15 @@ export default class Main extends React.Component {
             <span className="categorie__name">Секонды</span>
           </div>
           <div className="items-list">
-            {/* { Object.keys( posts ).length ? (
+            { Object.keys( posts ).length ? (
               <>
               {posts.length? (posts.map((post,index)=>(
                     <CafeItem wide={index%4===0} key={post.id} post={post}/>
                   ))):''}
               </>
-              ):""} */}
+              ):""}
                   <>
-                  {foodcorts.length? (foodcorts.map((foodcort,index)=>(
-                  <CafeItem type="Фудкорт" wide key={foodcort.id} post={foodcort}/>
-                ))):''}
+                  
                 
                   </>
                   
@@ -82,20 +79,28 @@ export default class Main extends React.Component {
             {/* <CafeItem /> */}
             {/* <CafeItem /> */}
             {/* <CafeItem /> */}
-            <Share/>
+            {/* <Share/> */}
             {/* <CafeItem /> */}
-            {isMobile? <div className="right-banner"></div>:null}
             {/* <CafeItem wide/> */}
             {/* <CafeItem /> */}
+          </div>
+          <div className="items-list">
+          { Object.keys( foodcorts ).length ? (
+              <>
+          {foodcorts.length? (foodcorts.map((foodcort,index)=>(
+                  <CafeItem type="Фудкорт" key={foodcort.id} post={foodcort}/>
+                ))):''}
+                </>
+              ):""}
           </div>
           <button className="button load-more">Загрузить ещё</button>
           {isMobile? <Random/> : null}
         </div>
         {isMobile? null:
-          <div className="sidebar-container">
-            <Random/>
-            <SocialLinks/>
-            <div className="right-banner"></div>
+          <div className=" sidebar-container">
+            <div className="right-sidebar-container">
+              <Random/>
+            </div>
           </div>
         }
       </div>

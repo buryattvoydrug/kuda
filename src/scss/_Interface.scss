@@ -1,8 +1,12 @@
+@import './Constants';
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   letter-spacing: -0.065em;
+}
+::selection{
+  background: $pink;
 }
 body{
   min-height: 100vh;
@@ -28,6 +32,10 @@ a{
   display: flex;
   flex-direction: column;
   align-items: flex-end;
+}
+.right-sidebar-container{
+  position: fixed;
+  width: 320px;
 }
 button{
   background: none;

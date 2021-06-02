@@ -1,0 +1,10 @@
+@import '../Constants';
+.nav{
+  .navbar{
+    display: flex;
+    color:$pink;
+    .navbar__item{
+      margin-left: 25px;
+    }
+  }
+}

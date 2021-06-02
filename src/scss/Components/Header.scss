@@ -17,6 +17,7 @@ header{
   }
   .sidebar-container{
     align-items: center;
+    justify-content: space-between;
     display: flex;
     flex-direction: row-reverse;
   }
@@ -56,13 +57,6 @@ header{
     letter-spacing: -0.065em;
     strong{
       font-weight: 300;
-    }
-  }
-  .search{
-    .to-search__button{
-      font-size: 18px;
-      color:$pink;
-      letter-spacing: -0.065em;
     }
   }
 }
