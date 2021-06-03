@@ -7,9 +7,28 @@
       margin-right: 60px;
     }
   }
+  .category-type{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 35px 0 10px;
+    .category__title{
+      padding:  0 10px 0 5px;
+      text-decoration: underline;
+      // background: $pink;
+    }
+    .category{
+      color:$pink;
+    }
+  }
+  
   
 
   //fonts
+  .category__title{
+    font-size: 24px;
+  }
   .categorie__name{
     font-size: 18px;
     font-weight: 300;

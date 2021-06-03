@@ -8,3 +8,27 @@
     }
   }
 }
+@media (max-width:1279px) {
+  .nav{
+    position: relative;
+    background: #fff;
+    height: 100vh;
+    .social-links{
+      position: absolute;
+      bottom:15vh;
+      right:50px;
+    }
+    .navbar{
+      padding: 50px;
+      flex-direction: column;
+      align-items: flex-end;
+      color:$pink;
+      li{
+        margin-bottom: 10px;
+      }
+      .navbar__item{
+        font-size: 32px;
+      }
+    }
+  }
+}

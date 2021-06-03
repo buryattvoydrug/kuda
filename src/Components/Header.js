@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +10,9 @@ const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 function Header() {
+
+
+
   window.addEventListener('scroll', progressBar);
   function progressBar(e){
     let windowHeight = document.documentElement.scrollHeight-document.documentElement.clientHeight;
@@ -18,22 +21,56 @@ function Header() {
     const progress=document.querySelector('.row');
     progress.style.width=per+'vw';
   }
+
+  const [menu,setMenu]=useState(false)
+  const toggleMenu=()=>{
+    setMenu(!menu);
+    if (document.body.style.overflowY !== "hidden") {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  }
+  const closeMenu = () => {
+    setMenu(false);
+    document.body.style.overflowY = "scroll";
+  }
+
+
   return (
     <>
       <header>
         <div className="wrapper">
         <div className="container">
           <div className="logo">куда <strong>пойдём</strong>?</div>
-          <Nav/>
+          {!isMobile? <Nav/> : null}
         </div>
         <div className="sidebar-container">
-          <SocialLinks/>
+          {isMobile? 
+          <button onClick={toggleMenu} className={menu? "nav-button active__button" : "nav-button "}>
+            <span></span><span></span><span></span>
+            {/* <img src="http://localhost:3000/images/search.svg" alt="" /> */}
+          </button>
+           : <SocialLinks/>}
+          
           <button className="fave__button">
             <img src="http://localhost:3000/images/fave.svg" alt="" />
           </button>
         </div>
         <div className="row"></div>
         </div>
+        {menu? 
+          <div className="nav">
+            <ul className="navbar">
+              <li onClick={closeMenu}><Link to="/" className="navbar__item">главная</Link></li>
+              <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">блог</Link></li>
+              <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">фудкорты</Link></li>
+              <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">заведения</Link></li>
+              <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">кофе</Link></li>
+              <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">о нас</Link></li>
+            </ul>
+            {isMobile? <SocialLinks/>:null}
+            </div> : null}
       </header>
     </>
   )
