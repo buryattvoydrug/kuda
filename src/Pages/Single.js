@@ -27,12 +27,12 @@ export default class Single extends React.Component {
   
   componentDidMount(){
     window.scrollTo(0, 0)
-    const wordPressSiteUrl="https://localhost/wordpress";
+    const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
     this.setState({loading:true},
       ()=>{
         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts/${this.props.match.params.id}`)
         .then(res=>{this.setState({loading:false, post:res.data})})
-        .catch(error=>this.setState({loading:false,error:error.response.data}))
+        .catch(error=>this.setState({loading:false,error:error.response}))
       }
     );
   }

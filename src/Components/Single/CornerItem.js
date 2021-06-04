@@ -13,33 +13,35 @@ const isMobile = (windowWidth<1280)
 export default class CornerItem extends React.Component {
   constructor(props){
     super(props);
+    const data=this.props.data
     this.state={
       loading:false,
-      data:this.props.data,
+      data:data,
       corners:[],
       error:''
     }
+    console.log(this.state.data)
   }
   
   componentDidMount(){
     window.scrollTo(0, 0)
-    const wordPressSiteUrl="https://localhost/wordpress";
+    const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
     let tmp=[]
-    this.state.data.map((item,index)=>(
-      this.setState({loading:true},
-        ()=>{
-          axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/corners/${item.ID}`)
-          .then(res=>{
-            tmp.push(res.data)
-            this.setState({loading:false, corners:tmp})
-          })
-          .catch(error=>this.setState({loading:false,error:error.response.data}))
-        }
-      )
-    ))
+    console.log(this.state.data)
+  this.state.data.map((item,index)=>(
+    this.setState({loading:true},
+      ()=>{
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/corners/${item.ID}`)
+        .then(res=>{
+          tmp.push(res.data)
+          this.setState({loading:false, corners:tmp})
+        })
+        .catch(error=>this.setState({loading:false,error:error.response.data}))
+      }
+    )
+  ))
   }
   render() {
-
     return (
       <>
       {this.state.corners.map((item,index)=>(

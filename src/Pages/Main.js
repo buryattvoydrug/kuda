@@ -41,7 +41,6 @@ export default class Main extends React.Component {
     });
   }
   componentDidMount(){
-    // http://nikuda.poydemkuda.ru/index.php
     const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
     this.setState({loading:true},
       ()=>{
@@ -91,7 +90,7 @@ export default class Main extends React.Component {
           { Object.keys( foodcorts ).length ? (
               <>
           {foodcorts.length? (this.state.foodcorts.slice(0, this.state.visibleFoodcorts).map((foodcort,index)=>(
-                  <CafeItem wide={isMobile? index%3===0: (index%9)%4===0} key={foodcort.id} post={foodcort}/>
+                  <CafeItem type={"Фудкорт"} wide={isMobile? index%3===0: (index%9)%4===0} key={foodcort.id} post={foodcort}/>
                 ))):''}
                 </>
               ):""}

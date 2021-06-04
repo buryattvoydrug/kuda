@@ -27,7 +27,7 @@ export default class Foodcort extends React.Component {
   
   componentDidMount(){
     window.scrollTo(0, 0)
-    const wordPressSiteUrl="https://localhost/wordpress";
+    const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
     this.setState({loading:true},
       ()=>{
         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/foodcorts/${this.props.match.params.id}`)
