@@ -1,12 +1,6 @@
 @import '../Constants';
 .main-page{
-  .categories{
-    display: flex;
-    margin: 20px 0 15px;
-    .categorie__name{
-      margin-right: 60px;
-    }
-  }
+  
   .category-type{
     width: 100%;
     display: flex;
@@ -41,16 +35,7 @@
 }
 @media(max-width:1279px){
   .main-page{
-    .categories{
-      max-width: 100%;
-      overflow-x: scroll;
-      .categorie__name{
-        margin-right: 40px;
-      }
-    }
-    .categories::-webkit-scrollbar {
-      width: 0;
-    }
+    
     .load-more{
       margin-bottom: 70px;
     }

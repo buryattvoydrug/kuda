@@ -64,10 +64,10 @@ function Header() {
             <ul className="navbar">
               <li onClick={closeMenu}><Link to="/" className="navbar__item">главная</Link></li>
               <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">блог</Link></li>
-              <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">фудкорты</Link></li>
-              <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">заведения</Link></li>
-              <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">кофе</Link></li>
-              <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">о нас</Link></li>
+              <li onClick={closeMenu}><Link to="/foodcorts/" className="navbar__item">фудкорты</Link></li>
+              <li onClick={closeMenu}><Link to="/posts/" className="navbar__item">заведения</Link></li>
+              {/* <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">кофе</Link></li> */}
+              {/* <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">о нас</Link></li> */}
             </ul>
             {isMobile? <SocialLinks/>:null}
             </div> : null}

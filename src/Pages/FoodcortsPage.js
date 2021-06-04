@@ -14,51 +14,57 @@ const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 
-export default class BlogList extends React.Component {
+export default class FoodcortsPage extends React.Component {
 
   constructor(props){
     super(props);
     this.state={
       loading:false,
-      news:[],
-      visible: 12,
+      foodcorts:[],
+      visiblefoodcorts: 9,
       error:''
     }
-    this.loadMore = this.loadMore.bind(this);
+    this.loadMorefoodcorts = this.loadMorefoodcorts.bind(this);
   }
-  loadMore() {
+  loadMorefoodcorts() {
     this.setState((prev) => {
-      return {visible: prev.visible + 9};
+      return {visiblefoodcorts: prev.visiblefoodcorts + 9};
     });
   }
   componentDidMount(){
+    // http://nikuda.poydemkuda.ru/index.php
     const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
     this.setState({loading:true},
       ()=>{
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/foodcorts`)
+        .then(res=>{this.setState({loading:false, foodcorts:res.data})})
+        .catch(error=>this.setState({loading:false,error:error.responce.data}))
         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/news`)
         .then(res=>{this.setState({loading:false, news:res.data})})
+        .catch(error=>this.setState({loading:false,error:error.responce.data}))
+        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/foodcorts`)
+        .then(res=>{this.setState({loading:false, foodcorts:res.data})})
         .catch(error=>this.setState({loading:false,error:error.responce.data}))
       }
     );
   }
-
   render() {
-    const {news}=this.state
-    console.log(news)
+    const {foodcorts}=this.state
+    console.log(foodcorts)
     return (
       <>
       <div className="blog-page page">
         <div className="container">
-      { Object.keys( news ).length ? (
+      { Object.keys( foodcorts ).length ? (
 
           <>
           <div className="category-type">
-            <h2 className="category__title">Блог</h2>
+            <h2 className="category__title">Фудкорты</h2>
             {isMobile? null :
             <div className="categories">
               <span className="categorie__name active_name">Все</span>
-              <span className="categorie__name">Тег1</span>
-              <span className="categorie__name">Проект</span>
+              <span className="categorie__name">Пицца</span>
+              <span className="categorie__name">Суши</span>
               <span className="categorie__name">Говно</span>
               <span className="categorie__name">Жопа</span>
             </div>}
@@ -73,13 +79,13 @@ export default class BlogList extends React.Component {
               </div>
           :null}
           
-          <div className="items-list blog-list">
-            {news.length? (this.state.news.slice(0, this.state.visible).map(newsitem=>(
-              <NewsItem key={newsitem.id} post={newsitem}/>
-            ))):''}
+          <div className="items-list">
+          {foodcorts.length? (this.state.foodcorts.slice(0, this.state.visiblefoodcorts).map((post,index)=>(
+                    <CafeItem wide={isMobile? index%3===0: (index%9)%4===0} key={post.id} post={post}/>
+                  ))):''}
           </div>
-          {this.state.visible  < this.state.news.length &&
-             <button className="button load-more" onClick={this.loadMore} type="button">Загрузить ещё</button>
+          {this.state.visiblefoodcorts < this.state.foodcorts.length &&
+             <button className="button load-more" onClick={this.loadMorefoodcorts} type="button">Загрузить ещё</button>
           }
           {isMobile? <Random/> : null}
           </>

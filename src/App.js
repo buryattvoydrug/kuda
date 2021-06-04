@@ -13,6 +13,8 @@ import Routee from './Pages/Routee';
 import BlogList from './Pages/BlogList';
 import SingleBlog from './Pages/SingleBlog';
 import {Link, Route, Switch, useLocation} from 'react-router-dom'
+import PostsPage from './Pages/PostsPage';
+import FoodcortsPage from './Pages/FoodcortsPage';
 
 function App() {
 
@@ -33,6 +35,8 @@ function App() {
           {/* <Routee/> */}
           <Route exact path="/" component={Main}/>
           <Route exact path="/blog/" component={BlogList}/>
+          <Route exact path="/posts/" component={PostsPage}/>
+          <Route exact path="/foodcorts/" component={FoodcortsPage}/>
           <Route exact path="/post/:id" component={Single}/>
           <Route exact path="/news/:id" component={SingleBlog}/>
           <Route exact path="/foodcort/:id" component={Foodcort}/>

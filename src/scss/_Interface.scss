@@ -96,6 +96,7 @@ li{
     font-weight: 300;
   }
 }
+
 .item-info,.corner-info{
   position: relative;
   .item__title{
@@ -142,6 +143,19 @@ li{
 
 
 @media (max-width:1279px) {
+  .category-type{
+    padding-top: 0;
+  }
+  .categories{
+    max-width: 100%;
+    overflow-x: scroll;
+    .categorie__name{
+      margin-right: 40px;
+    }
+  }
+  .categories::-webkit-scrollbar {
+    width: 0;
+  }
   .wrapper{
     width: 90vw;
     margin: 0 5vw;
