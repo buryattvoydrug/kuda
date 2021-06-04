@@ -22,25 +22,25 @@ function SingleHead({corners,post}) {
                   
                   <h3 className="item__title">{post.acf["cafe-item-title"]}</h3>
                   <div className="address">
-                    <img src="http://localhost:3000/images/pin.svg" alt="" className="pin" />
+                    <img src="/images/pin.svg" alt="" className="pin" />
                     <span className="address__text">{post.acf["cafe-item-address"]}</span>
                   </div>
                   <div className="prefs">
                     <div className="price">
                     { [...Array(price)].map((item, index) =>                       
-                    <span className="active_price" key={index}><img src="http://localhost:3000/images/rub.svg" alt=""/></span>
+                    <span className="active_price" key={index}><img src="/images/rub.svg" alt=""/></span>
                     ) }
                     { [...Array(5-price)].map((item, index) =>                       
-                    <span key={index}><img src="http://localhost:3000/images/rub.svg" alt=""/></span>
+                    <span key={index}><img src="/images/rub.svg" alt=""/></span>
                     ) }
                     </div>
                     {post.acf["cafe-item-vegan"]? 
-                    <img src="http://localhost:3000/images/vegan.svg" alt="" className="vegan-icon" />
+                    <img src="/images/vegan.svg" alt="" className="vegan-icon" />
                     : null}
                     
                   </div>
                   <button className="fave__button">
-                    <img src="http://localhost:3000/images/fave.svg" alt="" />
+                    <img src="/images/fave.svg" alt="" />
                   </button>
                 </div>
                 <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />
@@ -50,12 +50,12 @@ function SingleHead({corners,post}) {
                 <p className="head__text">{post.acf["cafe-item-head__text"]}</p>
                 <p className="accent__text">{post.acf["cafe-item-accent__text"]}</p>
                 <a href={post.acf["cafe-item-map__link"]} className="map__button">
-                  <img src="http://localhost:3000/images/tomap.png" alt="" />
+                  <img src="/images/tomap.png" alt="" />
                   <span>Как добраться?</span>
                 </a>
                 {corners? null:
                   <a href={post.acf["cafe-item-site__link"]} className="web__button">
-                  <img src="http://localhost:3000/images/web.png" alt="" />
+                  <img src="/images/web.png" alt="" />
                   <span>Сайт</span>
                 </a>}
               </div>

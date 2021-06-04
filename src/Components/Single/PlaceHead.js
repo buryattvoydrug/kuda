@@ -15,16 +15,16 @@ function PlaceHead({place}) {
                 <div className="item-info">
                   <h3 className="item__title">{place.acf["place-name"]}</h3>
                   <div className="address">
-                    <img src="http://localhost:3000/images/pin.svg" alt="" className="pin" />
+                    <img src="/images/pin.svg" alt="" className="pin" />
                     <span className="address__text">{place.acf["place-address"]}</span>
                   </div>
                   <div className="place-buttons">
                     <button className="map__button">
-                      <img src="http://localhost:3000/images/tomap.png" alt="" />
+                      <img src="/images/tomap.png" alt="" />
                       <span>Как добраться?</span>
                     </button>
                     <button className="fave__button">
-                      <img src="http://localhost:3000/images/fave.svg" alt="" />
+                      <img src="/images/fave.svg" alt="" />
                     </button>
                   </div>
                 </div>

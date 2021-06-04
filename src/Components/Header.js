@@ -49,12 +49,12 @@ function Header() {
           {isMobile? 
           <button onClick={toggleMenu} className={menu? "nav-button active__button" : "nav-button "}>
             <span></span><span></span><span></span>
-            {/* <img src="http://localhost:3000/images/search.svg" alt="" /> */}
+            {/* <img src="/images/search.svg" alt="" /> */}
           </button>
            : <SocialLinks/>}
           
           <button className="fave__button">
-            <img src="http://localhost:3000/images/fave.svg" alt="" />
+            <img src="/images/fave.svg" alt="" />
           </button>
         </div>
         <div className="row"></div>

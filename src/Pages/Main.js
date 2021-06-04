@@ -20,14 +20,29 @@ export default class Main extends React.Component {
     this.state={
       loading:false,
       posts:[],
+      visiblePosts: 9,
       news:[],
+      visibleNews: 10,
       foodcorts:[],
+      visibleFoodcorts: 9,
       error:''
     }
+    this.loadMorePosts = this.loadMorePosts.bind(this);
+    this.loadMoreFoodcorts = this.loadMoreFoodcorts.bind(this);
+  }
+  loadMorePosts() {
+    this.setState((prev) => {
+      return {visiblePosts: prev.visiblePosts + 9};
+    });
+  }
+  loadMoreFoodcorts() {
+    this.setState((prev) => {
+      return {visibleFoodcorts: prev.visibleFoodcorts + 9};
+    });
   }
   componentDidMount(){
     // http://nikuda.poydemkuda.ru/index.php
-    const wordPressSiteUrl="http://localhost/wordpress/";
+    const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
     this.setState({loading:true},
       ()=>{
         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts`)
@@ -47,12 +62,11 @@ export default class Main extends React.Component {
     const {posts}=this.state
     const {news}=this.state
     const {foodcorts}=this.state
-    console.log(foodcorts)
     return (
       <>
       <div className="main-page page">
         <div className="container">
-          <News news={news}/>
+          <News count={this.state.visibleNews} news={news}/>
           <div className="category-type">
             <h2 className="category__title">Заведения</h2>
             <Link className="category">Показать все</Link>
@@ -60,22 +74,15 @@ export default class Main extends React.Component {
           <div className="items-list">
             { Object.keys( posts ).length ? (
               <>
-              {posts.length? (posts.map((post,index)=>(
-                    <CafeItem wide={index%4===0} key={post.id} post={post}/>
+              {posts.length? (this.state.posts.slice(0, this.state.visiblePosts).map((post,index)=>(
+                    <CafeItem wide={isMobile? index%3===0: (index%9)%4===0} key={post.id} post={post}/>
                   ))):''}
               </>
               ):""}
-            {/* <CafeItem wide type="Фудкорт"/> */}
-            {/* <CafeItem /> */}
-            {/* <CafeItem /> */}
-            {/* <CafeItem /> */}
-            {/* <CafeItem /> */}
-            {/* <Share/> */}
-            {/* <CafeItem /> */}
-            {/* <CafeItem wide/> */}
-            {/* <CafeItem /> */}
           </div>
-          <button className="button load-more">Загрузить ещё</button>
+          {this.state.visiblePosts < this.state.posts.length &&
+             <button className="button load-more" onClick={this.loadMorePosts} type="button">Загрузить ещё</button>
+          }
           <div className="category-type">
             <h2 className="category__title">Фудкорты</h2>
             <Link className="category">Показать все</Link>
@@ -83,13 +90,15 @@ export default class Main extends React.Component {
           <div className="items-list">
           { Object.keys( foodcorts ).length ? (
               <>
-          {foodcorts.length? (foodcorts.map((foodcort,index)=>(
-                  <CafeItem wide={index%4===0} key={foodcort.id} post={foodcort}/>
+          {foodcorts.length? (this.state.foodcorts.slice(0, this.state.visibleFoodcorts).map((foodcort,index)=>(
+                  <CafeItem wide={isMobile? index%3===0: (index%9)%4===0} key={foodcort.id} post={foodcort}/>
                 ))):''}
                 </>
               ):""}
           </div>
-          <button className="button load-more">Загрузить ещё</button>
+          {this.state.visibleFoodcorts < this.state.foodcorts.length &&
+             <button className="button load-more" onClick={this.loadMoreFoodcorts} type="button">Загрузить ещё</button>
+          }
           {isMobile? <Random/> : null}
         </div>
         {isMobile? null:

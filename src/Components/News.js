@@ -31,13 +31,13 @@ Math.easeInOutQuad = function (t, b, c, d) {
 	t--;
 	return -c/2 * (t*(t-2) - 1) + b;
 };
-function News({news}) {
+function News({count,news}) {
   return (
     <>
       <div className="news-container">
         <section id="content" className="news">
         {
-          news.length? (news.map((newsitem,index)=>(
+          news.length? (news.slice(0, count).map((newsitem,index)=>(
             <NewsItem key={index} post={newsitem}/>
           ))):''
         }

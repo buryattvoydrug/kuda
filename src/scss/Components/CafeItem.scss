@@ -18,13 +18,6 @@
       opacity: 1;
     }
   }
-  .prefs{
-    display: flex;
-    margin-bottom: 5px;
-    .vegan-icon{
-      margin-left: 5px;
-    }
-  }
   .item__title{
     width: 80%;
   }
@@ -37,13 +30,9 @@
     }
   }
   .fave__button{
-    height: 40px;
     position: absolute;
     bottom:0;
     right:0;
-    img{
-      width: 80%;
-    }
   }
 
 
@@ -85,6 +74,7 @@
     }
   }
   .fave__button{
+    margin-right: 10px;
     filter:invert(1);
   }
   .cafe-item__img{
@@ -112,37 +102,30 @@
 }
 @media(max-width:1279px){
   .cafe-item{
+    margin-bottom: 15px;
     width: 48%;
     height: 310px;
     .cafe-item__img{
-      height: 180px;
+      height: 210px;
       min-width: 100%;
     }
     .fave__button{
       bottom:auto;
       top:-10px;
-      height: 50px;
-      width: 50px;
-    }
-    .item-info{
-      margin-top: 5px;
-      .prefs{
-        .price{
-          margin-right: 0;
-          span{
-            margin-right: 2px;
-          }
-          img{
-            height: 13px;
-          }
-        }
-        .vegan-icon{
-          height: 15px;
-        }
+      height: 40px;
+      width: 40px;
+      img{
+        height: 80%;
       }
     }
+    
     .item__title{
       width: 100%;
+    }
+    //fonts
+    .item__title{
+      font-size: 18px;
+      line-height: 100%;
     }
   }
   .cafe-item-wide{
@@ -158,4 +141,5 @@
       width: 80%;
     }
   }
+  
 }

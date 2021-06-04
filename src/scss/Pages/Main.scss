@@ -12,10 +12,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 35px 0 10px;
+    padding: 35px 0 5px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #000;
     .category__title{
       padding:  0 10px 0 5px;
-      text-decoration: underline;
+      // text-decoration: underline;
       // background: $pink;
     }
     .category{
@@ -27,7 +29,7 @@
 
   //fonts
   .category__title{
-    font-size: 24px;
+    font-size: 28px;
   }
   .categorie__name{
     font-size: 18px;

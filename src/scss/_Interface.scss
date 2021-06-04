@@ -15,6 +15,9 @@ body{
   position: relative;
   padding-bottom: 320px;
 }
+body::-webkit-scrollbar{
+  width: 0;
+}
 a{
   color:inherit;
   text-decoration: none;
@@ -96,38 +99,41 @@ li{
 .item-info,.corner-info{
   position: relative;
   .item__title{
-    margin-top: 10px;
+    margin-top: 2px;
     width: 100%;
   }
   .fave__button{
+    height: 30px;
+    width: 30px;
     img{
-      height: 40px;
+      height: 30px;
     }          
   }
   .address{
     margin-top: 10px;
+    width: 85%;
     .pin{
-      height: 25px;
+      height: 15px;
     }
   }
   .prefs{
-    margin: 10px 0;
+    margin: 0;
     display: flex;
     align-items: center;
     .vegan-icon{
-      width: 30px;
+      width: 20px;
     }
     .price{
-      margin-right: 15px;
+      margin-right: 10px;
       span{
-        margin-right: 7px;
+        margin-right: 2px;
         opacity: 0.25;
       }
       .active_price{
         opacity: 1 !important;
       }
       img{
-        height: 18px;
+        height: 10px;
       }
     }
     
@@ -163,6 +169,26 @@ li{
     }
     .date{
       font-size: 14px;
+    }
+  }
+  .item-info{
+    margin-top: 5px;
+    .prefs{
+      .price{
+        margin-right: 0;
+        span{
+          margin-right: 2px;
+        }
+        img{
+          height: 10px;
+        }
+      }
+      .vegan-icon{
+        height: 12px;
+      }
+    }
+    .address{
+      width: 100%;
     }
   }
 }

@@ -48,26 +48,26 @@ export default class CornerItem extends React.Component {
                   <div className="corner-info">
                   <h3 className="item__title">{item.acf["cafe-item-title"]}</h3>
                     <div className="address">
-                      <img src="http://localhost:3000/images/pin.svg" alt="" className="pin" />
+                      <img src="/images/pin.svg" alt="" className="pin" />
                       <span className="address__text">{item.acf.address}</span>
                     </div>
                     <div className="prefs">
                     <div className="price">
                     
                     { [...Array(Number(item.acf["cafe-item-prices"]))].map((i, index) =>                       
-                    <span className="active_price" key={index}><img src="http://localhost:3000/images/rub.svg" alt=""/></span>
+                    <span className="active_price" key={index}><img src="/images/rub.svg" alt=""/></span>
                     ) }
                     { [...Array(5-Number(item.acf["cafe-item-prices"]))].map((i, index) =>                       
-                    <span key={index}><img src="http://localhost:3000/images/rub.svg" alt=""/></span>
+                    <span key={index}><img src="/images/rub.svg" alt=""/></span>
                     ) }
                     </div>
                     {item.acf["cafe-item-vegan"]? 
-                    <img src="http://localhost:3000/images/vegan.svg" alt="" className="vegan-icon" />
+                    <img src="/images/vegan.svg" alt="" className="vegan-icon" />
                     : null}
                     
                   </div>
                     <button className="fave__button">
-                      <img src="http://localhost:3000/images/fave.svg" alt="" />
+                      <img src="/images/fave.svg" alt="" />
                     </button>
   
                     <Menu post={item}/>
