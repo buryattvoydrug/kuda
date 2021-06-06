@@ -5,7 +5,6 @@ import '../scss/Components/CafeItem.scss'
 
 function CafeItem({wide,type,post}) {
   const price=Number(post.acf["cafe-item-prices"])
-  console.log(post)
   return (
     <>
       <Link to={type==="Фудкорт"? `/foodcort/${post.id}` : `/post/${post.id}`}  className={wide? "item cafe-item cafe-item-wide" : "item cafe-item"}>

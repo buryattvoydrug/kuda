@@ -50,7 +50,6 @@ export default class FoodcortsPage extends React.Component {
   }
   render() {
     const {foodcorts}=this.state
-    console.log(foodcorts)
     return (
       <>
       <div className="blog-page page">

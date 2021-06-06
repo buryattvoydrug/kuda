@@ -42,7 +42,7 @@ function Header() {
       <header>
         <div className="wrapper">
         <div className="container">
-          <div className="logo">куда <strong>пойдём</strong>?</div>
+          <Link to="/" className="logo">куда <strong>пойдём</strong>?</Link>
           {!isMobile? <Nav/> : null}
         </div>
         <div className="sidebar-container">

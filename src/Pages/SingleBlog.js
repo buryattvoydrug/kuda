@@ -22,7 +22,7 @@ export default class SingleBlog extends React.Component {
   
   componentDidMount(){
     window.scrollTo(0, 0)
-    const wordPressSiteUrl="https://localhost/wordpress";
+    const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
     this.setState({loading:true},
       ()=>{
         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/news/${this.props.match.params.id}`)
@@ -33,35 +33,37 @@ export default class SingleBlog extends React.Component {
   }
   render() {
     const {newsitem}=this.state
+    console.log(newsitem)
     return (
       <>
       <section className="single-page page">
         <div className="container">
         { Object.keys( newsitem ).length ? (
           <>
-          <div className="main-banner"></div>
-          {isMobile? 
-          <div className="main-banner"></div>
-          :null
-          }
           <NewsItem post={newsitem}/>
-          <WideBlock post={newsitem}/>
-          {isMobile? 
-          <Share wide/>
-          :<div className="main-banner"></div>
-          }
+          <WideBlock img={newsitem.acf["cafe-item-img1"]} text={newsitem.acf["cafe-item-text1"]} post={newsitem}/>
           <SlimBlock post={newsitem}/>
-          {isMobile? 
-          <div className="right-banner"></div> : null
-          }
+          
+          {newsitem.acf["cafe-item-img1_копия"].length ? <WideBlock img={newsitem.acf["cafe-item-img1_копия"]} text={newsitem.acf["cafe-item-text1_копия"]} post={newsitem}/>: null}
+          {newsitem.acf["cafe-item-img2_копия"].length ? <SlimBlock post={newsitem}/>: null}
+
+          {newsitem.acf["cafe-item-img1_копия2"].length ? <WideBlock img={newsitem.acf["cafe-item-img1_копия2"]} text={newsitem.acf["cafe-item-text_копия2"]} post={newsitem}/>: null}
+          {newsitem.acf["cafe-item-img2_копия2"].length ? <SlimBlock post={newsitem}/>: null}
+
+
           <SingleBottom post={newsitem}/>
+          {/* {isMobile? 
+          <Share wide/>
+          : null
+          } */}
           </>
           ):""}
         </div>
         {isMobile? null:
           <div className="sidebar-container">
-            <Share/>
-            <div className="right-banner"></div>
+            <div className="right-sidebar-container">
+              <Share/>
+            </div>
           </div>
         }
       </section>

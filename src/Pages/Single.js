@@ -52,7 +52,7 @@ export default class Single extends React.Component {
           <div className="main-banner"></div>
           :null
           }
-          <WideBlock post={post}/>
+          <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
           {isMobile? 
           <Share wide/>
           :<div className="main-banner"></div>
