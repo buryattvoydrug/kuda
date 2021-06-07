@@ -13,9 +13,26 @@
         width: 400px;
         object-fit: cover;
       }
+        .item-info{
+          .prefs{
+            .price img{
+              margin: 10px 0;
+              height: 16px;
+            }
+          }
+          .fave__button{
+            margin-bottom: 5px;
+            height: 40px;
+            width: 40px;
+            img{
+              height: 100%;
+            }
+          }
+        }
       
       
       .head__text{
+        font-size: 18px;
         width: 420px;
         line-height: 120%;
       }
@@ -43,6 +60,7 @@
   .item__title{
     font-size: 36px;
     line-height: 90%;
+    width: 100% !important;
   }
   .address__text{
     font-size: 24px;
@@ -107,6 +125,7 @@
     
     .item__title{
       font-size: 22px;
+      width: 80% !important;
     }
     .address__text{
       font-size: 18px;

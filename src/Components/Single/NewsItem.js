@@ -11,7 +11,11 @@ function NewsItem({post}) {
       <Link to={`/news/${post.id}`} className={isDark? "news__item dark_news":"news__item"}>
           <div className="news-top">
             <div className="logo">куда <strong>пойдём</strong>?</div>
-            <div className="project">{post.acf.project}</div>
+            {
+              post.acf.project?
+              <div className="project">{post.acf.project}</div>
+              : null
+            }
           </div>
           <img src={post.acf.news__img} alt="" className="news__img"/>
           <h1 className="news__title">{post.acf.news__title}</h1>

@@ -83,7 +83,7 @@ li{
   }
 }
 .top{
-  margin-top: 20px;
+  margin: 20px 0 5px;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -111,7 +111,9 @@ li{
     }          
   }
   .address{
-    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
     width: 85%;
     .pin{
       height: 15px;
@@ -198,7 +200,7 @@ li{
         }
       }
       .vegan-icon{
-        height: 12px;
+        height: 15px;
       }
     }
     .address{

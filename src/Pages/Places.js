@@ -45,17 +45,8 @@ export default class Places extends React.Component {
           <div className="main-banner"></div>
           <PlaceHead place={place}/>
           <DoubleSlim place={place}/>
-
-          {isMobile? 
-          <div className="main-banner"></div>
-          :null
-          }
           <Nearby data={place.acf["places-nearby"]}/>
           <Share wide/>
-
-                    {isMobile? 
-          <div className="right-banner"></div> : null
-          }
           {isMobile? <Random/> : null}
           </>
       ):""}

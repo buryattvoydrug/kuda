@@ -47,7 +47,6 @@ export default class Foodcort extends React.Component {
           <>
           {console.log(foodcort.acf.corners)}
 
-          <div className="main-banner"></div>
           <SingleHead post={foodcort} corners/>
           <section className="corners-page">
             <h2 className="corners__title">Корнеры</h2>
@@ -55,18 +54,6 @@ export default class Foodcort extends React.Component {
               <CornerItem data={foodcort.acf.corners}/>
             </div>
           </section>
-
-
-          {isMobile? 
-          <div className="main-banner"></div>
-          :null
-          }
-          
-          
-          
-          {isMobile? 
-          <div className="right-banner"></div> : null
-          }
           <SingleBottom post={foodcort} />
           </>
       ):""}

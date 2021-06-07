@@ -8,9 +8,7 @@ function CafeItem({wide,type,post}) {
   return (
     <>
       <Link to={type==="Фудкорт"? `/foodcort/${post.id}` : `/post/${post.id}`}  className={wide? "item cafe-item cafe-item-wide" : "item cafe-item"}>
-        {type? 
-        <span className="type">{type}</span>
-        : null}
+        
         <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />
         <div className="item-info">
         <div className="prefs">
