@@ -98,12 +98,12 @@ export default class Main extends React.Component {
           {this.state.visibleFoodcorts < this.state.foodcorts.length &&
              <button className="button load-more" onClick={this.loadMoreFoodcorts} type="button">Загрузить ещё</button>
           }
-          {isMobile? <Random/> : null}
+          {isMobile? <Random news={news} posts={posts} foodcorts={foodcorts}/> : null}
         </div>
         {isMobile? null:
           <div className=" sidebar-container">
             <div className="right-sidebar-container">
-              <Random/>
+              <Random news={news} posts={posts} foodcorts={foodcorts}/>
             </div>
           </div>
         }

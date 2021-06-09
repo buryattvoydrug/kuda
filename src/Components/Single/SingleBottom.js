@@ -7,7 +7,7 @@ function SingleBottom({post}) {
   return (
     <>
       <section className="single-bottom">
-            <Random/>
+            {/* <Random/> */}
             <div className="bottom-accent">
               <h3 className="bottom-accent__title">Итог:</h3>
               <p className="bottom-accent__text">

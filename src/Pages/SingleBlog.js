@@ -27,28 +27,27 @@ export default class SingleBlog extends React.Component {
       ()=>{
         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/news/${this.props.match.params.id}`)
         .then(res=>{this.setState({loading:false, newsitem:res.data})})
-        .catch(error=>this.setState({loading:false,error:error.response.data}))
+        .catch(error=>this.setState({loading:false,error:error.response}))
       }
     );
   }
   render() {
     const {newsitem}=this.state
-    console.log(newsitem)
     return (
       <>
       <section className="single-page page">
         <div className="container">
-        { Object.keys( newsitem ).length ? (
+        {newsitem.id? (
           <>
           <NewsItem post={newsitem}/>
           <WideBlock img={newsitem.acf["cafe-item-img1"]} text={newsitem.acf["cafe-item-text1"]} post={newsitem}/>
           <SlimBlock post={newsitem}/>
           
-          {newsitem.acf["cafe-item-img1_копия"].length ? <WideBlock img={newsitem.acf["cafe-item-img1_копия"]} text={newsitem.acf["cafe-item-text1_копия"]} post={newsitem}/>: null}
-          {newsitem.acf["cafe-item-img2_копия"].length ? <SlimBlock post={newsitem}/>: null}
+          {newsitem.acf["cafe-item-img1_копия"] ? <WideBlock img={newsitem.acf["cafe-item-img1_копия"]} text={newsitem.acf["cafe-item-text1_копия"]} post={newsitem}/>: null}
+          {newsitem.acf["cafe-item-img2_копия"] ? <SlimBlock post={newsitem}/>: null}
 
-          {newsitem.acf["cafe-item-img1_копия2"].length ? <WideBlock img={newsitem.acf["cafe-item-img1_копия2"]} text={newsitem.acf["cafe-item-text_копия2"]} post={newsitem}/>: null}
-          {newsitem.acf["cafe-item-img2_копия2"].length ? <SlimBlock post={newsitem}/>: null}
+          {newsitem.acf["cafe-item-img1_копия2"] ? <WideBlock img={newsitem.acf["cafe-item-img1_копия2"]} text={newsitem.acf["cafe-item-text_копия2"]} post={newsitem}/>: null}
+          {newsitem.acf["cafe-item-img2_копия2"] ? <SlimBlock post={newsitem}/>: null}
 
 
           <SingleBottom post={newsitem}/>
