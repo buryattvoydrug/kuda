@@ -1,6 +1,6 @@
 const initialState={
   news:[],
-  visibleNews: 3,
+  visibleNews: 9,
   isLoaded:false
 }
 
@@ -21,7 +21,7 @@ const news=(state=initialState,action)=>{
       case 'SET_VISIBLE_NEWS':
         return{
           ...state,
-          visibleNews: state.visibleNews + 3
+          visibleNews: state.visibleNews + 9
         }
     default:
       return state;

@@ -21,7 +21,11 @@ function PostsPage() {
   const visiblePosts=useSelector(({posts})=>posts.visiblePosts);
   const isLoaded=useSelector(({posts})=>posts.isLoaded);
 
-  
+  React.useEffect(()=>{
+    if(!isLoaded){
+      dispatch(fetchPosts());
+    }
+  },[dispatch]);
   return (
     <>
       <div className="blog-page page">

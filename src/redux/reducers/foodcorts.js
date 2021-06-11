@@ -1,6 +1,6 @@
 const initialState={
   foodcorts:[],
-  visibleFoodcorts: 3,
+  visibleFoodcorts: 9,
   isLoaded:false
 }
 
@@ -21,7 +21,7 @@ const foodcorts=(state=initialState,action)=>{
     case 'SET_VISIBLE_FOODCORTS':
       return{
         ...state,
-        visibleFoodcorts: state.visibleFoodcorts + 3
+        visibleFoodcorts: state.visibleFoodcorts + 9
       }
     default:
       return state;

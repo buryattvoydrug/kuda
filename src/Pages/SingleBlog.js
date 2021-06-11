@@ -30,6 +30,9 @@ function SingleBlog() {
   const newsLocation=location.pathname.split('/')
   const newsNumber=newsLocation[newsLocation.length-1]
   const newsitem=news.find((item)=>(item.id==newsNumber))
+
+  const author=newsitem.acf["news-author"].data.display_name
+  
   return (
     <>
       <section className="single-page page">
@@ -47,7 +50,7 @@ function SingleBlog() {
           {newsitem.acf["cafe-item-img2_копия2"] ? <SlimBlock post={newsitem}/>: null}
 
 
-          <SingleBottom post={newsitem}/>
+          <SingleBottom author={author} post={newsitem}/>
           {isMobile? 
           <Share wide/>
           : null

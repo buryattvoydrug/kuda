@@ -14,9 +14,10 @@ function Random() {
   }
   // const buttons=['Заведение','Фудкорт','Новость']
   
-  const buttons=[{name:"Заведение",type:'post',data:posts},
-                 {name:"Фудкорт",type:'foodcort',data:foodcorts},
-                 {name:"Новость",type:'news',data:news}]
+  const buttons=[{name:"Еда",type:'post',data:posts},
+                  {name:"Места",type:'post',data:posts},
+                  {name:"Маршрут прогулки",type:'post',data:posts},
+                 {name:"Фудкорт",type:'foodcort',data:foodcorts}]
   
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
@@ -29,7 +30,7 @@ function Random() {
   }
   return (
     <>
-      <div className="random">
+      <div className="random" id="random">
         <h3 className="random__title">Рандомайзер</h3>
         <span>Если не можете определиться</span>
         <div className="random-block">

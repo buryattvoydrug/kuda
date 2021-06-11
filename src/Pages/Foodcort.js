@@ -35,7 +35,7 @@ function Foodcort() {
         <div className="container">
       { isLoaded ? (
           <>
-          <SingleHead post={foodcort} corners/>
+          <SingleHead date={foodcort.date.split('-')} post={foodcort} corners/>
           <section className="corners-page">
             <h2 className="corners__title">Корнеры</h2>
             <div className="corners">

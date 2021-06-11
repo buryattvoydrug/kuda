@@ -1,6 +1,6 @@
 const initialState={
   posts:[],
-  visiblePosts: 3,
+  visiblePosts: 9,
   isLoaded:false
 }
 
@@ -21,7 +21,7 @@ const posts=(state=initialState,action)=>{
     case 'SET_VISIBLE':
       return{
         ...state,
-        visiblePosts: state.visiblePosts + 3
+        visiblePosts: state.visiblePosts + 9
       }
     default:
       return state;

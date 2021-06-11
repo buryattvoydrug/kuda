@@ -24,10 +24,11 @@ function BlogList() {
   const visibleNews=useSelector(({news})=>news.visibleNews);
   const isLoadedNews=useSelector(({news})=>news.isLoaded);
 
-  // React.useEffect(()=>{
-  //   dispatch(fetchNews());
-  // },[dispatch]);
-  console.log(news)
+  React.useEffect(()=>{
+    if(!isLoadedNews){
+      dispatch(fetchNews());
+    }
+  },[dispatch]);
   return (
     <>
       <div className="blog-page page">

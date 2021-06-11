@@ -1,25 +1,26 @@
 @import '../Constants';
 .random{
-  margin-bottom: 10px;
   padding: 30px 0 30px 30px;
   border:1px solid #000;
   .random-block{
     display: flex;
     flex-wrap: wrap;
-    margin: 15px 0 10px;
+    margin: 15px 0 20px;
     .random__button{
+      transition: all 1s;
       height: 50px;
       border: 1px solid #000;
       border-radius: 16px;
       padding: 18px 5px 18px 20px;
       display: flex;
       align-items: center;
-      margin: 0 10px 10px 0;
+      margin: 0 10px 5px 0;
       span{
         letter-spacing: -0.065em;
         text-align: left;
         margin-right: 7px;
         line-height: 100%;
+        transform: scale(1);
       }
     }
     .active_button{

@@ -24,7 +24,11 @@ function FoodcortsPage() {
   const visibleFoodcorts=useSelector(({foodcorts})=>foodcorts.visibleFoodcorts);
   const isLoaded=useSelector(({foodcorts})=>foodcorts.isLoaded);
 
-  console.log(foodcorts)
+  React.useEffect(()=>{
+    if(!isLoaded){
+      dispatch(fetchFoodcorts());
+    }
+  },[dispatch]);
 
   return (
     <>

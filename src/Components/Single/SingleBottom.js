@@ -3,7 +3,7 @@ import React from 'react'
 import '../../scss/Components/Single/Blocks.scss'
 import Random from '../Random'
 
-function SingleBottom({post}) {
+function SingleBottom({post,author}) {
   return (
     <>
       <section className="single-bottom">
@@ -13,7 +13,7 @@ function SingleBottom({post}) {
               <p className="bottom-accent__text">
               {post.acf["cafe-item-accent"]}
               </p>
-              <span className="author"><strong>Автор</strong> Даниил Бугров</span>
+              <span className="author"><strong>Автор</strong> {author}</span>
             </div>
           </section>
     </>

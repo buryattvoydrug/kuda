@@ -5,8 +5,15 @@ import Cornners from './Cornners'
 import Menu from './Menu'
 
 
-function SingleHead({corners,post}) {
+function SingleHead({corners,post,date}) {
   console.log(post)
+
+  const day=Number(date[2].slice(0,2))
+  const month=Number(date[1])
+  const year=Number(date[0])
+  const months = ["Января", "Февраля", "Марта", "Апреля", "Мая", "Июня", 
+            "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"];
+
 
   const price=Number(post.acf["cafe-item-prices"])
   return (
@@ -14,7 +21,7 @@ function SingleHead({corners,post}) {
       <section className="single-head">
             <div className="top">
               <span className="category">Рестораны</span>
-              <span className="date">21 мая 2021</span>
+              <span className="date">{day} {months[month-1]} {year}</span>
             </div>
             <div className="head-block">
               <div className="col cafe-item">

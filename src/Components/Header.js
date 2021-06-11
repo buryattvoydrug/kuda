@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
+import {Link as ScrolLink} from 'react-scroll';
 import {useSelector, useDispatch} from 'react-redux'
 import {fetchPosts} from '../redux/actions/posts'
 import { Link } from 'react-router-dom';
@@ -74,6 +75,14 @@ function Header() {
             {isMobile? <SocialLinks/>:null}
             </div> : null}
       </header>
+      <ScrolLink spy={true}
+            smooth={true}
+            offset={-100}
+            duration= {500} className="to-random" to="random">
+        <div className="to-random">
+          <img src="/images/shuffle.svg" alt="" />
+        </div>
+      </ScrolLink>
     </>
   )
 }

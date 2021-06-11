@@ -38,7 +38,7 @@ function Single() {
 
       { isLoaded ? (
           <>
-          <SingleHead post={post}/>
+          <SingleHead date={post.date.split('-')} post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
           <SlimBlock post={post}/>
           <SingleBottom post={post}/>
