@@ -9,6 +9,7 @@ import CornerItem from '../Components/Single/CornerItem';
 import SingleBottom from '../Components/Single/SingleBottom';
 import SingleHead from '../Components/Single/SingleHead';
 import SocialLinks from '../Components/SocialLinks';
+import { fetchFoodcorts } from '../redux/actions/foodcorts';
 
 import '../scss/Pages/Foodcort.scss'
 import '../scss/Pages/Single.scss'
@@ -24,6 +25,11 @@ function Foodcort() {
   const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
   const visibleFoodcorts=useSelector(({foodcorts})=>foodcorts.visibleFoodcorts);
   const isLoaded=useSelector(({foodcorts})=>foodcorts.isLoaded);
+  React.useEffect(()=>{
+    if(!isLoaded){
+      dispatch(fetchFoodcorts());
+    }
+  },[dispatch]);
 
   const location = useLocation();
   const foodcortLocation=location.pathname.split('/')

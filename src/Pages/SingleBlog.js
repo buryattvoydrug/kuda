@@ -21,17 +21,19 @@ function SingleBlog() {
   const news=useSelector(({news})=>news.news);
   const isLoadedNews=useSelector(({news})=>news.isLoaded);
 
-  // React.useEffect(()=>{
-  //   dispatch(fetchNews());
-  // },[dispatch]);
-  // console.log(news)
+  React.useEffect(()=>{
+    if(!isLoadedNews){
+      dispatch(fetchNews());
+    }
+  },[dispatch]);
 
   const location = useLocation();
   const newsLocation=location.pathname.split('/')
   const newsNumber=newsLocation[newsLocation.length-1]
   const newsitem=news.find((item)=>(item.id==newsNumber))
 
-  const author=newsitem.acf["news-author"].data.display_name
+
+
   
   return (
     <>
@@ -50,7 +52,7 @@ function SingleBlog() {
           {newsitem.acf["cafe-item-img2_копия2"] ? <SlimBlock post={newsitem}/>: null}
 
 
-          <SingleBottom author={author} post={newsitem}/>
+          <SingleBottom author={newsitem.acf["news-author"].data.display_name} post={newsitem}/>
           {isMobile? 
           <Share wide/>
           : null

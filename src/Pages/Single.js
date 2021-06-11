@@ -11,6 +11,7 @@ import SingleHead from '../Components/Single/SingleHead';
 import SlimBlock from '../Components/Single/SlimBlock';
 import WideBlock from '../Components/Single/WideBlock';
 import SocialLinks from '../Components/SocialLinks';
+import { fetchPosts } from '../redux/actions/posts';
 
 import '../scss/Pages/Single.scss'
 
@@ -24,7 +25,11 @@ function Single() {
   const items=useSelector(({posts})=>posts.posts);
   const isLoaded=useSelector(({posts})=>posts.isLoaded);
 
-
+  React.useEffect(()=>{
+    if(!isLoaded){
+      dispatch(fetchPosts());
+    }
+  },[dispatch]);
 
   const location = useLocation();
   const postLocation=location.pathname.split('/')
