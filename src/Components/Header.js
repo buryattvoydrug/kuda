@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
+import {useSelector, useDispatch} from 'react-redux'
+import {fetchPosts} from '../redux/actions/posts'
 import { Link } from 'react-router-dom';
 
 import '../scss/Components/Header.scss'
@@ -11,15 +13,15 @@ const isMobile = (windowWidth<1280)
 
 function Header() {
 
-
-
   window.addEventListener('scroll', progressBar);
   function progressBar(e){
     let windowHeight = document.documentElement.scrollHeight-document.documentElement.clientHeight;
     let windowScroll=document.body.scrollTop || document.documentElement.scrollTop;
     let per = windowScroll/windowHeight*100;
     const progress=document.querySelector('.row');
-    progress.style.width=per+'vw';
+    if(progress){
+      progress.style.width=per+'vw';
+    }
   }
 
   const [menu,setMenu]=useState(false)

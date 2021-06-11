@@ -25,14 +25,6 @@ function App() {
       <Header/>
       <div className="wrapper">
         <Switch location={location} key={location.pathname}>
-          {/* <SingleBlog/> */}
-          {/* <BlogList/> */}
-          {/* <Favs/> */}
-          {/* <PageNotFound/> */}
-          {/* <SignIn/> */}
-          {/* <Foodcort/> */}
-          {/* <Places/> */}
-          {/* <Routee/> */}
           <Route exact path="/" component={Main}/>
           <Route exact path="/blog/" component={BlogList}/>
           <Route exact path="/posts/" component={PostsPage}/>

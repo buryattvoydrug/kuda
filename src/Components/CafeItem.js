@@ -5,9 +5,10 @@ import '../scss/Components/CafeItem.scss'
 
 function CafeItem({wide,type,post}) {
   const price=Number(post.acf["cafe-item-prices"])
+
   return (
     <>
-      <Link to={type==="Фудкорт"? `/foodcort/${post.id}` : `/post/${post.id}`}  className={wide? "item cafe-item cafe-item-wide" : "item cafe-item"}>
+      <Link to={type=="Фудкорт"? `/foodcort/${post.id}` : `/post/${post.id}`}  className={wide? "item cafe-item cafe-item-wide" : "item cafe-item"}>
         
         <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />
         <div className="item-info">

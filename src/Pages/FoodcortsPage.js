@@ -1,12 +1,13 @@
-import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CafeItem from '../Components/CafeItem';
 import Random from '../Components/Random';
 import Share from '../Components/Share';
 import NewsItem from '../Components/Single/NewsItem';
 import SocialLinks from '../Components/SocialLinks';
+import { fetchFoodcorts, setVisibleFoodcorts } from '../redux/actions/foodcorts';
 
 import '../scss/Pages/BlogList.scss'
 
@@ -14,47 +15,22 @@ const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 
-export default class FoodcortsPage extends React.Component {
+function FoodcortsPage() {
+  window.scrollTo(0, 0)
 
-  constructor(props){
-    super(props);
-    this.state={
-      loading:false,
-      foodcorts:[],
-      visiblefoodcorts: 9,
-      error:''
-    }
-    this.loadMorefoodcorts = this.loadMorefoodcorts.bind(this);
-  }
-  loadMorefoodcorts() {
-    this.setState((prev) => {
-      return {visiblefoodcorts: prev.visiblefoodcorts + 9};
-    });
-  }
-  componentDidMount(){
-    // http://nikuda.poydemkuda.ru/index.php
-    const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
-    this.setState({loading:true},
-      ()=>{
-        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/foodcorts`)
-        .then(res=>{this.setState({loading:false, foodcorts:res.data})})
-        .catch(error=>this.setState({loading:false,error:error.responce.data}))
-        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/news`)
-        .then(res=>{this.setState({loading:false, news:res.data})})
-        .catch(error=>this.setState({loading:false,error:error.responce.data}))
-        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/foodcorts`)
-        .then(res=>{this.setState({loading:false, foodcorts:res.data})})
-        .catch(error=>this.setState({loading:false,error:error.responce.data}))
-      }
-    );
-  }
-  render() {
-    const {foodcorts}=this.state
-    return (
-      <>
+  const dispatch = useDispatch();
+
+  const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
+  const visibleFoodcorts=useSelector(({foodcorts})=>foodcorts.visibleFoodcorts);
+  const isLoaded=useSelector(({foodcorts})=>foodcorts.isLoaded);
+
+  console.log(foodcorts)
+
+  return (
+    <>
       <div className="blog-page page">
         <div className="container">
-      { Object.keys( foodcorts ).length ? (
+      { isLoaded ? (
 
           <>
           <div className="category-type">
@@ -79,12 +55,12 @@ export default class FoodcortsPage extends React.Component {
           :null}
           
           <div className="items-list">
-          {foodcorts.length? (this.state.foodcorts.slice(0, this.state.visiblefoodcorts).map((post,index)=>(
-                    <CafeItem wide={isMobile? index%3===0: (index%9)%4===0} key={post.id} post={post}/>
+          {foodcorts.length? (foodcorts.slice(0, visibleFoodcorts).map((post,index)=>(
+                    <CafeItem type={"Фудкорт"} wide={isMobile? index%3===0: (index%9)%4===0} key={post.id} post={post}/>
                   ))):''}
           </div>
-          {this.state.visiblefoodcorts < this.state.foodcorts.length &&
-             <button className="button load-more" onClick={this.loadMorefoodcorts} type="button">Загрузить ещё</button>
+          {visibleFoodcorts < foodcorts.length &&
+             <button className="button load-more" onClick={()=>(dispatch(setVisibleFoodcorts()))} type="button">Загрузить ещё</button>
           }
           {isMobile? <Random/> : null}
           </>
@@ -100,6 +76,8 @@ export default class FoodcortsPage extends React.Component {
         }
       </div>
     </>
-    )
-  }
+  )
 }
+
+export default FoodcortsPage
+

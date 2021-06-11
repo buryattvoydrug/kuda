@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import Random from '../Components/Random';
 import Share from '../Components/Share';
 import Menu from '../Components/Single/Menu';
@@ -15,36 +17,26 @@ import '../scss/Pages/Single.scss'
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
-export default class Single extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-      loading:false,
-      post:{},
-      error:''
-    }
-  }
-  
-  componentDidMount(){
-    window.scrollTo(0, 0)
-    const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
-    this.setState({loading:true},
-      ()=>{
-        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts/${this.props.match.params.id}`)
-        .then(res=>{this.setState({loading:false, post:res.data})})
-        .catch(error=>this.setState({loading:false,error:error.response}))
-      }
-    );
-  }
+function Single() {
+  window.scrollTo(0, 0)
 
-  render() {
-    const {post}=this.state
-    return (
-      <>
+  const dispatch = useDispatch();
+  const items=useSelector(({posts})=>posts.posts);
+  const isLoaded=useSelector(({posts})=>posts.isLoaded);
+
+
+
+  const location = useLocation();
+  const postLocation=location.pathname.split('/')
+  const postNumber=postLocation[postLocation.length-1]
+  const post=items.find((item)=>(item.id==postNumber))
+
+  return (
+    <>
       <section className="single-page page">
       <div className="container">
 
-      { Object.keys( post ).length ? (
+      { isLoaded ? (
           <>
           <SingleHead post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
@@ -63,6 +55,38 @@ export default class Single extends React.Component {
         }
       </section>
     </>
-    )
-  }
+  )
 }
+export default Single
+
+
+
+
+// export default class Single extends React.Component {
+//   constructor(props){
+//     super(props);
+//     this.state={
+//       loading:false,
+//       post:{},
+//       error:''
+//     }
+//   }
+  
+//   componentDidMount(){
+//     const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
+//     this.setState({loading:true},
+//       ()=>{
+//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts/${this.props.match.params.id}`)
+//         .then(res=>{this.setState({loading:false, post:res.data})})
+//         .catch(error=>this.setState({loading:false,error:error.response}))
+//       }
+//     );
+//   }
+
+//   render() {
+//     const {post}=this.state
+//     return (
+      
+//     )
+//   }
+// }

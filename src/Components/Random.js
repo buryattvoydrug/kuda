@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import '../scss/Components/Random.scss'
 
-function Random({posts,foodcorts,news}) {
+function Random() {
+  const posts=useSelector(({posts})=>posts.posts);
+  const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
+  const news=useSelector(({news})=>news.news);
+
   const [active,setActive]=useState(-1)
   const toggleButton=(index)=>{
     setActive(index)
