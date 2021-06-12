@@ -12,6 +12,7 @@ import SlimBlock from '../Components/Single/SlimBlock';
 import WideBlock from '../Components/Single/WideBlock';
 import SocialLinks from '../Components/SocialLinks';
 import { fetchPosts } from '../redux/actions/posts';
+import { motion } from 'framer-motion';
 
 import '../scss/Pages/Single.scss'
 
@@ -38,8 +39,29 @@ function Single() {
     if(!isLoaded){
       dispatch(fetchPosts());
     }
-  },[dispatch]);
-
+  },[isLoaded,dispatch]);
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
+  };
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+      scale: 0.8
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      x: "100vw",
+      scale: 1.2
+    }
+  };
 
   return (
     <>
@@ -47,12 +69,16 @@ function Single() {
       <div className="container">
 
       { post ? (
-          <>
+          <motion.div  initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}>
           <SingleHead date={post.date.split('-')} post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
           <SlimBlock post={post}/>
           <SingleBottom post={post}/>
-          </>
+          </motion.div>
       
       ):""}
       </div>

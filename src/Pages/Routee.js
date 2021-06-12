@@ -15,6 +15,7 @@ import { fetchFoodcorts } from '../redux/actions/foodcorts';
 import { fetchNews } from '../redux/actions/news';
 import { fetchPosts } from '../redux/actions/posts';
 import { fetchRandom } from '../redux/actions/random';
+import { motion } from 'framer-motion';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -32,17 +33,43 @@ function Routee() {
   const route=routes.find((item)=>(item.id==postNumber))
 
   React.useEffect(()=>{
-      
+    if(!isLoadedRoutes){
       dispatch(fetchRandom());
-  },[dispatch]);
-
+    }
+  },[isLoadedRoutes,dispatch]);
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
+  };
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+      scale: 0.8
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      x: "100vw",
+      scale: 1.2
+    }
+  };
   return (
     <>
       <section className="single-page page">
         <div className="container">
       { isLoadedRoutes ? (
 
-          <>
+          <motion.div  initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}>
           <div className="main-banner"></div>
           <PlaceHead place={route}/>
           <WidePlaces text={route.acf["wide-text1"]} img={route.acf["wide-img1"]}/>
@@ -60,7 +87,7 @@ function Routee() {
           <div className="right-banner"></div> : null
           }
           {isMobile? <Random/> : null}
-          </>
+          </motion.div>
       ):""}
 
           </div>

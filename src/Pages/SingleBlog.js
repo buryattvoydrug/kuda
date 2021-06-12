@@ -9,6 +9,7 @@ import SingleBottom from '../Components/Single/SingleBottom';
 import SlimBlock from '../Components/Single/SlimBlock';
 import WideBlock from '../Components/Single/WideBlock';
 import { fetchNews } from '../redux/actions/news';
+import { motion } from 'framer-motion';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -25,7 +26,29 @@ function SingleBlog() {
     if(!isLoadedNews){
       dispatch(fetchNews());
     }
-  },[dispatch]);
+  },[isLoadedNews,dispatch]);
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
+  };
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+      scale: 0.8
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      x: "100vw",
+      scale: 1.2
+    }
+  };
 
   const location = useLocation();
   const newsLocation=location.pathname.split('/')
@@ -40,7 +63,11 @@ function SingleBlog() {
       <section className="single-page page">
         <div className="container">
         {newsitem? (
-          <>
+          <motion.div  initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}>
           <NewsItem post={newsitem}/>
           <WideBlock img={newsitem.acf["cafe-item-img1"]} text={newsitem.acf["cafe-item-text1"]} post={newsitem}/>
           <SlimBlock post={newsitem}/>
@@ -57,7 +84,7 @@ function SingleBlog() {
           <Share wide/>
           : null
           }
-          </>
+          </motion.div>
           ):""}
         </div>
         {isMobile? null:

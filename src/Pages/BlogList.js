@@ -9,6 +9,7 @@ import Share from '../Components/Share';
 import NewsItem from '../Components/Single/NewsItem';
 import SocialLinks from '../Components/SocialLinks';
 import { fetchNews, setVisibleNews } from '../redux/actions/news';
+import { motion } from 'framer-motion';
 
 import '../scss/Pages/BlogList.scss'
 
@@ -28,14 +29,41 @@ function BlogList() {
     if(!isLoadedNews){
       dispatch(fetchNews());
     }
-  },[dispatch]);
+  },[isLoadedNews,dispatch]);
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
+  };
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+      scale: 0.8
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      x: "100vw",
+      scale: 1.2
+    }
+  };
   return (
     <>
       <div className="blog-page page">
         <div className="container">
       { isLoadedNews ? (
 
-          <>
+          <motion.div initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}>
           <div className="category-type">
             <h2 className="category__title">Блог</h2>
             {isMobile? null :
@@ -68,7 +96,7 @@ function BlogList() {
              <button className="button load-more" onClick={()=>(dispatch(setVisibleNews()))} type="button">Загрузить ещё</button>
           }
           {isMobile? <Random/> : null}
-          </>
+          </motion.div>
       ):""}
 
         </div>

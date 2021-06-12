@@ -32,8 +32,8 @@ function Random() {
       dispatch(fetchRandom());
 
     }
-  },[dispatch]);
-
+  },[isLoadedPlaces,isLoadedRoutes,dispatch]);
+  
 
   const [active,setActive]=useState(-1)
   const toggleButton=(index)=>{

@@ -10,6 +10,7 @@ import SingleBottom from '../Components/Single/SingleBottom';
 import SingleHead from '../Components/Single/SingleHead';
 import SocialLinks from '../Components/SocialLinks';
 import { fetchFoodcorts } from '../redux/actions/foodcorts';
+import { motion } from 'framer-motion';
 
 import '../scss/Pages/Foodcort.scss'
 import '../scss/Pages/Single.scss'
@@ -29,7 +30,29 @@ function Foodcort() {
     if(!isLoaded){
       dispatch(fetchFoodcorts());
     }
-  },[dispatch]);
+  },[isLoaded,dispatch]);
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
+  };
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+      scale: 0.8
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      x: "100vw",
+      scale: 1.2
+    }
+  };
 
   const location = useLocation();
   const foodcortLocation=location.pathname.split('/')
@@ -40,7 +63,11 @@ function Foodcort() {
       <section className="single-page page">
         <div className="container">
       { foodcort ? (
-          <>
+          <motion.div initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}>
           <SingleHead date={foodcort.date.split('-')} post={foodcort} corners/>
           <section className="corners-page">
             <h2 className="corners__title">Корнеры</h2>
@@ -49,7 +76,7 @@ function Foodcort() {
             </div>
           </section>
           <SingleBottom post={foodcort} />
-          </>
+          </motion.div>
       ):""}
 
         </div>
