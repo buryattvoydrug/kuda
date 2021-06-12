@@ -20,7 +20,6 @@ function PostsPage() {
   const items=useSelector(({posts})=>posts.posts);
   const visiblePosts=useSelector(({posts})=>posts.visiblePosts);
   const isLoaded=useSelector(({posts})=>posts.isLoaded);
-
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());

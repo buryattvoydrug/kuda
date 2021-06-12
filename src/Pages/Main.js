@@ -37,49 +37,47 @@ function Main() {
 
   
     React.useEffect(()=>{
-      if(!isLoadedPosts){
         dispatch(fetchPosts());
-      }
-      if(!isLoadedFoodcorts){
         dispatch(fetchFoodcorts());
-      }
-      if(!isLoadedNews){
         dispatch(fetchNews());
-      }
     },[dispatch]);
   return (
     <>
       <div className="main-page page">
         <div className="container">
           {isLoadedNews? <News count={visibleNews} news={news}/>:''}
+          {isLoadedPosts? <>
           <div className="category-type">
             <h2 className="category__title">Заведения</h2>
             <Link to="/posts/" className="category">Показать все</Link>
           </div>
-          {isLoadedPosts? 
+          
             <div className="items-list">
           {posts.length? (posts.slice(0, visiblePosts).map((item,index)=>(
                     <CafeItem wide={isMobile? index%3===0: (index%9)%4===0} key={item.id} post={item}/>
                   ))):''}
           </div>
-          :''}
+          
           {posts.length > visiblePosts &&
              <button className="button load-more" onClick={()=>(dispatch(setVisiblePosts()))} type="button">Загрузить ещё</button>
-          }
+          }</>
+          :''}
+          {isLoadedFoodcorts? <>
           <div className="category-type">
             <h2 className="category__title">Фудкорты</h2>
             <Link to="/foodcorts/" className="category">Показать все</Link>
           </div>
-          {isLoadedFoodcorts? 
+          
           <div className="items-list">
           {foodcorts.length? (foodcorts.slice(0, visibleFoodcorts).map((post,index)=>(
                     <CafeItem type={"Фудкорт"} wide={isMobile? index%3===0: (index%9)%4===0} key={post.id} post={post}/>
                   ))):''}
           </div>
-          : ''}
           {visibleFoodcorts < foodcorts.length &&
              <button className="button load-more" onClick={()=>(dispatch(setVisibleFoodcorts()))} type="button">Загрузить ещё</button>
           }
+          </>
+          : ''}
         </div>
         {isMobile? null:
           <div className="sidebar-container">

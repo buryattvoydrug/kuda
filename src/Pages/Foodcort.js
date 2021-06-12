@@ -39,7 +39,7 @@ function Foodcort() {
     <>
       <section className="single-page page">
         <div className="container">
-      { isLoaded ? (
+      { foodcort ? (
           <>
           <SingleHead date={foodcort.date.split('-')} post={foodcort} corners/>
           <section className="corners-page">

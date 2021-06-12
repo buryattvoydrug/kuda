@@ -12,28 +12,32 @@ import Places from './Pages/Places';
 import Routee from './Pages/Routee';
 import BlogList from './Pages/BlogList';
 import SingleBlog from './Pages/SingleBlog';
-import {Link, Route, Switch, useLocation} from 'react-router-dom'
+import {Link, Route, Switch, useLocation } from 'react-router-dom'
 import PostsPage from './Pages/PostsPage';
 import FoodcortsPage from './Pages/FoodcortsPage';
+// import { useHistory } from 'react-router'
 
 function App() {
 
   const location = useLocation();
+  // const history = useHistory()
+  // window.location.reload();
+  
 
   return (
     <>
       <Header/>
       <div className="wrapper">
-        <Switch location={location} key={location.pathname}>
-          <Route exact path="/" component={Main}/>
-          <Route exact path="/blog/" component={BlogList}/>
-          <Route exact path="/posts/" component={PostsPage}/>
-          <Route exact path="/foodcorts/" component={FoodcortsPage}/>
-          <Route exact path="/post/:id" component={Single}/>
-          <Route exact path="/news/:id" component={SingleBlog}/>
-          <Route exact path="/foodcort/:id" component={Foodcort}/>
-          <Route exact path="/place/:id" component={Places}/>
-          <Route exact path="/route/:id" component={Routee}/>
+        <Switch location={location} key={location.key}>
+          <Route exact path="/"><Main/></Route>
+          <Route exact path="/blog/"><BlogList/></Route>
+          <Route exact path="/posts/" ><PostsPage/></Route>
+          <Route exact path="/foodcorts/"><FoodcortsPage/></Route>
+          <Route exact path="/post/:id"><Single/></Route>
+          <Route exact path="/news/:id"><SingleBlog/></Route>
+          <Route exact path="/foodcort/:id"><Foodcort/></Route>
+          <Route exact path="/place/:id"><Places/></Route>
+          <Route exact path="/route/:id"><Routee/></Route>
         </Switch>
         <Footer/>
       </div>

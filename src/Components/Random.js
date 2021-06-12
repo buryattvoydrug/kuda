@@ -1,12 +1,39 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { fetchFoodcorts } from '../redux/actions/foodcorts';
+import { fetchPosts } from '../redux/actions/posts';
+import { fetchRandom } from '../redux/actions/random';
 import '../scss/Components/Random.scss'
 
 function Random() {
+  const dispatch = useDispatch();
+
   const posts=useSelector(({posts})=>posts.posts);
+  const isLoadedPosts=useSelector(({posts})=>posts.isLoaded);
+
   const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
-  const news=useSelector(({news})=>news.news);
+  const isLoadedFoodcorts=useSelector(({foodcorts})=>foodcorts.isLoaded);
+
+  const places=useSelector(({random})=>random.places);
+  const isLoadedPlaces=useSelector(({random})=>random.isLoadedPlaces);
+
+  const routes=useSelector(({random})=>random.routes);
+  const isLoadedRoutes=useSelector(({random})=>random.isLoadedRoutes);
+
+  React.useEffect(()=>{
+    // if(!isLoadedPosts){
+    //   dispatch(fetchPosts());
+    // }
+    // if(!isLoadedFoodcorts){
+    //   dispatch(fetchFoodcorts());
+    // }
+    if(!isLoadedPlaces || !isLoadedRoutes){
+      dispatch(fetchRandom());
+
+    }
+  },[dispatch]);
+
 
   const [active,setActive]=useState(-1)
   const toggleButton=(index)=>{
@@ -15,8 +42,8 @@ function Random() {
   // const buttons=['Заведение','Фудкорт','Новость']
   
   const buttons=[{name:"Еда",type:'post',data:posts},
-                  {name:"Места",type:'post',data:posts},
-                  {name:"Маршрут прогулки",type:'post',data:posts},
+                  {name:"Места",type:'place',data:places},
+                  {name:"Маршрут прогулки",type:'route',data:routes},
                  {name:"Фудкорт",type:'foodcort',data:foodcorts}]
   
   function getRandomInt(max) {

@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import Random from '../Components/Random';
 import Share from '../Components/Share';
 import DoubleSlim from '../Components/Single/DoubleSlim';
@@ -9,39 +11,36 @@ import PlaceHead from '../Components/Single/PlaceHead';
 import WideBlock from '../Components/Single/WideBlock';
 import WidePlaces from '../Components/Single/WidePlaces';
 import SocialLinks from '../Components/SocialLinks';
+import { fetchFoodcorts } from '../redux/actions/foodcorts';
+import { fetchNews } from '../redux/actions/news';
+import { fetchPosts } from '../redux/actions/posts';
+import { fetchRandom } from '../redux/actions/random';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 
-export default class Routee extends React.Component {
-  constructor(props){
-    super(props);
-    this.state={
-      loading:false,
-      route:{},
-      error:''
-    }
-  }
-  componentDidMount(){
-    const wordPressSiteUrl="https://localhost/wordpress/";
-    this.setState({loading:true},
-      ()=>{
-        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/routes/${this.props.match.params.id}`)
-        .then(res=>{this.setState({loading:false, route:res.data})})
-        .catch(error=>this.setState({loading:false,error:error.responce}))
-      }
-    );
-  }
-  render() {
-    const route=this.state.route
-    console.log(route)
+function Routee() {
+  const dispatch = useDispatch();
 
-    return (
-      <>
+  const routes=useSelector(({random})=>random.routes);
+  const isLoadedRoutes=useSelector(({random})=>random.isLoadedRoutes);
+
+  const location = useLocation();
+  const postLocation=location.pathname.split('/')
+  const postNumber=postLocation[postLocation.length-1]
+  const route=routes.find((item)=>(item.id==postNumber))
+
+  React.useEffect(()=>{
+      
+      dispatch(fetchRandom());
+  },[dispatch]);
+
+  return (
+    <>
       <section className="single-page page">
         <div className="container">
-      { Object.keys( route ).length ? (
+      { isLoadedRoutes ? (
 
           <>
           <div className="main-banner"></div>
@@ -74,6 +73,37 @@ export default class Routee extends React.Component {
         }
       </section>
     </>
-    )
-  }
+  )
 }
+
+export default Routee
+
+
+// export default class Routee extends React.Component {
+//   constructor(props){
+//     super(props);
+//     this.state={
+//       loading:false,
+//       route:{},
+//       error:''
+//     }
+//   }
+//   componentDidMount(){
+//     const wordPressSiteUrl="https://localhost/wordpress/";
+//     this.setState({loading:true},
+//       ()=>{
+//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/routes/${this.props.match.params.id}`)
+//         .then(res=>{this.setState({loading:false, route:res.data})})
+//         .catch(error=>this.setState({loading:false,error:error.responce}))
+//       }
+//     );
+//   }
+//   render() {
+//     const route=this.state.route
+//     console.log(route)
+
+//     return (
+      
+//     )
+//   }
+// }

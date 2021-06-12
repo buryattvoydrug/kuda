@@ -20,28 +20,33 @@ const isMobile = (windowWidth<1280)
 
 function Single() {
   window.scrollTo(0, 0)
-
   const dispatch = useDispatch();
   const items=useSelector(({posts})=>posts.posts);
   const isLoaded=useSelector(({posts})=>posts.isLoaded);
 
-  React.useEffect(()=>{
-    if(!isLoaded){
-      dispatch(fetchPosts());
-    }
-  },[dispatch]);
 
   const location = useLocation();
   const postLocation=location.pathname.split('/')
   const postNumber=postLocation[postLocation.length-1]
   const post=items.find((item)=>(item.id==postNumber))
 
+  // const postNumber=23
+  // const post=items.find((item)=>(item.id==postNumber))
+
+  // console.log(isLoaded)
+  React.useEffect(()=>{
+    if(!isLoaded){
+      dispatch(fetchPosts());
+    }
+  },[dispatch]);
+
+
   return (
     <>
       <section className="single-page page">
       <div className="container">
 
-      { isLoaded ? (
+      { post ? (
           <>
           <SingleHead date={post.date.split('-')} post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />

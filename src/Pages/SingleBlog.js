@@ -39,7 +39,7 @@ function SingleBlog() {
     <>
       <section className="single-page page">
         <div className="container">
-        {isLoadedNews? (
+        {newsitem? (
           <>
           <NewsItem post={newsitem}/>
           <WideBlock img={newsitem.acf["cafe-item-img1"]} text={newsitem.acf["cafe-item-text1"]} post={newsitem}/>
