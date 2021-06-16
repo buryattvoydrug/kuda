@@ -1,5 +1,4 @@
 import React from 'react'
-import renderHTML from "react-render-html";
 import '../../scss/Components/Single/Menu.scss'
 
 function Menu({post}) {
@@ -8,27 +7,26 @@ function Menu({post}) {
       <div className="menu">
                   <h4 className="menu__title">Меню</h4>
                   <ul className="menu-block">
-                  {renderHTML( post.acf["cafe-item-menu"] )}
-                    {/* <li className="menu__item">
-                      <span>Пепперони</span>
+                    <li className="menu__item">
+                      <span>{post.acf.menu.блюдо}</span>
                       <span className="row-dots"></span>
-                      <span>380 <img src="http://localhost:3000/images/rub.svg" alt=""/></span>
+                      <span>{post.acf.menu.цена_блюда} <img src="/images/rub.svg" alt=""/></span>
                     </li>
                     <li className="menu__item">
-                      <span>Пепперони</span>
+                      <span>{post.acf.menu.блюдо_копия}</span>
                       <span className="row-dots"></span>
-                      <span>380 <img src="http://localhost:3000/images/rub.svg" alt=""/></span>
+                      <span>{post.acf.menu.цена_блюда_копия} <img src="/images/rub.svg" alt=""/></span>
                     </li>
                     <li className="menu__item">
-                      <span>Пепперони</span>
+                      <span>{post.acf.menu.блюдо_копия2}</span>
                       <span className="row-dots"></span>
-                      <span>380 <img src="http://localhost:3000/images/rub.svg" alt=""/></span>
+                      <span>{post.acf.menu.цена_блюда_копия2} <img src="/images/rub.svg" alt=""/></span>
                     </li>
                     <li className="menu__item">
-                      <span>Пепперони</span>
+                      <span>{post.acf.menu.блюдо_копия3}</span>
                       <span className="row-dots"></span>
-                      <span>380 <img src="http://localhost:3000/images/rub.svg" alt=""/></span>
-                    </li> */}
+                      <span>{post.acf.menu.цена_блюда_копия3} <img src="/images/rub.svg" alt=""/></span>
+                    </li>
                   </ul>
                 </div>
     </>

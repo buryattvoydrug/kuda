@@ -78,12 +78,16 @@ function Foodcort() {
           <SingleBottom post={foodcort} />
           </motion.div>
       ):""}
-
+      {isMobile? 
+          <>
+            <Share/>
+          </>
+          :''}
         </div>
         {isMobile? null:
           <div className="sidebar-container">
-            <Share/>
             <div className="right-banner"></div>
+            <Share/>
           </div>
         }
       </section>

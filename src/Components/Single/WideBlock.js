@@ -1,4 +1,5 @@
 import React from 'react'
+import renderHTML from "react-render-html";
 
 import '../../scss/Components/Single/Blocks.scss'
 
@@ -8,7 +9,7 @@ function WideBlock({img,text}) {
       <section className="wide-block">
             <p className="wide-text">
             {/* {post.acf["cafe-item-text1"]} */}
-            {text}
+            {renderHTML(text)}
             </p>
             <div className="wide-image">
               {/* <img src={post.acf["cafe-item-img1"]} alt="" /> */}

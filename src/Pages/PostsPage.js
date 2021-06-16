@@ -17,6 +17,9 @@ const isMobile = (windowWidth<1280)
 
 
 function PostsPage() {
+
+  window.scrollTo(0, 0)
+
   const dispatch = useDispatch();
   const items=useSelector(({posts})=>posts.posts);
   const visiblePosts=useSelector(({posts})=>posts.visiblePosts);
@@ -95,9 +98,9 @@ function PostsPage() {
         </div>
         {isMobile? null:
           <div className="sidebar-container">
-            <div className="right-sidebar-container">
+              <div div className="right-banner"></div>
               <Random/>
-            </div>
+              <Share/>
           </div>
         }
       </div>

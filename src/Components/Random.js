@@ -22,16 +22,18 @@ function Random() {
   const isLoadedRoutes=useSelector(({random})=>random.isLoadedRoutes);
 
   React.useEffect(()=>{
-    // if(!isLoadedPosts){
-    //   dispatch(fetchPosts());
-    // }
-    // if(!isLoadedFoodcorts){
-    //   dispatch(fetchFoodcorts());
-    // }
     if(!isLoadedPlaces || !isLoadedRoutes){
       dispatch(fetchRandom());
-
+      console.log(isLoadedPlaces,isLoadedRoutes)
     }
+    // else{if(!isLoadedRoutes){
+      // alert(2)
+      // dispatch(fetchFoodcorts());
+    // }}
+      
+    // if(!(isLoadedPlaces && isLoadedRoutes)){
+    //   dispatch(fetchRandom());
+    // }
   },[isLoadedPlaces,isLoadedRoutes,dispatch]);
   
 

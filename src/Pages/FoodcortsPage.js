@@ -100,9 +100,9 @@ function FoodcortsPage() {
         </div>
         {isMobile? null:
           <div className="sidebar-container">
-            <div className="right-sidebar-container">
+              <div div className="right-banner"></div>
               <Random/>
-            </div>
+              <Share/>
           </div>
         }
       </div>

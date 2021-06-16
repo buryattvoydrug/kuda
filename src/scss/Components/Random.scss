@@ -42,6 +42,9 @@
 }
 @media(max-width:1279px){
   .random{
+    position: relative !important;
+    top:auto !important;
+
     max-width: 100%;
     padding-left: 20px;
   }

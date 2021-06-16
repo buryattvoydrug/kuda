@@ -21,7 +21,7 @@ const isMobile = (windowWidth<1280)
 
 
 function Main() {
-  // window.scrollTo(0, 0)
+  window.scrollTo(0, 0)
 
   const dispatch = useDispatch();
 
@@ -68,7 +68,6 @@ function Main() {
         scale: 1.2
       }
     };
-    
   return (
     <>
       <div className="main-page page">
@@ -84,7 +83,7 @@ function Main() {
           </motion.div>
           :''}
           {isLoadedPosts? <motion.div 
-          initial="initial"
+              initial="initial"
               animate="in"
               exit="out"
               variants={pageVariants}
@@ -99,6 +98,7 @@ function Main() {
                     <CafeItem wide={isMobile? index%3===0: (index%9)%4===0} key={item.id} post={item}/>
                   ))):''}
           </div>
+          
           
           {posts.length > visiblePosts &&
              <button className="button load-more" onClick={()=>(dispatch(setVisiblePosts()))} type="button">Загрузить ещё</button>
@@ -124,13 +124,18 @@ function Main() {
           }
           </motion.div>
           : ''}
-          {isMobile? <Random/>:''}
+          {(isMobile)? 
+          <>
+            <Random/>
+            <Share/>
+          </>
+          :''}
         </div>
         {isMobile? null:
           <div className="sidebar-container">
-            <div className="right-sidebar-container">
+              <div div className="right-banner"></div>
               <Random/>
-            </div>
+              <Share/>
           </div>
         }
       </div>

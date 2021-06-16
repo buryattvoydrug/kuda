@@ -1,20 +1,21 @@
-import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import Random from '../Components/Random';
 import Share from '../Components/Share';
-import Menu from '../Components/Single/Menu';
 import SingleBottom from '../Components/Single/SingleBottom';
 import SingleHead from '../Components/Single/SingleHead';
 import SlimBlock from '../Components/Single/SlimBlock';
 import WideBlock from '../Components/Single/WideBlock';
-import SocialLinks from '../Components/SocialLinks';
 import { fetchPosts } from '../redux/actions/posts';
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/Single.scss'
+import Random from '../Components/Random';
+
+
+
+
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -34,7 +35,7 @@ function Single() {
   // const postNumber=23
   // const post=items.find((item)=>(item.id==postNumber))
 
-  // console.log(isLoaded)
+  console.log(post)
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
@@ -77,16 +78,21 @@ function Single() {
           <SingleHead date={post.date.split('-')} post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
           <SlimBlock post={post}/>
-          <SingleBottom post={post}/>
+          <SingleBottom author={post.acf["post-author"].data.display_name} post={post}/>
           </motion.div>
       
       ):""}
+      {isMobile? 
+          <>
+            <Share/>
+          </>
+          :''}
       </div>
         
         {isMobile? null:
           <div className="sidebar-container">
-            <Share/>
             <div className="right-banner"></div>
+            <Share/>
           </div>
         }
       </section>

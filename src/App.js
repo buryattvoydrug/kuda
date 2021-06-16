@@ -35,7 +35,7 @@ function App() {
     if(isLoadedNews || isLoadedFoodcorts || isLoadedPosts||isLoadedPlaces){
       setTimeout(function() {
         setActive(false)
-     },150);
+     },700);
     }
     
   return (
@@ -57,10 +57,12 @@ function App() {
         </AnimatePresence>
         <Footer/>
       </div>
-      {!active ? '': 
-          <div className="preloader">
-            <img src="/images/preloader.gif" alt="" />
-          </div>}
+      {/* {!!active ? '':  */}
+          <div className={!active ? "preloader hidden_preloader" : "preloader"}>
+            <img src="/images/loading.webp" alt="" />
+            <div className="preloader-logo"><strong>куда</strong> пойдём?</div>
+          </div>
+          {/* } */}
     </>
   );
 }

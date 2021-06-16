@@ -2,27 +2,30 @@
 .nav{
   .navbar{
     display: flex;
-    color:$pink;
+    color:#E71084;
     .navbar__item{
       margin-left: 25px;
     }
   }
 }
+
 @media (max-width:1279px) {
   .nav{
+    opacity: 1 !important;
+    transition: all 1s;
     position: relative;
     background: #fff;
     height: 100vh;
     .social-links{
-      position: absolute;
-      bottom:15vh;
+      position: fixed;
       right:50px;
+      top:240px;
     }
     .navbar{
       padding: 50px;
       flex-direction: column;
       align-items: flex-end;
-      color:$pink;
+      color:#E71084;
       li{
         margin-bottom: 10px;
       }
@@ -30,5 +33,10 @@
         font-size: 32px;
       }
     }
+    
+  }
+  .nav_hidden{
+    opacity: 0 !important;
+    transition: all .3s;
   }
 }

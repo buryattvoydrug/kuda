@@ -18,6 +18,8 @@ const isMobile = (windowWidth<1280)
 
 
 function BlogList() {
+  window.scrollTo(0, 0)
+
 
   const dispatch = useDispatch();
 
@@ -102,9 +104,9 @@ function BlogList() {
         </div>
         {isMobile? null:
           <div className="sidebar-container">
-            <div className="right-sidebar-container">
+              <div div className="right-banner"></div>
               <Random/>
-            </div>
+              <Share/>
           </div>
         }
       </div>

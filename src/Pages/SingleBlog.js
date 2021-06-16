@@ -89,9 +89,8 @@ function SingleBlog() {
         </div>
         {isMobile? null:
           <div className="sidebar-container">
-            <div className="right-sidebar-container">
-              <Share/>
-            </div>
+            <div className="right-banner"></div>
+            <Share/>
           </div>
         }
       </section>

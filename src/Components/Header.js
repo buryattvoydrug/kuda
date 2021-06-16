@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import {Link as ScrolLink} from 'react-scroll';
-import {useSelector, useDispatch} from 'react-redux'
-import {fetchPosts} from '../redux/actions/posts'
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import '../scss/Components/Header.scss'
 import Nav from './Nav';
@@ -27,7 +26,12 @@ function Header() {
 
   const [menu,setMenu]=useState(false)
   const toggleMenu=()=>{
-    setMenu(!menu);
+    if(menu){document.getElementById('nav').classList.add('nav_hidden')}
+    setTimeout(function() {
+      if(menu) document.getElementById('nav').classList.remove('nav_hidden')
+      setMenu(!menu);
+
+   },300);
     if (document.body.style.overflowY !== "hidden") {
       document.body.style.overflowY = "hidden";
     } else {
@@ -35,17 +39,46 @@ function Header() {
     }
   }
   const closeMenu = () => {
-    setMenu(false);
+    if(menu){document.getElementById('nav').classList.add('nav_hidden')}
+    setTimeout(function() {
+        if(menu) document.getElementById('nav').classList.remove('nav_hidden')
+        setMenu(!menu);
+   },600);
     document.body.style.overflowY = "scroll";
   }
 
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
+  };
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+      scale: 0.8
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      x: "100vw",
+      scale: 1.2
+    }
+  };
 
   return (
     <>
       <header>
         <div className="wrapper">
         <div className="container">
-          <Link to="/" className="logo">куда <strong>пойдём</strong>?</Link>
+          <ScrolLink spy={true}
+            smooth={true}
+            offset={0}
+            duration= {500} to="root" className="logo">куда <strong>пойдём</strong>?</ScrolLink>
           {!isMobile? <Nav/> : null}
         </div>
         <div className="sidebar-container">
@@ -63,7 +96,11 @@ function Header() {
         <div className="row"></div>
         </div>
         {menu? 
-          <div className="nav">
+          <motion.div id="nav" initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition} className="nav">
             <ul className="navbar">
               <li onClick={closeMenu}><Link to="/" className="navbar__item">главная</Link></li>
               <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">блог</Link></li>
@@ -73,13 +110,14 @@ function Header() {
               {/* <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">о нас</Link></li> */}
             </ul>
             {isMobile? <SocialLinks/>:null}
-            </div> : null}
+            </motion.div> : null}
       </header>
       <ScrolLink spy={true}
             smooth={true}
-            offset={-100}
+            offset={-75}
             duration= {500} className="to-random" to="random">
-        <div className="to-random">
+          {/* <span className="to-random__text">Рандом</span> */}
+        <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
         </div>
       </ScrolLink>

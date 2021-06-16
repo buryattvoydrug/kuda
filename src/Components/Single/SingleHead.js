@@ -3,6 +3,7 @@ import React from 'react'
 import '../../scss/Components/Single/SingleHead.scss'
 import Cornners from './Cornners'
 import Menu from './Menu'
+import renderHTML from "react-render-html";
 
 
 function SingleHead({corners,post,date}) {
@@ -54,8 +55,8 @@ function SingleHead({corners,post,date}) {
               </div>
               <div className="col">
                 {corners? <Cornners post={post}/>:<Menu post={post}/>}
-                <p className="head__text">{post.acf["cafe-item-head__text"]}</p>
-                <p className="accent__text">{post.acf["cafe-item-accent__text"]}</p>
+                <p className="head__text">{renderHTML(post.acf["cafe-item-head__text"])}</p>
+                <p className="accent__text">{renderHTML(post.acf["cafe-item-accent__text"])}</p>
                 <a href={post.acf["cafe-item-map__link"]} className="map__button">
                   <img src="/images/tomap.png" alt="" />
                   <span>Как добраться?</span>
