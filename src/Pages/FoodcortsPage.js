@@ -66,16 +66,16 @@ function FoodcortsPage() {
               transition={pageTransition}>
           <div className="category-type">
             <h2 className="category__title">Фудкорты</h2>
-            {isMobile? null :
+            {/* {isMobile? null :
             <div className="categories">
               <span className="categorie__name active_name">Все</span>
               <span className="categorie__name">Пицца</span>
               <span className="categorie__name">Суши</span>
               <span className="categorie__name">Говно</span>
               <span className="categorie__name">Жопа</span>
-            </div>}
+            </div>} */}
           </div>
-          {isMobile?
+          {/* {isMobile?
               <div className="categories">
                 <span className="categorie__name active_name">Все</span>
                 <span className="categorie__name">Тег1</span>
@@ -83,7 +83,7 @@ function FoodcortsPage() {
                 <span className="categorie__name">Говно</span>
                 <span className="categorie__name">Жопа</span>
               </div>
-          :null}
+          :null} */}
           
           <div className="items-list">
           {foodcorts.length? (foodcorts.slice(0, visibleFoodcorts).map((post,index)=>(

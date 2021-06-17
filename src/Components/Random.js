@@ -24,7 +24,7 @@ function Random() {
   React.useEffect(()=>{
     if(!isLoadedPlaces || !isLoadedRoutes){
       dispatch(fetchRandom());
-      console.log(isLoadedPlaces,isLoadedRoutes)
+      // console.log(isLoadedPlaces,isLoadedRoutes)
     }
     // else{if(!isLoadedRoutes){
       // alert(2)

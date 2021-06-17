@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React from 'react'
+import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -55,6 +55,40 @@ function BlogList() {
       scale: 1.2
     }
   };
+  
+  let categories=[]
+  let categoriesNames=[]
+  if(news){
+    news.map((item,index)=>{categories.push((news[index].acf.type))})
+    categories.map((item,index)=>{
+      categories[index].map((i,ind)=>{categoriesNames.push(categories[index][ind].name)})
+    })
+  }
+  const categoriesNamesUnique = categoriesNames.filter(function(item, pos) {
+    return categoriesNames.indexOf(item) == pos;
+  })
+  const arrayCat=[]
+  let tmp=[]
+  categories.map((item,index)=>(
+    tmp=[],
+    item.map((i,ind)=>(
+      tmp.push(i.name)
+    )),
+    arrayCat.push(tmp)
+  ))
+  const [active,setActive]=useState("Все")
+  function setCategory(cat){
+    setActive(cat)
+  }
+  const filtredItems=arrayCat.map((item,index)=>(
+    item.findIndex(i=>i===active)
+  ))
+  let itemsToShow=[]
+  if(isLoadedNews){
+    itemsToShow=news.filter((item)=>(filtredItems[news.indexOf(item)]>=0))
+  }
+
+  console.log(news,categoriesNamesUnique)
   return (
     <>
       <div className="blog-page page">
@@ -70,29 +104,23 @@ function BlogList() {
             <h2 className="category__title">Блог</h2>
             {isMobile? null :
             <div className="categories">
-              <span className="categorie__name active_name">Все</span>
-              <span className="categorie__name">Тег1</span>
-              <span className="categorie__name">Проект</span>
-              <span className="categorie__name">Говно</span>
-              <span className="categorie__name">Жопа</span>
+            {categoriesNamesUnique.map((item,index)=>(
+              <span key={item.id} onClick={()=>setCategory(item)} className={active==item? "categorie__name active_name": "categorie__name"}>{item}</span>
+            ))}
             </div>}
           </div>
           {isMobile?
-              <div className="categories">
-                <span className="categorie__name active_name">Все</span>
-                <span className="categorie__name">Тег1</span>
-                <span className="categorie__name">Проект</span>
-                <span className="categorie__name">Говно</span>
-                <span className="categorie__name">Жопа</span>
-              </div>
+            <div className="categories">
+            {categoriesNamesUnique.map((item,index)=>(
+              <span key={item.id} onClick={()=>setCategory(item)} className={active==item? "categorie__name active_name": "categorie__name"}>{item}</span>
+            ))}
+            </div>
           :null}
           
           <div className="items-list blog-list">
-          {isLoadedNews? 
-              news.length? (news.slice(0, visibleNews).map((newsitem,index)=>(
-                <NewsItem key={index} post={newsitem}/>
-              ))):''
-          :''}
+          {isLoadedNews? (itemsToShow.slice(0, visibleNews).map((item,index)=>(
+            <NewsItem key={index} post={item}/>
+                  ))):''}
           </div>
           {visibleNews < news.length &&
              <button className="button load-more" onClick={()=>(dispatch(setVisibleNews()))} type="button">Загрузить ещё</button>

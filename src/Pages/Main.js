@@ -37,7 +37,7 @@ function Main() {
   const visibleNews=useSelector(({news})=>news.visibleNews);
   const isLoadedNews=useSelector(({news})=>news.isLoaded);
 
-  console.log(isLoadedPosts)
+  // console.log(isLoadedPosts)
   
     React.useEffect(()=>{
       // if(!(isLoadedPosts || isLoadedFoodcorts || isLoadedNews)){

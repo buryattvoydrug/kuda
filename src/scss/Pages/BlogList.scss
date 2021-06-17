@@ -25,6 +25,7 @@
       .categorie__name{
         font-weight: 300;
         padding-left: 30px;
+        transition: all .5s;
       }
       .active_name{
         font-weight: 800;
@@ -36,6 +37,9 @@
   }
 }
 @media(max-width:1279px){
+  .active_name{
+    font-weight: 800;
+  }
   .blog-page{
     .blog-list{
       padding-bottom: 50px;

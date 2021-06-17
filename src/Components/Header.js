@@ -13,17 +13,29 @@ const isMobile = (windowWidth<1280)
 
 function Header() {
 
+
   window.addEventListener('scroll', progressBar);
+
+  const [logo,setLogo]=useState(true)
+  
+
   function progressBar(e){
     let windowHeight = document.documentElement.scrollHeight-document.documentElement.clientHeight;
     let windowScroll=document.body.scrollTop || document.documentElement.scrollTop;
+    // console.log(document.documentElement.scrollTop)
+
     let per = windowScroll/windowHeight*100;
     const progress=document.querySelector('.row');
     if(progress){
       progress.style.width=per+'vw';
     }
-  }
+    if(document.documentElement.scrollTop=='0'){
+      setLogo(true)
+    } else {
+      setLogo(false)
+    }
 
+  }
   const [menu,setMenu]=useState(false)
   const toggleMenu=()=>{
     if(menu){document.getElementById('nav').classList.add('nav_hidden')}
@@ -69,16 +81,22 @@ function Header() {
       scale: 1.2
     }
   };
+  // console.log(logo)
 
   return (
     <>
       <header>
         <div className="wrapper">
         <div className="container">
-          <ScrolLink spy={true}
+        {logo?
+          <Link to="/" className="logo">куда <strong>пойдём</strong>?</Link>
+        :
+        <ScrolLink spy={true}
             smooth={true}
             offset={0}
             duration= {500} to="root" className="logo">куда <strong>пойдём</strong>?</ScrolLink>
+        }
+          
           {!isMobile? <Nav/> : null}
         </div>
         <div className="sidebar-container">
