@@ -11,10 +11,10 @@ function WideBlock({img,text}) {
             {/* {post.acf["cafe-item-text1"]} */}
             {renderHTML(text)}
             </p>
-            <div className="wide-image">
+            {img && <div className="wide-image">
               {/* <img src={post.acf["cafe-item-img1"]} alt="" /> */}
               <img src={img} alt="" />
-            </div>
+            </div>}
       </section>
     </>
   )
