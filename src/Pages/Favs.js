@@ -1,9 +1,11 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
 import CafeItem from '../Components/CafeItem'
+import Cart from '../Components/Cart'
 import Random from '../Components/Random'
 import Share from '../Components/Share'
 import SocialLinks from '../Components/SocialLinks'
+import { motion } from 'framer-motion';
 
 import '../scss/Pages/Favs.scss'
 
@@ -13,34 +15,55 @@ const isMobile = (windowWidth<1280)
 
 
 export default function Favs() {
+  window.scrollTo(0, 0)
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5
+  };
+  const pageVariants = {
+    initial: {
+      opacity: 0,
+      x: "-100vw",
+      scale: 0.8
+    },
+    in: {
+      opacity: 1,
+      x: 0,
+      scale: 1
+    },
+    out: {
+      opacity: 0,
+      x: "100vw",
+      scale: 1.2
+    }
+  };
+
   return (
     <>
-      <div className="favs-page page">
+      <div className="blog-page page">
         <div className="container">
-          <div className="main-banner"></div>
-          <div className="favs-head">
-            <h2 className="favs__title">Избранное</h2>
-            <button className="exit">выйти <br />из профиля</button>
-          </div>
-          <div className="items-list">
-            <CafeItem wide type="Фудкорт"/>
-            <CafeItem />
-            <CafeItem />
-            <CafeItem />
-            <CafeItem />
-            <CafeItem wide/>
-            <CafeItem />
-          </div>
-          <button className="button load-more">Загрузить ещё</button>
-          <Share wide/>
-          {isMobile? <div className="right-banner"></div>:null}
-          {isMobile? <Random/> : null}
+          <motion.div initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}>
+              <div className="category-type">
+                <h2 className="category__title">Избранное</h2>
+              </div>
+              <div className="items-list">
+                <Cart/>
+              </div>
+              {isMobile? <div className="right-banner"></div>:null}
+              {isMobile? <Random/> : null}
+          </motion.div>
         </div>
         {isMobile? null:
           <div className="sidebar-container">
-            <Random/>
-            <SocialLinks/>
-            <div className="right-banner"></div>
+              <div div className="right-banner"></div>
+              <Random/>
+              <Share/>
           </div>
         }
       </div>

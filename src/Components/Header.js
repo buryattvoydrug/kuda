@@ -12,11 +12,11 @@ const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 function Header() {
+  const [logo,setLogo]=useState(true)
 
 
   window.addEventListener('scroll', progressBar);
 
-  const [logo,setLogo]=useState(true)
   
 
   function progressBar(e){
@@ -29,6 +29,7 @@ function Header() {
     if(progress){
       progress.style.width=per+'vw';
     }
+
     if(document.documentElement.scrollTop=='0'){
       setLogo(true)
     } else {
@@ -81,7 +82,7 @@ function Header() {
       scale: 1.2
     }
   };
-  // console.log(logo)
+  console.log(logo)
 
   return (
     <>
@@ -107,9 +108,9 @@ function Header() {
           </button>
            : <SocialLinks/>}
           
-          <button className="fave__button">
+          <Link to="/favs/" className="fave__button">
             <img src="/images/fave.svg" alt="" />
-          </button>
+          </Link>
         </div>
         <div className="row"></div>
         </div>

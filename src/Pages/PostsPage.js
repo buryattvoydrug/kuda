@@ -11,6 +11,7 @@ import { fetchPosts, setVisiblePosts } from '../redux/actions/posts';
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/BlogList.scss'
+import Cart from '../Components/Cart';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -26,13 +27,26 @@ function PostsPage() {
   const isLoaded=useSelector(({posts})=>posts.isLoaded);
 
   
-
+  const handleAddPizzaToCart=(obj)=>{
+    dispatch({
+        type:'ADD_PIZZA_CART',
+        payload:obj,
+    })
+  }
+  const handleRemoveCartItem=(obj)=>{
+    dispatch({
+        type:'REMOVE_CART_ITEM',
+        payload:obj,
+    })
+  }
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
     }
-
   },[isLoaded,dispatch]);
+
+
+  
   
   const pageTransition = {
     type: "tween",
@@ -88,12 +102,14 @@ function PostsPage() {
   if(isLoaded){
     itemsToShow=items.filter((item)=>(filtredItems[items.indexOf(item)]>=0))
   }
+  const cart=localStorage.getItem('itemsCart')+''
+  console.log(cart)
   return (
     <>
       <div className="blog-page page">
         <div className="container">
       { isLoaded? (
-
+          
           <motion.div initial="initial"
               animate="in"
               exit="out"
@@ -118,7 +134,8 @@ function PostsPage() {
           
           <div className="items-list">
           {items.length? (itemsToShow.slice(0, visiblePosts).map((item,index)=>(
-            <CafeItem wide={isMobile? index%3===0: (index%9)%4===0} key={item.id} post={item}/>
+            <CafeItem   toDelete={cart.includes('"id":'+item.id)}
+                         wide={isMobile? index%3===0: (index%9)%4===0} post={item}/>
                   ))):''}
           </div>
           {itemsToShow.length > visiblePosts &&

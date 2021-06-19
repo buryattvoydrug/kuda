@@ -53,6 +53,8 @@ function FoodcortsPage() {
       scale: 1.2
     }
   };
+  const cart=localStorage.getItem('itemsCart')+''
+  console.log(cart)
   return (
     <>
       <div className="blog-page page">
@@ -87,7 +89,7 @@ function FoodcortsPage() {
           
           <div className="items-list">
           {foodcorts.length? (foodcorts.slice(0, visibleFoodcorts).map((post,index)=>(
-                    <CafeItem type={"Фудкорт"} wide={isMobile? index%3===0: (index%9)%4===0} key={post.id} post={post}/>
+                    <CafeItem toDelete={cart.includes('"id":'+post.id)} type={"Фудкорт"} wide={isMobile? index%3===0: (index%9)%4===0} key={post.id} post={post}/>
                   ))):''}
           </div>
           {visibleFoodcorts < foodcorts.length &&

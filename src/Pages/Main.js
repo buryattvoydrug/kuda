@@ -68,6 +68,8 @@ function Main() {
         scale: 1.2
       }
     };
+  const cart=localStorage.getItem('itemsCart')+''
+  console.log(cart)
   return (
     <>
       <div className="main-page page">
@@ -95,7 +97,7 @@ function Main() {
           
             <div className="items-list">
           {posts.length? (posts.slice(0, visiblePosts).map((item,index)=>(
-                    <CafeItem wide={isMobile? index%3===0: (index%9)%4===0} key={item.id} post={item}/>
+                    <CafeItem toDelete={cart.includes('"id":'+item.id)} wide={isMobile? index%3===0: (index%9)%4===0} key={item.id} post={item}/>
                   ))):''}
           </div>
           
@@ -116,7 +118,7 @@ function Main() {
           
           <div className="items-list">
           {foodcorts.length? (foodcorts.slice(0, visibleFoodcorts).map((post,index)=>(
-                    <CafeItem type={"Фудкорт"} wide={isMobile? index%3===0: (index%9)%4===0} key={post.id} post={post}/>
+                    <CafeItem toDelete={cart.includes('"id":'+post.id)} type={"Фудкорт"} wide={isMobile? index%3===0: (index%9)%4===0} key={post.id} post={post}/>
                   ))):''}
           </div>
           {visibleFoodcorts < foodcorts.length &&
