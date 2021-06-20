@@ -3,6 +3,7 @@ import renderHTML from "react-render-html";
 
 
 import '../../scss/Components/Single/Menu.scss'
+import Menu from './Menu';
 
 function Cornners({post}) {
   return (
@@ -10,7 +11,7 @@ function Cornners({post}) {
       <div className="menu">
                   <h4 className="menu__title">Корнеры</h4>
                   <ul className="corners-block">
-                  {renderHTML( post.acf["cafe-item-menu"] )}
+                  {/* <Menu post={post}/> */}
                   </ul>
                 </div>
     </>

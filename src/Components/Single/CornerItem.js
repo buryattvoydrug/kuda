@@ -1,6 +1,9 @@
 import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCorners } from '../../redux/actions/corners';
+import { fetchPosts } from '../../redux/actions/posts';
 
 import '../../scss/Components/Single/CornerItem.scss'
 import Share from '../Share';
@@ -10,41 +13,21 @@ const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 
-export default class CornerItem extends React.Component {
-  constructor(props){
-    super(props);
-    const data=this.props.data
-    this.state={
-      loading:false,
-      data:data,
-      corners:[],
-      error:''
+function CornerItem() {
+  const dispatch = useDispatch();
+
+
+  const corners=useSelector(({corners})=>corners.corners);
+  const isLoaded=useSelector(({corners})=>corners.isLoaded);
+
+  React.useEffect(()=>{
+    if(!isLoaded){
+      dispatch(fetchCorners());
     }
-    console.log(this.state.data)
-  }
-  
-  componentDidMount(){
-    window.scrollTo(0, 0)
-    const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
-    let tmp=[]
-    console.log(this.state.data)
-  this.state.data.map((item,index)=>(
-    this.setState({loading:true},
-      ()=>{
-        axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/corners/${item.ID}`)
-        .then(res=>{
-          tmp.push(res.data)
-          this.setState({loading:false, corners:tmp})
-        })
-        .catch(error=>this.setState({loading:false,error:error.response.data}))
-      }
-    )
-  ))
-  }
-  render() {
-    return (
-      <>
-      {this.state.corners.map((item,index)=>(
+  },[isLoaded,dispatch]);
+  return (
+    <>
+      {corners? corners.map((item,index)=>(
         <div key={index} className="corner">
                   <img src={item.acf["cafe-item-main-img"]} alt="" className="corner__image" />
                   <div className="corner-info">
@@ -87,9 +70,49 @@ export default class CornerItem extends React.Component {
                   :<div className="main-banner"></div>
                   }
                 </div>
-      ))}
+      )):""}
         
       </>
-    )
-  }
+  )
 }
+
+export default CornerItem
+
+
+// export default class CornerItem extends React.Component {
+//   constructor(props){
+//     super(props);
+//     const data=this.props.data
+//     this.state={
+//       loading:false,
+//       data:data,
+//       corners:[],
+//       error:''
+//     }
+//     console.log(this.state.data)
+//   }
+  
+//   componentDidMount(){
+//     window.scrollTo(0, 0)
+//     const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
+//     let tmp=[]
+//     console.log(this.state.data)
+//   this.state.data.map((item,index)=>(
+//     this.setState({loading:true},
+//       ()=>{
+//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/corners/${item.ID}`)
+//         .then(res=>{
+//           tmp.push(res.data)
+//           this.setState({loading:false, corners:tmp})
+//         })
+//         .catch(error=>this.setState({loading:false,error:error.response}))
+//       }
+//     )
+//   ))
+//   }
+//   render() {
+//     return (
+      
+//     )
+//   }
+// }

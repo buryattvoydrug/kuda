@@ -14,6 +14,7 @@
         object-fit: cover;
       }
         .item-info{
+          position: relative;
           .prefs{
             .price img{
               margin: 10px 0;
@@ -21,6 +22,9 @@
             }
           }
           .fave__button{
+            position: absolute;
+            top:auto;
+            bottom: 0;
             margin-bottom: 5px;
             height: 40px;
             width: 40px;
@@ -90,12 +94,20 @@
   .single-head{
     .head-block{
       flex-direction: column;
+      
       .cafe-item{
         margin-right: 0;
       }
       .col{
         min-width: auto;
         width: 100%;
+        .item-info{
+          position: relative;
+          .fave__button{
+            top:auto;
+            bottom:0;
+          }
+        }
         .cafe-item__img{
           height: 550px;
           width: 100%;

@@ -10,6 +10,23 @@
     flex-direction: row;
   }
 }
+.empty{
+  margin: 20px;
+  img{
+    height: 100px;
+  }
+}
+.cart__title{
+  font-weight: 300;
+  line-height: 110%;
+  margin-bottom: 15px;
+}
+.cart__text{
+  margin-bottom: 10px;
+  line-height: 110%;
+  padding: 15px 20px;
+  background: $pink;
+}
 .category-type{
   width: 100%;
   display: flex;

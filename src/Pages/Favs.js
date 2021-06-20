@@ -52,6 +52,9 @@ export default function Favs() {
               <div className="category-type">
                 <h2 className="category__title">Избранное</h2>
               </div>
+              <p className="cart__text">
+                <strong>Сохраненные</strong> в этом разделе заведения будут храниться в браузере <strong>вашего устройства</strong>.
+              </p>
               <div className="items-list">
                 <Cart/>
               </div>

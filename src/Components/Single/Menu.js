@@ -2,6 +2,8 @@ import React from 'react'
 import '../../scss/Components/Single/Menu.scss'
 
 function Menu({post}) {
+  console.log(post)
+
   return (
     <>
       <div className="menu">
