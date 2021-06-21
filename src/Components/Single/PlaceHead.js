@@ -23,9 +23,9 @@ function PlaceHead({place}) {
                       <img src="/images/tomap.png" alt="" />
                       <span>Как добраться?</span>
                     </button>
-                    <button className="fave__button">
+                    {/* <button className="fave__button">
                       <img src="/images/fave.svg" alt="" />
-                    </button>
+                    </button> */}
                   </div>
                 </div>
                 <img className="cafe-item__img" src={place.acf["main-image"]} alt="" />

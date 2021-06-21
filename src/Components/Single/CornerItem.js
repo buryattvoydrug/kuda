@@ -65,11 +65,7 @@ function CornerItem() {
                       <img src={item.acf["cafe-item-img2"]} alt="" />
                     </div>
                   </section>
-                  {isMobile? 
-                  <Share wide/>
-                  :<div className="main-banner"></div>
-                  }
-                </div>
+                  </div>
       )):""}
         
       </>

@@ -12,10 +12,18 @@
     margin: 30px 0 100px;
     width:100%;
     position: relative;
+    .price{
+      margin-top: 10px;
+    }
     .fave__button{
       position: absolute;
-      left:50%;
+      left:40%;
+      height:40px;
+      width: 40px;
       bottom:0;
+      img{
+        height: 100%;
+      }
     }
     .item__title{
       font-size: 36px;

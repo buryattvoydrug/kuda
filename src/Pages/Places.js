@@ -12,6 +12,7 @@ import SingleHead from '../Components/Single/SingleHead';
 import SocialLinks from '../Components/SocialLinks';
 import { fetchRandom } from '../redux/actions/random';
 import { motion } from 'framer-motion';
+import { fetchPosts } from '../redux/actions/posts';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -27,16 +28,23 @@ function Places() {
   const places=useSelector(({random})=>random.places);
   const isLoadedPlaces=useSelector(({random})=>random.isLoadedPlaces);
 
-  const location = useLocation();
-  const postLocation=location.pathname.split('/')
-  const postNumber=postLocation[postLocation.length-1]
-  const place=places.find((item)=>(item.id==postNumber))
+  const items=useSelector(({posts})=>posts.posts);
+  const isLoaded=useSelector(({posts})=>posts.isLoaded);
 
   React.useEffect(()=>{
     if(!isLoadedPlaces){
       dispatch(fetchRandom());
     }
-  },[isLoadedPlaces,dispatch]);
+    if(!isLoaded){
+      dispatch(fetchPosts());
+    }
+  },[isLoaded,isLoadedPlaces,dispatch]);
+  const location = useLocation();
+  const postLocation=location.pathname.split('/')
+  const postNumber=postLocation[postLocation.length-1]
+  const place=places.find((item)=>(item.id==postNumber))
+
+  
   const pageTransition = {
     type: "tween",
     ease: "anticipate",
@@ -59,7 +67,14 @@ function Places() {
       scale: 1.2
     }
   };
-
+  // if(isLoaded){
+    // console.log(place.acf["places-nearby"])
+    const placesIDs=place.acf["places-nearby"]
+    console.log(placesIDs)
+    const cornersArray=placesIDs.map((i,index)=>(items.filter((item)=>(item.id==i))))
+    console.log(cornersArray)
+    //находить нужные items из place.acf["places-nearby"] - по айди заведений
+  // }
   return (
     <>
       <section className="single-page page">
@@ -71,21 +86,19 @@ function Places() {
               exit="out"
               variants={pageVariants}
               transition={pageTransition}>
-          <div className="main-banner"></div>
           <PlaceHead place={place}/>
           <DoubleSlim place={place}/>
-          {place.acf["places-nearby"]? <Nearby data={place.acf["places-nearby"]}/>:''}
-          <Share wide/>
+          {place.acf["places-nearby"]? <Nearby data={cornersArray}/>:''}
+          {/* <Share wide/> */}
           {isMobile? <Random/> : null}
           </motion.div>
       ):""}
 
           </div>
-        {isMobile? null:
+          {isMobile? null:
           <div className="sidebar-container">
-            <Random/>
-            <SocialLinks/>
             <div className="right-banner"></div>
+            <Share/>
           </div>
         }
       </section>
