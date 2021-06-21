@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import '../../scss/Components/Single/SingleHead.scss'
 import Cornners from './Cornners'
 import Menu from './Menu'
 import renderHTML from "react-render-html";
+import { addPizzaToCart, removeCartItem } from '../../redux/actions/cart';
 
 
 function SingleHead({corners,post,date}) {
@@ -17,6 +18,10 @@ function SingleHead({corners,post,date}) {
 
 
   const price=Number(post.acf["cafe-item-prices"])
+
+  const cart=localStorage.getItem('itemsCart')+''
+  const [g,setG]=useState(cart.includes('"id":'+post.id))
+
   return (
     <>
       <section className="single-head">
@@ -47,8 +52,8 @@ function SingleHead({corners,post,date}) {
                     : null}
                     
                   </div>
-                  <button className="fave__button">
-                    <img src="/images/fave.svg" alt="" />
+                  <button onClick={g? removeCartItem(post): addPizzaToCart(post)} className="fave__button">
+                    <img onClick={()=>{setG(!g)}} src={g? "/images/fave_active.svg":"/images/fave.svg"} alt="" />
                   </button>
                 </div>
                 <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />

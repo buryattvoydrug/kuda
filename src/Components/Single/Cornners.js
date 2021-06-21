@@ -11,7 +11,7 @@ function Cornners({post}) {
       <div className="menu">
                   <h4 className="menu__title">Корнеры</h4>
                   <ul className="corners-block">
-                  {/* <Menu post={post}/> */}
+                  <Menu corners post={post}/>
                   </ul>
                 </div>
     </>
