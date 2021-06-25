@@ -58,6 +58,8 @@ function Foodcort() {
   const foodcortLocation=location.pathname.split('/')
   const foodcortNumber=foodcortLocation[foodcortLocation.length-1]
   const foodcort=foodcorts.find((item)=>(item.id==foodcortNumber))
+  
+  // console.log(foodcort)
   return (
     <>
       <section className="single-page page">
@@ -72,10 +74,10 @@ function Foodcort() {
           <section className="corners-page">
             <h2 className="corners__title">Корнеры</h2>
             <div className="corners">
-              <CornerItem data={foodcort.acf.corners}/>
+              <CornerItem address={foodcort.acf["cafe-item-address"]} data={foodcort.acf.corners}/>
             </div>
           </section>
-          <SingleBottom post={foodcort} />
+          <SingleBottom author={foodcort.acf["post-author"].data.display_name} post={foodcort} />
           </motion.div>
       ):""}
       {isMobile? 

@@ -103,7 +103,7 @@ function PostsPage() {
     itemsToShow=items.filter((item)=>(filtredItems[items.indexOf(item)]>=0))
   }
   const cart=localStorage.getItem('itemsCart')+''
-  console.log(cart)
+  // console.log(cart)
   return (
     <>
       <div className="blog-page page">

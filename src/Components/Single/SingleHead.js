@@ -8,7 +8,7 @@ import { addPizzaToCart, removeCartItem } from '../../redux/actions/cart';
 
 
 function SingleHead({corners,post,date}) {
-  console.log(post)
+  // console.log(post)
 
   const day=Number(date[2].slice(0,2))
   const month=Number(date[1])
@@ -26,7 +26,7 @@ function SingleHead({corners,post,date}) {
     <>
       <section className="single-head">
             <div className="top">
-              <span className="category">Рестораны</span>
+              <span className="category">{corners? 'Фудкорты':'Заведения'}</span>
               <span className="date">{day} {months[month-1]} {year}</span>
             </div>
             <div className="head-block">

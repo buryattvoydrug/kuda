@@ -35,7 +35,7 @@ function Single() {
   // const postNumber=23
   // const post=items.find((item)=>(item.id==postNumber))
 
-  console.log(post)
+  // console.log(post)
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());

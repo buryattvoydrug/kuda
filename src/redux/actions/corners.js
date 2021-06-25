@@ -7,13 +7,13 @@ export const setLoaded=(payload)=>({
 export const fetchCorners=()=>(dispatch)=>{
   const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
   dispatch(setLoaded(false));
-  axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/corners`).then(({data})=>{
-      dispatch(setPosts(data));
+  axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/corners?per_page=100`).then(({data})=>{
+      dispatch(setCorners(data));
     });
 
 }
-export const setPosts =(items)=>({
-  type:'SET_POSTS',
+export const setCorners =(items)=>({
+  type:'SET_CORNERS',
   payload:items,
 });
 export const setVisiblePosts =(visible)=>({

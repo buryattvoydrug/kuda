@@ -121,8 +121,11 @@
           width: 100%;
         }
         .map__button{
-          float:right;
-          padding-right: 10px;
+          // float:right;
+          padding: 20px 0 0 30px;
+          span{
+            padding-top: 5px;
+          }
         }
         .web__button{
           padding-left: 10px;

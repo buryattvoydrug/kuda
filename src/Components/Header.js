@@ -82,7 +82,7 @@ function Header() {
       scale: 1.2
     }
   };
-  console.log(logo)
+  // console.log(logo)
 
   return (
     <>

@@ -24,7 +24,6 @@ function FoodcortsPage() {
   const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
   const visibleFoodcorts=useSelector(({foodcorts})=>foodcorts.visibleFoodcorts);
   const isLoaded=useSelector(({foodcorts})=>foodcorts.isLoaded);
-  console.log(isLoaded)
 
   React.useEffect(()=>{
     if(!isLoaded){
@@ -54,7 +53,6 @@ function FoodcortsPage() {
     }
   };
   const cart=localStorage.getItem('itemsCart')+''
-  console.log(cart)
   return (
     <>
       <div className="blog-page page">

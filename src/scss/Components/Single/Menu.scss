@@ -1,7 +1,7 @@
 @import '../../Constants';
 .menu{
-  margin: 20px 0 60px 140px;
-  width: 270px;
+  margin: 20px 0 60px 100px;
+  width: 310px;
   .menu__title{
     width: 100%;
     padding: 10px;
@@ -44,8 +44,13 @@
     font-size: 18px;
   }
 }
+
 @media(max-width:1279px){
   .menu{
     margin: 15px 0 55px;
+    width: 95%;
+    .corners-block{
+      margin: 15px 10px;
+    }
   }
 }

@@ -19,7 +19,9 @@ function CafeItem({wide,type,post,toDelete,isCart}) {
   //   firstHandler(e);
   //   secondHander(e);
   // };
-  
+  if(post.acf.corners){
+    type="Фудкорт"
+  }
   return (
     <>
       {/* <Link to={type=="Фудкорт"? `/foodcort/${post.id}` : `/post/${post.id}`}  className={wide? "item cafe-item cafe-item-wide" : "item cafe-item"}> */}
