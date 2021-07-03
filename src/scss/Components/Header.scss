@@ -1,34 +1,6 @@
 @import '../Constants';
 
-.to-random{
-  z-index: 10;
-  position: fixed;
-  bottom:20px;
-  right:20px;
-  display: flex;
-  align-items: center;
-  border-radius: 100px;
-  cursor: pointer;
 
-  
-  
-  .to-random__button{
-    height: 70px;
-    width: 70px;
-    background: $pink;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 100px;
-
-  }
-  .to-random__text{
-    color: #fff;
-    font-weight: 800;
-    font-size: 20px;
-    padding:  0 20px 5px 40px;
-  }
-}
 header{
   .logo{
     cursor: pointer;

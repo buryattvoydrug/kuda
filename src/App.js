@@ -54,6 +54,7 @@ function App() {
             <Route exact path="/foodcort/:id"><Foodcort/></Route>
             <Route exact path="/place/:id"><Places/></Route>
             <Route exact path="/route/:id"><Routee/></Route>
+            <Route path="*" component={PageNotFound}/>
           </Switch>
         </AnimatePresence>
         <Footer/>

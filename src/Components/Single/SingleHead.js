@@ -7,7 +7,7 @@ import renderHTML from "react-render-html";
 import { addPizzaToCart, removeCartItem } from '../../redux/actions/cart';
 
 
-function SingleHead({corners,post,date}) {
+function SingleHead({corners,post,date,route}) {
   // console.log(post)
 
   const day=Number(date[2].slice(0,2))
@@ -26,7 +26,9 @@ function SingleHead({corners,post,date}) {
     <>
       <section className="single-head">
             <div className="top">
-              <span className="category">{corners? 'Фудкорты':'Заведения'}</span>
+            {route?
+              <span className="category">Маршруты</span>:
+              <span className="category">{corners? 'Фудкорты':'Заведения'}</span>}
               <span className="date">{day} {months[month-1]} {year}</span>
             </div>
             <div className="head-block">
@@ -41,14 +43,14 @@ function SingleHead({corners,post,date}) {
                   <div className="prefs">
                     <div className="price">
                     { [...Array(price)].map((item, index) =>                       
-                    <span className="active_price" key={index}><img src="/images/rub.svg" alt=""/></span>
+                    <span className="active_price" key={index}><img src={route? "/images/people.svg":"/images/rub.svg"} alt=""/></span>
                     ) }
                     { [...Array(5-price)].map((item, index) =>                       
-                    <span key={index}><img src="/images/rub.svg" alt=""/></span>
+                    <span key={index}><img src={route? "/images/people.svg":"/images/rub.svg"} alt=""/></span>
                     ) }
                     </div>
                     {post.acf["cafe-item-vegan"]? 
-                    <img src="/images/vegan.svg" alt="" className="vegan-icon" />
+                    <img src={route? "/images/bike.svg":"/images/vegan.svg"} alt="" className="vegan-icon" />
                     : null}
                     
                   </div>
@@ -56,9 +58,10 @@ function SingleHead({corners,post,date}) {
                     <img onClick={()=>{setG(!g)}} src={g? "/images/fave_active.svg":"/images/fave.svg"} alt="" />
                   </button>
                 </div>
-                <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />
+                {route? null:
+                <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />}
               </div>
-              <div className="col">
+              {route? null:<div className="col">
                 {corners? <Cornners post={post}/>:<Menu post={post}/>}
                 <p className="head__text">{renderHTML(post.acf["cafe-item-head__text"])}</p>
                 <p className="accent__text">{renderHTML(post.acf["cafe-item-accent__text"])}</p>
@@ -71,7 +74,7 @@ function SingleHead({corners,post,date}) {
                   <img src="/images/web.png" alt="" />
                   <span>Сайт</span>
                 </a>}
-              </div>
+              </div>}
             </div>
           </section>
     </>

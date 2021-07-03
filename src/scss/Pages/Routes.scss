@@ -1,0 +1,129 @@
+@import '../Constants';
+.route-page{
+  .col{
+    width: 450px;
+    .price{
+      span{
+        margin-right: 5px;
+      }
+    }
+    .vegan-icon{
+      padding-bottom: 5px;
+    }
+  }
+  .places{
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    .place__item{
+      margin-bottom: 40px;
+      width: 450px;
+      position: relative;
+      .bottom-line{
+        position: absolute;
+        bottom:-170px;
+        left:340px;
+        z-index: -1;
+
+      }
+      .top-line{
+        left:-60px;
+        top:-15px;
+        position: absolute;
+        z-index: -1;
+      }
+      .top-line2{
+        position: absolute;
+        top:-400px;
+        left:-50px;
+        z-index: -1;
+      }
+      .place-block{
+        display: flex;
+        padding: 80px 0 40px;
+        .place__number{
+          line-height: 80%;
+          font-size: 72px;
+          font-weight: 800;
+        }
+        .place__text{
+          width: 350px;
+          font-size: 14px;
+          line-height: 130%;
+          margin-left: 30px;
+        }
+      }
+      .place__img{
+        height: 500px;
+        width: 400px;
+        object-fit: cover;
+      }
+    }
+    .top_place__item{
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: flex-end;
+      align-items: flex-end;
+      .place-block{
+        padding: 40px 10px 80px 0;
+        flex-direction: row-reverse;
+        .place__text{
+          margin-left: 0;
+          margin-right: 30px;
+        }
+      }
+    }
+  }
+}
+.map{
+  background: #000;
+  display: block;
+  height: 500px;
+  width: 100%;
+}
+@media(max-width:1279px){
+  .map{
+    height: 400px;
+  }
+  .route-page{
+    padding-top: 60px;
+    .routes-bottom{
+      padding: 0 5vw;
+    }
+    .nearby{
+      padding: 0 5vw;
+    }
+    .container{
+      width: 100vw;
+      transform: translateX(-5vw);
+      .single-head{
+        padding:0 5vw;
+      }
+      .places{
+        .m-top-line{
+          width: 100%;
+        }
+        margin-top: 0;
+        .place__item{
+          width: 100%;
+          .place-block{
+            padding: 90px 5vw 50px;
+            .place__number{
+              font-size: 48px;
+            }
+          }
+          img{
+            width: 100%;
+          }
+        }
+      }
+    }
+    .col{
+      .vegan-icon{
+        height: 25px;
+        margin-left: 10px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+}

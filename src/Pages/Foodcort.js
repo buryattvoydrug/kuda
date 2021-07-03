@@ -11,9 +11,11 @@ import SingleHead from '../Components/Single/SingleHead';
 import SocialLinks from '../Components/SocialLinks';
 import { fetchFoodcorts } from '../redux/actions/foodcorts';
 import { motion } from 'framer-motion';
+import {Link as ScrolLink} from 'react-scroll';
 
 import '../scss/Pages/Foodcort.scss'
 import '../scss/Pages/Single.scss'
+import PageNotFound from './PageNotFound';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -62,6 +64,8 @@ function Foodcort() {
   // console.log(foodcort)
   return (
     <>
+    {foodcort===undefined? <PageNotFound/>: 
+
       <section className="single-page page">
         <div className="container">
       { foodcort ? (
@@ -92,7 +96,16 @@ function Foodcort() {
             <Share/>
           </div>
         }
-      </section>
+        <ScrolLink spy={true}
+            smooth={true}
+            offset={-75}
+            duration= {500} className="to-random" to="random">
+          {/* <span className="to-random__text">Рандом</span> */}
+        <div className="to-random__button">
+          <img src="/images/shuffle.svg" alt="" />
+        </div>
+      </ScrolLink>
+      </section>}
     </>
   )
 }

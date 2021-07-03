@@ -131,15 +131,7 @@ function Header() {
             {isMobile? <SocialLinks/>:null}
             </motion.div> : null}
       </header>
-      <ScrolLink spy={true}
-            smooth={true}
-            offset={-75}
-            duration= {500} className="to-random" to="random">
-          {/* <span className="to-random__text">Рандом</span> */}
-        <div className="to-random__button">
-          <img src="/images/shuffle.svg" alt="" />
-        </div>
-      </ScrolLink>
+      
     </>
   )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -9,9 +9,10 @@ import SlimBlock from '../Components/Single/SlimBlock';
 import WideBlock from '../Components/Single/WideBlock';
 import { fetchPosts } from '../redux/actions/posts';
 import { motion } from 'framer-motion';
+import {Link as ScrolLink} from 'react-scroll';
 
 import '../scss/Pages/Single.scss'
-import Random from '../Components/Random';
+import PageNotFound from './PageNotFound';
 
 
 
@@ -35,11 +36,12 @@ function Single() {
   // const postNumber=23
   // const post=items.find((item)=>(item.id==postNumber))
 
-  // console.log(post)
+  console.log(post)
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
     }
+    
   },[isLoaded,dispatch]);
   const pageTransition = {
     type: "tween",
@@ -63,12 +65,13 @@ function Single() {
       scale: 1.2
     }
   };
-
+  console.log(post)
   return (
     <>
+    {post===undefined? <PageNotFound/>: 
       <section className="single-page page">
       <div className="container">
-
+      
       { post ? (
           <motion.div  initial="initial"
               animate="in"
@@ -95,7 +98,17 @@ function Single() {
             <Share/>
           </div>
         }
+        <ScrolLink spy={true}
+            smooth={true}
+            offset={-75}
+            duration= {500} className="to-random" to="random">
+          {/* <span className="to-random__text">Рандом</span> */}
+        <div className="to-random__button">
+          <img src="/images/shuffle.svg" alt="" />
+        </div>
+      </ScrolLink>
       </section>
+    }
     </>
   )
 }

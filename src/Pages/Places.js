@@ -12,6 +12,7 @@ import SingleHead from '../Components/Single/SingleHead';
 import SocialLinks from '../Components/SocialLinks';
 import { fetchRandom } from '../redux/actions/random';
 import { motion } from 'framer-motion';
+import PageNotFound from './PageNotFound';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -62,6 +63,8 @@ function Places() {
 
   return (
     <>
+    {place===undefined? <PageNotFound/>: 
+    
       <section className="single-page page">
         <div className="container">
       { isLoadedPlaces ? (
@@ -88,7 +91,7 @@ function Places() {
             <div className="right-banner"></div>
           </div>
         }
-      </section>
+      </section>}
     </>
   )
 }

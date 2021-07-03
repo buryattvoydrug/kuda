@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import {Link as ScrolLink} from 'react-scroll';
 import { fetchFoodcorts } from '../redux/actions/foodcorts';
 import { fetchPosts } from '../redux/actions/posts';
 import { fetchRandom } from '../redux/actions/random';
 import '../scss/Components/Random.scss'
 
-function Random() {
+function Random({single}) {
   const dispatch = useDispatch();
 
   const posts=useSelector(({posts})=>posts.posts);
@@ -15,14 +16,12 @@ function Random() {
   const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
   const isLoadedFoodcorts=useSelector(({foodcorts})=>foodcorts.isLoaded);
 
-  const places=useSelector(({random})=>random.places);
-  const isLoadedPlaces=useSelector(({random})=>random.isLoadedPlaces);
 
   const routes=useSelector(({random})=>random.routes);
   const isLoadedRoutes=useSelector(({random})=>random.isLoadedRoutes);
 
   React.useEffect(()=>{
-    if(!isLoadedPlaces || !isLoadedRoutes){
+    if(!isLoadedRoutes){
       dispatch(fetchRandom());
       // console.log(isLoadedPlaces,isLoadedRoutes)
     }
@@ -34,7 +33,7 @@ function Random() {
     // if(!(isLoadedPlaces && isLoadedRoutes)){
     //   dispatch(fetchRandom());
     // }
-  },[isLoadedPlaces,isLoadedRoutes,dispatch]);
+  },[isLoadedRoutes,dispatch]);
   
 
   const [active,setActive]=useState(-1)
@@ -44,7 +43,6 @@ function Random() {
   // const buttons=['Заведение','Фудкорт','Новость']
   
   const buttons=[{name:"Еда",type:'post',data:posts},
-                  {name:"Места",type:'place',data:places},
                   {name:"Маршрут прогулки",type:'route',data:routes},
                  {name:"Фудкорт",type:'foodcort',data:foodcorts}]
   
@@ -71,6 +69,17 @@ function Random() {
         </div>
         <Link to={active!==-1? '/'+ buttons[active].type +'/'+randomItem(buttons[active].data) : "/"} className="button random__generate" onClick={(posts)=>randomItem(posts)}>Сгенерировать</Link>
       </div>
+      {single?
+      null:
+      <ScrolLink spy={true}
+            smooth={true}
+            offset={-75}
+            duration= {500} className="to-random" to="random">
+          {/* <span className="to-random__text">Рандом</span> */}
+        <div className="to-random__button">
+          <img src="/images/shuffle.svg" alt="" />
+        </div>
+      </ScrolLink>}
     </>
   )
 }

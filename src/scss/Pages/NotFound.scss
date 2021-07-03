@@ -11,10 +11,14 @@
     bottom:-100px;
     right:0;
   }
-
+  .button{
+    font-weight: 800;
+    background: $pink;
+    color:#000;
+  }
   //fonts
   .notfound__title{
-    font-size: 144px;
+    font-size: 72px;
     line-height: 90%;
     letter-spacing: -0.065em;
     width: 800px;
@@ -24,7 +28,7 @@
   }
   .notfound__text{
     font-weight: 300;
-    font-size: 48px;
+    font-size: 32px;
     margin-bottom: 30px;
   }
 }
@@ -32,11 +36,11 @@
   .notfound-page{
     //fonts
     .notfound__title{
-      font-size: 60px;
+      font-size: 48px;
       width: 100%;
     }
     .notfound__text{
-      font-size: 22px;
+      font-size: 18px;
     }
   }
 }
