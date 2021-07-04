@@ -1,17 +1,13 @@
 import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import CafeItem from '../Components/CafeItem';
 import Random from '../Components/Random';
 import Share from '../Components/Share';
-import NewsItem from '../Components/Single/NewsItem';
-import SocialLinks from '../Components/SocialLinks';
 import { fetchPosts, setVisiblePosts } from '../redux/actions/posts';
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/BlogList.scss'
-import Cart from '../Components/Cart';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -27,18 +23,6 @@ function PostsPage() {
   const isLoaded=useSelector(({posts})=>posts.isLoaded);
 
   
-  const handleAddPizzaToCart=(obj)=>{
-    dispatch({
-        type:'ADD_PIZZA_CART',
-        payload:obj,
-    })
-  }
-  const handleRemoveCartItem=(obj)=>{
-    dispatch({
-        type:'REMOVE_CART_ITEM',
-        payload:obj,
-    })
-  }
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
@@ -159,46 +143,3 @@ function PostsPage() {
 }
 
 export default PostsPage
-
-// export default class PostsPage extends React.Component {
-
-//   constructor(props){
-//     super(props);
-//     this.state={
-//       loading:false,
-//       posts:[],
-//       visiblePosts: 9,
-//       error:''
-//     }
-//     this.loadMorePosts = this.loadMorePosts.bind(this);
-//   }
-//   loadMorePosts() {
-//     this.setState((prev) => {
-//       return {visiblePosts: prev.visiblePosts + 9};
-//     });
-//   }
-//   componentDidMount(){
-//     // http://nikuda.poydemkuda.ru/index.php
-//     const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
-//     this.setState({loading:true},
-//       ()=>{
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts`)
-//         .then(res=>{this.setState({loading:false, posts:res.data})})
-//         .catch(error=>this.setState({loading:false,error:error.responce.data}))
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/news`)
-//         .then(res=>{this.setState({loading:false, news:res.data})})
-//         .catch(error=>this.setState({loading:false,error:error.responce.data}))
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/foodcorts`)
-//         .then(res=>{this.setState({loading:false, foodcorts:res.data})})
-//         .catch(error=>this.setState({loading:false,error:error.responce.data}))
-//       }
-//     );
-//   }
-//   render() {
-//     const {posts}=this.state
-//     console.log(posts)
-//     return (
-      
-//     )
-//   }
-// }

@@ -4,15 +4,12 @@ import Header from './Components/Header';
 import Footer from './Components/Footer';
 import Favs from './Pages/Favs';
 import PageNotFound from './Pages/PageNotFound';
-import SignIn from './Pages/SignIn';
-import SignUp from './Pages/SignUp';
 import Single from './Pages/Single';
 import Foodcort from './Pages/Foodcort';
-import Places from './Pages/Places';
 import Routee from './Pages/Routee';
 import BlogList from './Pages/BlogList';
 import SingleBlog from './Pages/SingleBlog';
-import {Link, Route, Switch, useLocation } from 'react-router-dom'
+import {Route, Switch, useLocation } from 'react-router-dom'
 import PostsPage from './Pages/PostsPage';
 import FoodcortsPage from './Pages/FoodcortsPage';
 import { useState } from 'react';
@@ -51,9 +48,8 @@ function App() {
             <Route exact path="/foodcorts/"><FoodcortsPage/></Route>
             <Route exact path="/post/:id"><Single/></Route>
             <Route exact path="/news/:id"><SingleBlog/></Route>
-            <Route exact path="/foodcort/:id"><Foodcort/></Route>
-            <Route exact path="/place/:id"><Places/></Route>
-            <Route exact path="/route/:id"><Routee/></Route>
+            <Route exact path="/foodcorts/:id"><Foodcort/></Route>
+            <Route exact path="/routes/:id"><Routee/></Route>
             <Route path="*" component={PageNotFound}/>
           </Switch>
         </AnimatePresence>

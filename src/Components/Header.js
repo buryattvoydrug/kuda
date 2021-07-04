@@ -22,7 +22,6 @@ function Header() {
   function progressBar(e){
     let windowHeight = document.documentElement.scrollHeight-document.documentElement.clientHeight;
     let windowScroll=document.body.scrollTop || document.documentElement.scrollTop;
-    // console.log(document.documentElement.scrollTop)
 
     let per = windowScroll/windowHeight*100;
     const progress=document.querySelector('.row');
@@ -104,7 +103,6 @@ function Header() {
           {isMobile? 
           <button onClick={toggleMenu} className={menu? "nav-button active__button" : "nav-button "}>
             <span></span><span></span><span></span>
-            {/* <img src="/images/search.svg" alt="" /> */}
           </button>
            : <SocialLinks/>}
           
@@ -125,8 +123,6 @@ function Header() {
               <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">блог</Link></li>
               <li onClick={closeMenu}><Link to="/foodcorts/" className="navbar__item">фудкорты</Link></li>
               <li onClick={closeMenu}><Link to="/posts/" className="navbar__item">заведения</Link></li>
-              {/* <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">кофе</Link></li> */}
-              {/* <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">о нас</Link></li> */}
             </ul>
             {isMobile? <SocialLinks/>:null}
             </motion.div> : null}

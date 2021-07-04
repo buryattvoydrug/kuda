@@ -1,17 +1,11 @@
-import axios from 'axios';
 import React from 'react'
-import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchCorners } from '../../redux/actions/corners';
 import renderHTML from "react-render-html";
 
 
 import '../../scss/Components/Single/CornerItem.scss'
-import Share from '../Share';
 import Menu from './Menu';
-
-const windowWidth = Dimensions.get('window').width;
-const isMobile = (windowWidth<1280)
 
 
 function CornerItem({data,address}) {
@@ -56,10 +50,6 @@ function CornerItem({data,address}) {
                     : null}
                     
                   </div>
-                    {/* <button className="fave__button">
-                      <img src="/images/fave.svg" alt="" />
-                    </button> */}
-  
                   </div>
                   <section className="slim-block">
                     <p className="slim-text">
@@ -78,42 +68,3 @@ function CornerItem({data,address}) {
 }
 
 export default CornerItem
-
-
-// export default class CornerItem extends React.Component {
-//   constructor(props){
-//     super(props);
-//     const data=this.props.data
-//     this.state={
-//       loading:false,
-//       data:data,
-//       corners:[],
-//       error:''
-//     }
-//     console.log(this.state.data)
-//   }
-  
-//   componentDidMount(){
-//     window.scrollTo(0, 0)
-//     const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
-//     let tmp=[]
-//     console.log(this.state.data)
-//   this.state.data.map((item,index)=>(
-//     this.setState({loading:true},
-//       ()=>{
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/corners/${item.ID}`)
-//         .then(res=>{
-//           tmp.push(res.data)
-//           this.setState({loading:false, corners:tmp})
-//         })
-//         .catch(error=>this.setState({loading:false,error:error.response}))
-//       }
-//     )
-//   ))
-//   }
-//   render() {
-//     return (
-      
-//     )
-//   }
-// }

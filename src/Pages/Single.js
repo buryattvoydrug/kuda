@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -33,10 +33,8 @@ function Single() {
   const postNumber=postLocation[postLocation.length-1]
   const post=items.find((item)=>(item.id==postNumber))
 
-  // const postNumber=23
-  // const post=items.find((item)=>(item.id==postNumber))
 
-  console.log(post)
+  // console.log(post)
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
@@ -65,7 +63,7 @@ function Single() {
       scale: 1.2
     }
   };
-  console.log(post)
+  // console.log(post)
   return (
     <>
     {post===undefined? <PageNotFound/>: 
@@ -102,7 +100,6 @@ function Single() {
             smooth={true}
             offset={-75}
             duration= {500} className="to-random" to="random">
-          {/* <span className="to-random__text">Рандом</span> */}
         <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
         </div>
@@ -113,35 +110,3 @@ function Single() {
   )
 }
 export default Single
-
-
-
-
-// export default class Single extends React.Component {
-//   constructor(props){
-//     super(props);
-//     this.state={
-//       loading:false,
-//       post:{},
-//       error:''
-//     }
-//   }
-  
-//   componentDidMount(){
-//     const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
-//     this.setState({loading:true},
-//       ()=>{
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts/${this.props.match.params.id}`)
-//         .then(res=>{this.setState({loading:false, post:res.data})})
-//         .catch(error=>this.setState({loading:false,error:error.response}))
-//       }
-//     );
-//   }
-
-//   render() {
-//     const {post}=this.state
-//     return (
-      
-//     )
-//   }
-// }

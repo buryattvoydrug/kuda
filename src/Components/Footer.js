@@ -1,5 +1,4 @@
 import React from 'react'
-import SocialLinks from './SocialLinks'
 
 import '../scss/Components/Footer.scss'
 
@@ -14,7 +13,6 @@ function Footer() {
         <div className="wrapper">
           <div className="footer">
               <span className="copyright">© Куда пойдем? , 2021</span>
-              {/* <SocialLinks/> */}
           </div>
         </div>
       </footer>

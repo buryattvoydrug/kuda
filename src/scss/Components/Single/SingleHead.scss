@@ -2,6 +2,34 @@
 .single-head{
   .head-block{
     display: flex;
+    .item-links{
+      position: absolute;
+      right:0;
+      display: flex;
+      flex-direction: row-reverse;
+      .fave__button{
+        height: 40px;
+        width: 40px;
+        img{
+          height: 100%;
+        }
+      }
+      .map__button,
+      .web__button{
+        margin-bottom: 5px;
+        right:40px;
+        height: 40px;
+        img{
+          padding: 5px;
+          height: 100%;
+        }
+      }
+      .web__button{
+        img{
+          padding: 8px;
+        }
+      }
+    }
     .cafe-item{
       height: auto;
       margin-right: 50px;
@@ -21,17 +49,9 @@
               height: 16px;
             }
           }
-          .fave__button{
-            position: absolute;
-            top:auto;
-            bottom: 0;
-            margin-bottom: 5px;
-            height: 40px;
-            width: 40px;
-            img{
-              height: 100%;
-            }
-          }
+          
+
+
         }
       
       
@@ -47,16 +67,10 @@
         // background: $pink;
         background: url('../../../images/grad.png');
       }
-      .map__button,
-      .web__button{
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        height: 40px;
-        img{
-          margin-right: 20px;
-        }
-      }
+     
+    }
+    .col:not(.cafe-item){
+      margin-top: 30px;
     }
   }
 
@@ -120,17 +134,35 @@
         .accent__text{
           width: 100%;
         }
-        .map__button{
-          // float:right;
-          padding: 20px 0 0 30px;
-          span{
-            padding-top: 5px;
+        .fave__button{
+          position: absolute;
+          top:auto;
+          bottom: 0;
+          margin-bottom: 5px;
+          height: 40px;
+          width: 40px;
+          img{
+            height: 100%;
+          }
+        }
+        .map__button,
+        .web__button{
+          position: absolute;
+          top:auto;
+          bottom: 0;
+          margin-bottom: 5px;
+          right:40px;
+          height: 40px;
+          img{
+            padding: 5px;
+            height: 100%;
           }
         }
         .web__button{
-          padding-left: 10px;
-          float: left;
-          margin-bottom: 30px;
+          right: 80px;
+          img{
+            padding: 8px;
+          }
         }
       }
     }

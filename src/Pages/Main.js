@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Dimensions } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
@@ -6,7 +6,6 @@ import CafeItem from '../Components/CafeItem'
 import News from '../Components/News'
 import Random from '../Components/Random'
 import Share from '../Components/Share'
-import SocialLinks from '../Components/SocialLinks'
 import { fetchFoodcorts, setVisibleFoodcorts } from '../redux/actions/foodcorts'
 import { fetchNews } from '../redux/actions/news'
 import { fetchPosts, setVisiblePosts } from '../redux/actions/posts'
@@ -40,11 +39,11 @@ function Main() {
   // console.log(isLoadedPosts)
   
     React.useEffect(()=>{
-      // if(!(isLoadedPosts || isLoadedFoodcorts || isLoadedNews)){
+      if(!(isLoadedPosts && isLoadedFoodcorts && isLoadedNews)){
         dispatch(fetchPosts());
         dispatch(fetchFoodcorts());
         dispatch(fetchNews());
-      // } 
+      } 
     },[dispatch]);
     const pageTransition = {
       type: "tween",
@@ -69,7 +68,7 @@ function Main() {
       }
     };
   const cart=localStorage.getItem('itemsCart')+''
-  console.log(cart)
+  // console.log(cart)
   return (
     <>
       <div className="main-page page">

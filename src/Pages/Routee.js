@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,15 +5,7 @@ import { useLocation } from 'react-router-dom';
 import Random from '../Components/Random';
 import Share from '../Components/Share';
 import Maps from '../Components/Maps';
-import DoubleSlim from '../Components/Single/DoubleSlim';
 import Nearby from '../Components/Single/Nearby';
-import PlaceHead from '../Components/Single/PlaceHead';
-import WideBlock from '../Components/Single/WideBlock';
-import WidePlaces from '../Components/Single/WidePlaces';
-import SocialLinks from '../Components/SocialLinks';
-import { fetchFoodcorts } from '../redux/actions/foodcorts';
-import { fetchNews } from '../redux/actions/news';
-import { fetchPosts } from '../redux/actions/posts';
 import { fetchRandom } from '../redux/actions/random';
 import { motion } from 'framer-motion';
 import PageNotFound from './PageNotFound';
@@ -125,7 +116,7 @@ function Routee() {
           <SingleHead route date={route.date.split('-')} post={route}/>
           <div className="places">
             {Object.keys(route.acf.places).map((item,index)=>(
-              <Place top={index%2!==0 && !isMobile} item={route.acf.places[item]} length={Object.keys(route.acf.places).length} index={index}/>
+              <Place key={index} top={index%2!==0 && !isMobile} item={route.acf.places[item]} length={Object.keys(route.acf.places).length} index={index}/>
 
             ))}
           </div>
@@ -155,7 +146,6 @@ function Routee() {
             smooth={true}
             offset={-75}
             duration= {500} className="to-random" to="random">
-          {/* <span className="to-random__text">Рандом</span> */}
         <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
         </div>

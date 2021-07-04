@@ -1,10 +1,8 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
-import CafeItem from '../Components/CafeItem'
 import Cart from '../Components/Cart'
 import Random from '../Components/Random'
 import Share from '../Components/Share'
-import SocialLinks from '../Components/SocialLinks'
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/Favs.scss'

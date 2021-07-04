@@ -10,7 +10,6 @@ function PageNotFound() {
         <h1 className="notfound__title">никуда <br /><strong>не пойдем</strong>!</h1>
         <span className="notfound__text">404. Страница не найдена</span>
         <Link to="/" className="button">Вернуться на главную</Link>
-        {/* <img className="notfound__image" src="/images/search.svg" alt="" /> */}
       </section>
     </>
   )

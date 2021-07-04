@@ -1,13 +1,9 @@
-import axios from 'axios';
 import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
-import CafeItem from '../Components/CafeItem';
 import Random from '../Components/Random';
 import Share from '../Components/Share';
 import NewsItem from '../Components/Single/NewsItem';
-import SocialLinks from '../Components/SocialLinks';
 import { fetchNews, setVisibleNews } from '../redux/actions/news';
 import { motion } from 'framer-motion';
 
@@ -88,7 +84,7 @@ function BlogList() {
     itemsToShow=news.filter((item)=>(filtredItems[news.indexOf(item)]>=0))
   }
 
-  console.log(news,categoriesNamesUnique)
+  // console.log(news,categoriesNamesUnique)
   return (
     <>
       <div className="blog-page page">

@@ -2,8 +2,6 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {Link as ScrolLink} from 'react-scroll';
-import { fetchFoodcorts } from '../redux/actions/foodcorts';
-import { fetchPosts } from '../redux/actions/posts';
 import { fetchRandom } from '../redux/actions/random';
 import '../scss/Components/Random.scss'
 
@@ -11,10 +9,10 @@ function Random({single}) {
   const dispatch = useDispatch();
 
   const posts=useSelector(({posts})=>posts.posts);
-  const isLoadedPosts=useSelector(({posts})=>posts.isLoaded);
+  // const isLoadedPosts=useSelector(({posts})=>posts.isLoaded);
 
   const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
-  const isLoadedFoodcorts=useSelector(({foodcorts})=>foodcorts.isLoaded);
+  // const isLoadedFoodcorts=useSelector(({foodcorts})=>foodcorts.isLoaded);
 
 
   const routes=useSelector(({random})=>random.routes);
@@ -40,18 +38,17 @@ function Random({single}) {
   const toggleButton=(index)=>{
     setActive(index)
   }
-  // const buttons=['Заведение','Фудкорт','Новость']
   
   const buttons=[{name:"Еда",type:'post',data:posts},
-                  {name:"Маршрут прогулки",type:'route',data:routes},
-                 {name:"Фудкорт",type:'foodcort',data:foodcorts}]
+                  {name:"Маршрут прогулки",type:'routes',data:routes},
+                 {name:"Фудкорт",type:'foodcorts',data:foodcorts}]
   
   function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   }
   function randomItem(items){
     if(items.length){
-      console.log(items.length,items[getRandomInt(items.length)].id);
+      // console.log(items.length,items[getRandomInt(items.length)].id);
       return items[getRandomInt(items.length)].id
     }
   }
@@ -62,7 +59,7 @@ function Random({single}) {
         <span>Если не можете определиться</span>
         <div className="random-block">
           {buttons.map((item,index)=>
-              <button onClick={()=>toggleButton(index)} className={active===index? " random__button active_button" : " random__button"}>
+              <button key={index} onClick={()=>toggleButton(index)} className={active===index? " random__button active_button" : " random__button"}>
                 <span>{buttons[index].name}</span>
                 <img src="/images/icon.png" alt="" />
               </button>)}
@@ -75,7 +72,6 @@ function Random({single}) {
             smooth={true}
             offset={-75}
             duration= {500} className="to-random" to="random">
-          {/* <span className="to-random__text">Рандом</span> */}
         <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
         </div>
