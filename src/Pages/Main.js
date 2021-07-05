@@ -20,7 +20,7 @@ const isMobile = (windowWidth<1280)
 
 
 function Main() {
-  window.scrollTo(0, 0)
+  // window.scrollTo(0, 0)
 
   const dispatch = useDispatch();
 

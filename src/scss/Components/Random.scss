@@ -1,39 +1,93 @@
 @import '../Constants';
 .random{
-  padding: 30px 0 30px 30px;
+  padding: 30px 0 30px 20px;
   border:1px solid #000;
+  
   .random-block{
     display: flex;
     flex-wrap: wrap;
     margin: 15px 0 20px;
-    .random__button{
+    .random__button{    
+      overflow: hidden;
+
       transition: all 1s;
-      height: 50px;
-      border: 1px solid #000;
+      height: 71px;
       border-radius: 16px;
-      padding: 18px 5px 18px 20px;
       display: flex;
-      align-items: center;
-      margin: 0 10px 5px 0;
+      align-items: flex-end;
+      margin: 0 5px 5px 0;
+      position: relative;
       span{
+        color:#fff;
+        text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
         letter-spacing: -0.065em;
         text-align: left;
-        margin-right: 7px;
         line-height: 100%;
         transform: scale(1);
+        margin: 0 65px 15px 20px;
+        font-weight: 800;
+        max-width: 70px;
+        z-index: 2;
+      }
+      img{
+        position: absolute;
+      transition: all 1s;
+
+        right:0;
+        border-radius: 16px;
       }
     }
+    .random__button:hover{
+      img{
+        transform: scale(1.1);
+
+      }
+    }
+    #food{
+      background: #f15256; /* Old browsers */ background: -webkit-linear-gradient(left, #f15256, #ff6b29); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #f15256, #ff6b29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    #route{
+      background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%);
+    }
+    #coffee{
+      background: #fed2a1; /* Old browsers */ background: -webkit-linear-gradient(left, #fed2a1, #a97953, #644431); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to left, #fed2a1, #a97953, #644431); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
+    #foodcort{
+      background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    }
+    
     .active_button{
-      background: #000;
-      color: #fff;
+      border-radius: 100px;
+      img{
+        border-radius: 100px;
+      }
+      background: #454545; /* Old browsers */ background: -webkit-linear-gradient(left, #454545, #212121); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #454545, #212121) !important; /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
     }
   }
+  .random__generate
+  {
+    transition: all 1s;
 
+    padding: 0;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    height: 45px;
+    font-weight: 800;
+    line-height: 100%;
+    background: #454545; /* Old browsers */ background: -webkit-linear-gradient(left, #454545, #212121); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #454545, #212121); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+  .random__generate:hover{
+    transform: scale(1.1);
+  }
 
   //fonts
+  
   .random__title{
     font-size: 24px;
   }
+  
   .random__button span{
     font-size: 14px;
     font-weight: 300;
