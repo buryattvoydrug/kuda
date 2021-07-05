@@ -15,7 +15,7 @@ const isMobile = (windowWidth<1280)
 
 function PostsPage() {
 
-  window.scrollTo(0, 0)
+  // window.scrollTo(0, 0)
 
   const dispatch = useDispatch();
   const items=useSelector(({posts})=>posts.posts);

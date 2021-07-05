@@ -7,7 +7,8 @@
     display: flex;
     flex-wrap: wrap;
     margin: 15px 0 20px;
-    .random__button{    
+    .random__button{  
+      cursor: pointer;  
       overflow: hidden;
 
       transition: all 1s;
