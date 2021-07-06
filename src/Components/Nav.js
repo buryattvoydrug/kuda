@@ -13,6 +13,7 @@ function Nav() {
         <li><Link to="/posts/" className="navbar__item">заведения</Link></li>
       </ul>
       </div>
+      
     </>
   )
 }

@@ -85,7 +85,7 @@ function Header() {
 
   return (
     <>
-      <header>
+      <header className={menu? 'active_header':null}>
         <div className="wrapper">
         <div className="container">
         {logo?
@@ -106,14 +106,14 @@ function Header() {
           </button>
            : <SocialLinks/>}
           
-          <Link to="/favs/" className="fave__button">
+          <Link onClick={closeMenu}  to="/favs/" className="fave__button">
             <img src="/images/fave.svg" alt="" />
           </Link>
         </div>
         <div className="row"></div>
         </div>
         {menu? 
-          <motion.div id="nav" initial="initial"
+          <motion.div  id="nav" initial="initial"
               animate="in"
               exit="out"
               variants={pageVariants}
@@ -127,7 +127,14 @@ function Header() {
             {isMobile? <SocialLinks/>:null}
             </motion.div> : null}
       </header>
-      
+      <ScrolLink spy={true}
+            smooth={true}
+            offset={-75}
+            duration= {500} className="to-random" to="random">
+        <div className="to-random__button">
+          <img src="/images/shuffle.svg" alt="" />
+        </div>
+      </ScrolLink>
     </>
   )
 }

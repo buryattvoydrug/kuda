@@ -2,6 +2,7 @@
 
 
 header{
+  transition: all .7s;
   .logo{
     cursor: pointer;
   }
@@ -18,11 +19,8 @@ header{
   margin-bottom: 15px;
   height: 60px;
   background: rgba( 255, 255, 255, 0.45 );
-  // box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
   backdrop-filter: blur( 20px );
   -webkit-backdrop-filter: blur( 20px );
-// border-radius: 10px;
-// border: 1px solid rgba( 255, 255, 255, 0.18 );
   .wrapper{
     display: flex;
     align-items: center;
@@ -67,6 +65,9 @@ header{
       font-weight: 300;
     }
   }
+}
+.active_header{
+  background: #fff;
 }
 @media (max-width:1279px) {
   header{

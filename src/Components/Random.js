@@ -110,7 +110,7 @@ function Random({single}) {
         </div>
         <Link to={active!==-1? '/'+ buttons[active].type +'/'+randomItem(buttons[active].data) : "/"} className="button random__generate" onClick={(posts)=>randomItem(posts)}>Сгенерировать</Link>
       </div>
-      {single?
+      {/* {single?
       null:
       <ScrolLink spy={true}
             smooth={true}
@@ -119,7 +119,7 @@ function Random({single}) {
         <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
         </div>
-      </ScrolLink>}
+      </ScrolLink>} */}
     </>
   )
 }

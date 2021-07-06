@@ -56,9 +56,8 @@ export default function Favs() {
               <div className="items-list">
                 <Cart/>
               </div>
-              {isMobile? <div className="right-banner"></div>:null}
-              {isMobile? <Random/> : null}
           </motion.div>
+          {isMobile? <Random/> : null}
         </div>
         {isMobile? null:
           <div className="sidebar-container">

@@ -68,19 +68,15 @@
   }
   .random__generate
   {
-    transition: all 1s;
-
-    padding: 0;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
+    transition: all .6s;
+    padding:13px 25px;
     height: 45px;
     font-weight: 800;
     line-height: 100%;
     background: #454545; /* Old browsers */ background: -webkit-linear-gradient(left, #454545, #212121); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #454545, #212121); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   }
   .random__generate:hover{
-    transform: scale(1.1);
+    border-radius: 100px;
   }
 
   //fonts

@@ -94,6 +94,7 @@ function PostsPage() {
         <div className="container">
       { isLoaded? (
           
+          <>
           <motion.div initial="initial"
               animate="in"
               exit="out"
@@ -125,8 +126,10 @@ function PostsPage() {
           {itemsToShow.length > visiblePosts &&
              <button className="button load-more" onClick={()=>(dispatch(setVisiblePosts()))} type="button">Загрузить ещё</button>
           }
-          {isMobile? <Random/> : null}
+          
           </motion.div>
+          {isMobile? <Random/> : null}
+          </>
       ):""}
 
         </div>

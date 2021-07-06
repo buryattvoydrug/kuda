@@ -56,6 +56,7 @@ function FoodcortsPage() {
         <div className="container">
       { isLoaded ? (
 
+          <>
           <motion.div initial="initial"
               animate="in"
               exit="out"
@@ -74,8 +75,10 @@ function FoodcortsPage() {
           {visibleFoodcorts < foodcorts.length &&
              <button className="button load-more" onClick={()=>(dispatch(setVisibleFoodcorts()))} type="button">Загрузить ещё</button>
           }
-          {isMobile? <Random/> : null}
           </motion.div>
+          {isMobile? <Random/> : null}
+          </>
+
       ):""}
 
         </div>

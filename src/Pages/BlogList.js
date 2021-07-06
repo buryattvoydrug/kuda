@@ -91,6 +91,7 @@ function BlogList() {
         <div className="container">
       { isLoadedNews ? (
 
+          <>
           <motion.div initial="initial"
               animate="in"
               exit="out"
@@ -121,8 +122,10 @@ function BlogList() {
           {visibleNews < news.length &&
              <button className="button load-more" onClick={()=>(dispatch(setVisibleNews()))} type="button">Загрузить ещё</button>
           }
-          {isMobile? <Random/> : null}
           </motion.div>
+          {isMobile? <Random/> : null}
+          </>
+
       ):""}
 
         </div>
