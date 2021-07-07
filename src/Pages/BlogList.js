@@ -8,6 +8,8 @@ import { fetchNews, setVisibleNews } from '../redux/actions/news';
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/BlogList.scss'
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -87,7 +89,9 @@ function BlogList() {
   // console.log(news,categoriesNamesUnique)
   return (
     <>
-      <div className="blog-page page">
+    <Header/>
+     <div className="wrapper">
+     <div className="blog-page page">
         <div className="container">
       { isLoadedNews ? (
 
@@ -137,6 +141,8 @@ function BlogList() {
           </div>
         }
       </div>
+      <Footer/>
+     </div>
     </>
   )
 }

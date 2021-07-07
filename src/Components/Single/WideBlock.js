@@ -4,6 +4,7 @@ import renderHTML from "react-render-html";
 import '../../scss/Components/Single/Blocks.scss'
 
 function WideBlock({img,text}) {
+  
   return (
     <>
       <section className="wide-block">

@@ -5,7 +5,7 @@ import {Link as ScrolLink} from 'react-scroll';
 import { fetchRandom } from '../redux/actions/random';
 import '../scss/Components/Random.scss'
 
-function Random({single}) {
+function Random({single,main}) {
   const dispatch = useDispatch();
 
   const posts=useSelector(({posts})=>posts.posts);
@@ -86,8 +86,16 @@ function Random({single}) {
   return (
     <>
       <div className="random" id="random">
+        {main?
+        <div className="random-top">
+          <h3 className="random__title">Или мы подберем <strong>рандомное</strong></h3>
+          <img src="/images/shuffle.svg" alt="" />
+        </div>
+        :
+        <>
         <h3 className="random__title">Рандомайзер</h3>
         <span>Если не можете определиться</span>
+        </>}
         <div className="random-block">
           {/* {buttons.map((item,index)=> */}
               <button id="food" onClick={()=>toggleButton(0)} className={active===0? " random__button active_button" : " random__button"}>

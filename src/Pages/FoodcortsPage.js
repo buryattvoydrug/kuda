@@ -8,6 +8,8 @@ import { fetchFoodcorts, setVisibleFoodcorts } from '../redux/actions/foodcorts'
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/BlogList.scss'
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -52,7 +54,9 @@ function FoodcortsPage() {
   const cart=localStorage.getItem('itemsCart')+''
   return (
     <>
-      <div className="blog-page page">
+    <Header/>
+    <div className="wrapper">
+    <div className="blog-page page">
         <div className="container">
       { isLoaded ? (
 
@@ -90,6 +94,9 @@ function FoodcortsPage() {
           </div>
         }
       </div>
+      <Footer/>
+    </div>
+    
     </>
   )
 }

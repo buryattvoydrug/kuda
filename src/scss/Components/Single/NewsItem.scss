@@ -1,8 +1,9 @@
 @import '../../Constants';
 
 .news__item{
+  border-radius:30px;
   flex: 0 0 auto;
-  padding: 20px 10px 30px 30px;
+  padding: 20px 10px 20px 20px;
   color:#fff;
   position: relative;
   width: 290px;
@@ -13,6 +14,7 @@
   justify-content: flex-end;
   background: linear-gradient(4.58deg, #000000 1.35%, rgba(0, 0, 0, 0) 64.76%);
   .news__img{
+    border-radius:30px;
     position: absolute;
     left:0;
     top:0;
@@ -55,6 +57,9 @@
     width: 90%;
   }
 }
+.news-load-more{
+  border-radius: 30px;
+}
 .dark_news{
   color: #000;
   background: linear-gradient(4.58deg, #FFFFFF -25.65%, rgba(255, 255, 255, 0) 64.76%);
@@ -63,9 +68,35 @@
   }
 }
 @media(max-width:1279px){
-  .news{
-    .news__item{
-      height: 250px;
+  .main-page{
+    padding-top: 65px;
+    .news-container{
+      margin-left: -5vw;
+      width: 100vw;
+    }
+    .news{
+      padding: 0;
+      .news__item{
+        border-radius:30px;
+        height: 200px;
+        width: 160px;
+        padding: 20px 0 20px 15px;
+        margin: 10px 5px 10px 5px;
+        .news__img{
+          border-radius:30px;
+        }
+        .news__title{
+          font-size: 14px;
+          font-weight: 800;
+          letter-spacing: normal;
+        }
+      }
+      .news-load-more{
+        border-radius:30px;
+        height: 200px;
+        width: 160px;
+        margin: 10px 5px 10px 5px;
+      }
     }
   }
   .blog-page{

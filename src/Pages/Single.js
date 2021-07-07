@@ -13,15 +13,18 @@ import {Link as ScrolLink} from 'react-scroll';
 
 import '../scss/Pages/Single.scss'
 import PageNotFound from './PageNotFound';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 
 
 
 
-const windowWidth = Dimensions.get('window').width;
-const isMobile = (windowWidth<1280)
 
-function Single() {
+function Single({map}) {
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
+
   window.scrollTo(0, 0)
   const dispatch = useDispatch();
   const items=useSelector(({posts})=>posts.posts);
@@ -66,6 +69,8 @@ function Single() {
   // console.log(post)
   return (
     <>
+    {map? null:<Header/>}
+    <div className="wrapper">
     {post===undefined? <PageNotFound/>: 
       <section className="single-page page">
       <div className="container">
@@ -76,10 +81,10 @@ function Single() {
               exit="out"
               variants={pageVariants}
               transition={pageTransition}>
-          <SingleHead date={post.date.split('-')} post={post}/>
+          <SingleHead map={map} date={post.date.split('-')} post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
-          <SlimBlock post={post}/>
-          <SingleBottom author={post.acf["post-author"].data.display_name} post={post}/>
+          <SlimBlock map post={post}/>
+          <SingleBottom map author={post.acf["post-author"].data.display_name} post={post}/>
           </motion.div>
       
       ):""}
@@ -106,6 +111,9 @@ function Single() {
       </ScrolLink>
       </section>
     }
+    {map?null:<Footer/>}
+    </div>
+    
     </>
   )
 }

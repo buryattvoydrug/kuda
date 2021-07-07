@@ -108,6 +108,52 @@
     font-weight: 800;
   }
 }
+.map-container{
+  .cafe-item{
+    margin-bottom: 15px;
+    width: 48%;
+    height: 310px;
+    .item-info{
+      margin-top: 10px;
+    }
+    .cafe-item__img{
+      height: 210px;
+      min-width: 100%;
+    }
+    .fave__button{
+      bottom:auto;
+      top:210px;
+      height: 40px;
+      width: 40px;
+      img{
+        height: 80%;
+      }
+    }
+    
+    .item__title{
+      width: 100%;
+    }
+    //fonts
+    .item__title{
+      font-size: 18px;
+      line-height: 100%;
+    }
+  }
+  .cafe-item-wide{
+    width: 100%;
+    .cafe-item__img{
+      height: 100%;
+    }
+    .fave__button{
+      bottom:0px;
+      top:auto;
+    }
+    .item__title{
+      width: 80%;
+    }
+  }
+  
+}
 @media(max-width:1279px){
   .cafe-item{
     margin-bottom: 15px;

@@ -1,12 +1,21 @@
 @import '../Constants';
 .random{
   padding: 30px 0 30px 20px;
-  border:1px solid #000;
-  
+  .random-top{
+    display: flex;
+    .random__title{
+      max-width: 210px;
+      font-weight: 300;
+      line-height: 100%;
+    }
+    img{
+      filter:invert(1);
+    }
+  }
   .random-block{
     display: flex;
     flex-wrap: wrap;
-    margin: 15px 0 20px;
+    margin: 20px 0 15px;
     .random__button{  
       cursor: pointer;  
       overflow: hidden;
@@ -16,7 +25,7 @@
       border-radius: 16px;
       display: flex;
       align-items: flex-end;
-      margin: 0 5px 5px 0;
+      margin: 0 5px 7px 0;
       position: relative;
       span{
         color:#fff;
@@ -66,17 +75,18 @@
 
     }
   }
-  .random__generate
-  {
+  .random__generate{
+    display: block;
     transition: all .6s;
-    padding:13px 25px;
     height: 45px;
     font-weight: 800;
     line-height: 100%;
-    background: #454545; /* Old browsers */ background: -webkit-linear-gradient(left, #454545, #212121); /* Chrome 10-25, Safari 5.1-6 */ background: linear-gradient(to right, #454545, #212121); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  }
-  .random__generate:hover{
-    border-radius: 100px;
+    background: #000;
+    border-radius: 80px;
+    width: 290px;
+    height: 55px;
+    padding: 17px 70px 0;
+    font-size: 18px;
   }
 
   //fonts

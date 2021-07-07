@@ -6,6 +6,8 @@ import Share from '../Components/Share'
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/Favs.scss'
+import Header from '../Components/Header'
+import Footer from '../Components/Footer'
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -40,7 +42,9 @@ export default function Favs() {
 
   return (
     <>
-      <div className="blog-page page">
+    <Header/>
+    <div className="wrapper">
+    <div className="blog-page page">
         <div className="container">
           <motion.div initial="initial"
               animate="in"
@@ -67,6 +71,9 @@ export default function Favs() {
           </div>
         }
       </div>
+      <Footer/>
+    </div>
+      
     </>
   )
 }

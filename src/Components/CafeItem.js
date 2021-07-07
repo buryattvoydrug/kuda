@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import {addPizzaToCart, removeCartItem} from '../redux/actions/cart'
 import '../scss/Components/CafeItem.scss'
 
-function CafeItem({wide,post,toDelete,isCart}) {
+function CafeItem({wide,post,toDelete,isCart,map}) {
   const price=Number(post.acf["cafe-item-prices"])
 
     
@@ -12,7 +12,10 @@ function CafeItem({wide,post,toDelete,isCart}) {
   const [g,setG]=useState(true)
 
   
-  const type=post.type
+  let type=post.type
+  if(map){
+    type='map/'+type
+  }
   return (
     <>
       <div className={wide? "item cafe-item cafe-item-wide" : "item cafe-item"}>

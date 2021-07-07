@@ -13,6 +13,9 @@ import { fetchPosts, setVisiblePosts } from '../redux/actions/posts'
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/Main.scss'
+import Banner from '../Components/Banner'
+import Header from '../Components/Header'
+import Footer from '../Components/Footer'
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -36,59 +39,31 @@ function Main() {
   const visibleNews=useSelector(({news})=>news.visibleNews);
   const isLoadedNews=useSelector(({news})=>news.isLoaded);
 
-  // console.log(isLoadedPosts)
   
     React.useEffect(()=>{
-      if(!(isLoadedPosts && isLoadedFoodcorts && isLoadedNews)){
+      // if(!(isLoadedPosts && isLoadedFoodcorts && isLoadedNews)){
         dispatch(fetchPosts());
         dispatch(fetchFoodcorts());
         dispatch(fetchNews());
-      } 
+      // } 
     },[dispatch]);
-    const pageTransition = {
-      type: "tween",
-      ease: "anticipate",
-      duration: 0.5
-    };
-    const pageVariants = {
-      initial: {
-        opacity: 0,
-        x: "-100vw",
-        scale: 0.8
-      },
-      in: {
-        opacity: 1,
-        x: 0,
-        scale: 1
-      },
-      out: {
-        opacity: 0,
-        x: "100vw",
-        scale: 1.2
-      }
-    };
+    
   const cart=localStorage.getItem('itemsCart')+''
-  // console.log(cart)
   return (
     <>
+      <Header/>
+      <div className="wrapper">
       <div className="main-page page">
         <div className="container">
           
           {isLoadedNews? 
-          <motion.div initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}>
+          <div>
             <News count={visibleNews} news={news}/>
-          </motion.div>
+          </div>
           :''}
-          {isLoadedPosts? <motion.div 
-              initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}>
+          {isLoadedPosts? <div 
+              >
+              <Banner/>
           <div className="category-type">
             <h2 className="category__title">Заведения</h2>
             <Link to="/posts/" className="category">Показать все</Link>
@@ -103,13 +78,9 @@ function Main() {
           
           {posts.length > visiblePosts &&
              <button className="button load-more" onClick={()=>(dispatch(setVisiblePosts()))} type="button">Загрузить ещё</button>
-          }</motion.div>
+          }</div>
           :''}
-          {isLoadedFoodcorts? <motion.div initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}>
+          {isLoadedFoodcorts? <div>
           <div className="category-type">
             <h2 className="category__title">Фудкорты</h2>
             <Link to="/foodcorts/" className="category">Показать все</Link>
@@ -123,11 +94,11 @@ function Main() {
           {visibleFoodcorts < foodcorts.length &&
              <button className="button load-more" onClick={()=>(dispatch(setVisibleFoodcorts()))} type="button">Загрузить ещё</button>
           }
-          </motion.div>
+          </div>
           : ''}
           {(isMobile)? 
           <>
-            <Random/>
+            {/* <Random/> */}
             <Share/>
           </>
           :''}
@@ -135,12 +106,12 @@ function Main() {
         {isMobile? null:
           <div className="sidebar-container">
               <div div className="right-banner"></div>
-              <Random/>
               <Share/>
           </div>
         }
       </div>
-      
+      <Footer/>
+      </div>
     </>
   )
 }

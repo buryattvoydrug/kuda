@@ -8,12 +8,15 @@ import { fetchPosts, setVisiblePosts } from '../redux/actions/posts';
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/BlogList.scss'
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
-const windowWidth = Dimensions.get('window').width;
-const isMobile = (windowWidth<1280)
 
 
-function PostsPage() {
+
+function PostsPage({map}) {
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
 
   // window.scrollTo(0, 0)
 
@@ -90,6 +93,8 @@ function PostsPage() {
   // console.log(cart)
   return (
     <>
+    {map? null:<Header/>}
+      <div className="wrapper">
       <div className="blog-page page">
         <div className="container">
       { isLoaded? (
@@ -119,7 +124,7 @@ function PostsPage() {
           
           <div className="items-list">
           {items.length? (itemsToShow.slice(0, visiblePosts).map((item,index)=>(
-            <CafeItem   toDelete={cart.includes('"id":'+item.id)}
+            <CafeItem  map={map} toDelete={cart.includes('"id":'+item.id)}
                          wide={isMobile? index%3===0: (index%9)%4===0} post={item}/>
                   ))):''}
           </div>
@@ -140,6 +145,8 @@ function PostsPage() {
               <Share/>
           </div>
         }
+      </div>
+      {map?null:<Footer/>}
       </div>
     </>
   )

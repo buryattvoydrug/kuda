@@ -1,0 +1,136 @@
+@import '../Constants';
+.banner{
+  margin-top: 20px;
+  height: 340px;
+  display: flex;
+  // background: url('../../images/bg.svg');
+  background: url('../../images/map-bg.png');
+  box-shadow: 0px 15.9064px 34.7585px rgba(0, 0, 0, 0.36);
+
+
+  background-size: cover;
+  border-radius: 30px;
+  .go-to-map{
+    width: 480px;
+    height: 340px;
+    background-size: 120%;
+    border-radius: 40px;
+    position: relative;
+    transition: all 1s;
+    .go-to-map__img{
+      position: absolute;
+      right: -85px;
+      bottom:0;
+      height: 250px;
+    }
+    .go-to-map__title{
+      text-shadow: 0px 4px 27px rgba(255, 255, 255, 0.9);
+      max-width: 120px;
+      line-height: 90%;
+      font-size: 42px;
+      font-weight: 300;
+      padding: 40px 0 0 30px;
+      strong{
+        letter-spacing: -0.015em;
+      }
+    }
+    .go-to-map__button{
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0px 109.371px 0px 39.3737px;
+      width: 240px;
+      height: 75px;
+      position: absolute;
+      bottom: 0;
+      padding-right: 25px;
+      span{
+        color: #fff;
+        font-weight: 800;
+        font-size: 16px;
+        max-width: 90px;
+        text-align: left;
+        line-height: 100%;
+      }
+      img{
+        height: 35px;
+      }
+    }
+  }
+  // .go-to-map:hover{
+  //   transform: scale(1.05);
+  // }
+  .random{
+    transition: all 1s;
+    width: 320px;
+    margin: 0 65px 0 50px;
+    .random-top{
+      img{
+        transition: all 1s;
+      }
+    }
+  }
+  .random:hover{
+    .random-top{
+      img{
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
+@media(max-width:1279px){
+  .banner{
+    padding: 0;
+    margin: 0;
+    margin-top: 15px;
+    height: auto;
+    flex-direction: column;
+    background: none;
+    box-shadow: none;
+    .go-to-map{
+      overflow: hidden;
+      height: 220px;
+      width: 105%;
+      margin-left: -2.5vw;
+      background: url('../../images/map-bg.png');
+      background-size: cover;
+      box-shadow: 0px 15.9064px 34.7585px rgba(0, 0, 0, 0.36);
+      .go-to-map__title{
+        font-size: 28px;
+        padding: 35px 0 0 30px;
+      }
+      .go-to-map__img{
+        height: 140px;
+        right: -20px;
+        bottom:0;
+      }
+      .go-to-map__button{
+        height: 60px;
+        width: 180px;
+        padding: 0 40px 0 35px;
+        span{
+          font-size: 14px;
+        }
+        img{
+          height: 25px;
+        }
+      }
+    }
+    .random{
+      width: 100%;
+      margin: 0;
+    }
+    .go-to-map:hover{
+      transform: none;
+    }
+    .random:hover{
+      transform: none;
+      .random-top{
+        img{
+          transform: none;
+        }
+      }
+    }
+  }
+}

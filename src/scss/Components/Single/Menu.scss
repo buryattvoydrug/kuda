@@ -45,6 +45,16 @@
   }
 }
 
+.map-container{
+  .menu{
+    margin: 15px 0 55px;
+    width: 95%;
+    .corners-block{
+      margin: 15px 10px;
+    }
+  }
+}
+
 @media(max-width:1279px){
   .menu{
     margin: 15px 0 55px;

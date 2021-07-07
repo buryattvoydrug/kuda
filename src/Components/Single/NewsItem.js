@@ -30,7 +30,7 @@ function NewsItem({post,single}) {
           </>
           :
             <>
-            <div className="logo">куда <strong>пойдём</strong>?</div>
+            {/* <div className="logo">куда <strong>пойдём</strong>?</div> */}
             {
               post.acf.project?
               <div className="project">{post.acf.project}</div>

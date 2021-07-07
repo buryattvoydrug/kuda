@@ -7,9 +7,9 @@ import renderHTML from "react-render-html";
 import { addPizzaToCart, removeCartItem } from '../../redux/actions/cart';
 import { Dimensions } from 'react-native';
 
-const windowWidth = Dimensions.get('window').width;
-const isMobile = (windowWidth<1280)
-function SingleHead({corners,post,date,route}) {
+function SingleHead({corners,post,date,route,map}) {
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
   // console.log(post)
 
   const day=Number(date[2].slice(0,2))
