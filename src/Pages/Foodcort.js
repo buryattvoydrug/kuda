@@ -13,6 +13,8 @@ import {Link as ScrolLink} from 'react-scroll';
 import '../scss/Pages/Foodcort.scss'
 import '../scss/Pages/Single.scss'
 import PageNotFound from './PageNotFound';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 
 function Foodcort({map}) {
@@ -22,7 +24,6 @@ function Foodcort({map}) {
   window.scrollTo(0, 0)
 
   const dispatch = useDispatch();
-
   const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
   const isLoaded=useSelector(({foodcorts})=>foodcorts.isLoaded);
   React.useEffect(()=>{
@@ -61,6 +62,8 @@ function Foodcort({map}) {
   // console.log(foodcort)
   return (
     <>
+    {map? null:<Header/>}
+    <div className="wrapper">
     {foodcort===undefined? <PageNotFound/>: 
 
       <section className="single-page page">
@@ -78,7 +81,7 @@ function Foodcort({map}) {
               <CornerItem address={foodcort.acf["cafe-item-address"]} data={foodcort.acf.corners}/>
             </div>
           </section>
-          <SingleBottom author={foodcort.acf["post-author"].data.display_name} post={foodcort} />
+          <SingleBottom map={map} author={foodcort.acf["post-author"].data.display_name} post={foodcort} />
           </motion.div>
       ):""}
       {isMobile? 
@@ -102,6 +105,9 @@ function Foodcort({map}) {
         </div>
       </ScrolLink>
       </section>}
+      {map?null:<Footer/>}
+    </div>
+    
     </>
   )
 }

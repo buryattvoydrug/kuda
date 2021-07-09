@@ -60,11 +60,7 @@ function CornerItem({data,address}) {
                       <img src={item.acf["cafe-item-img2"]} alt="" />
                     </div>
                   </section>
-<<<<<<< HEAD
-                  </div>
-=======
                 </div>
->>>>>>> origin/favs
       )):""}
         
       </>

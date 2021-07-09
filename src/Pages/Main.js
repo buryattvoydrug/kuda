@@ -41,13 +41,13 @@ function Main() {
 
   
     React.useEffect(()=>{
-      // if(!(isLoadedPosts && isLoadedFoodcorts && isLoadedNews)){
+      if(!(isLoadedPosts && isLoadedFoodcorts && isLoadedNews)){
         dispatch(fetchPosts());
         dispatch(fetchFoodcorts());
         dispatch(fetchNews());
-      // } 
+      } 
     },[dispatch]);
-    
+  console.log(posts,foodcorts,news) 
   const cart=localStorage.getItem('itemsCart')+''
   return (
     <>
@@ -56,12 +56,12 @@ function Main() {
       <div className="main-page page">
         <div className="container">
           
-          {isLoadedNews? 
+          {news.length? 
           <div>
             <News count={visibleNews} news={news}/>
           </div>
           :''}
-          {isLoadedPosts? <div 
+          {posts.length? <div 
               >
               <Banner/>
           <div className="category-type">
@@ -80,7 +80,7 @@ function Main() {
              <button className="button load-more" onClick={()=>(dispatch(setVisiblePosts()))} type="button">Загрузить ещё</button>
           }</div>
           :''}
-          {isLoadedFoodcorts? <div>
+          {foodcorts.length? <div>
           <div className="category-type">
             <h2 className="category__title">Фудкорты</h2>
             <Link to="/foodcorts/" className="category">Показать все</Link>

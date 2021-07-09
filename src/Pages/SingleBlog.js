@@ -11,6 +11,8 @@ import renderHTML from "react-render-html";
 import '../scss/Components/Single/SingleBlog.scss'
 import PageNotFound from './PageNotFound';
 import {Link as ScrolLink} from 'react-scroll';
+import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 
 
 
@@ -63,44 +65,49 @@ function SingleBlog() {
   // console.log(newsitem)
   return (
     <>
+    <Header/>
+    <div className="wrapper">
     {newsitem===undefined? <PageNotFound/>: 
 
-      <section className="single-page single-blog page">
-        <div className="container">
-        {newsitem? (
-          <motion.div  initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}>
-          <NewsItem single post={newsitem}/>
-         
+<section className="single-page single-blog page">
+  <div className="container">
+  {newsitem? (
+    <motion.div  initial="initial"
+        animate="in"
+        exit="out"
+        variants={pageVariants}
+        transition={pageTransition}>
+    <NewsItem single post={newsitem}/>
+   
 
-          {renderHTML(newsitem.acf.body)}
+    {renderHTML(newsitem.acf.body)}
 
-          <SingleBottom author={newsitem.acf["news-author"].data.display_name} post={newsitem}/>
-          {isMobile? 
-          <Share wide/>
-          : null
-          }
-          </motion.div>
-          ):""}
-        </div>
-        {isMobile? null:
-          <div className="sidebar-container">
-            <div className="right-banner"></div>
-            <Share/>
-          </div>
-        }
-        <ScrolLink spy={true}
-            smooth={true}
-            offset={-75}
-            duration= {500} className="to-random" to="random">
-        <div className="to-random__button">
-          <img src="/images/shuffle.svg" alt="" />
-        </div>
-      </ScrolLink>
-      </section>}
+    <SingleBottom author={newsitem.acf["news-author"].data.display_name} post={newsitem}/>
+    {isMobile? 
+    <Share wide/>
+    : null
+    }
+    </motion.div>
+    ):""}
+  </div>
+  {isMobile? null:
+    <div className="sidebar-container">
+      <div className="right-banner"></div>
+      <Share/>
+    </div>
+  }
+  <ScrolLink spy={true}
+      smooth={true}
+      offset={-75}
+      duration= {500} className="to-random" to="random">
+  <div className="to-random__button">
+    <img src="/images/shuffle.svg" alt="" />
+  </div>
+</ScrolLink>
+</section>}
+    <Footer/>
+
+    </div>
     </>
   )
 }

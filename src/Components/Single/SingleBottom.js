@@ -4,11 +4,11 @@ import renderHTML from "react-render-html";
 import '../../scss/Components/Single/Blocks.scss'
 import Random from '../Random'
 
-function SingleBottom({post,author}) {
+function SingleBottom({post,author,map}) {
   return (
     <>
       <section className="single-bottom">
-            <Random single/>
+            <Random map={map} single/>
             <div className="bottom-accent">
               <h3 className="bottom-accent__title">Итог:</h3>
               <p className="bottom-accent__text">

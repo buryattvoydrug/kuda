@@ -134,7 +134,7 @@ function Routee({map}) {
       {(isMobile)? 
           <>
             <div className="routes-bottom">
-            <Random single/>
+            <Random  map={map} single/>
             <Share/>
             </div>
           </>
@@ -143,7 +143,7 @@ function Routee({map}) {
           {isMobile? null:
           <div className="sidebar-container">
               <div div className="right-banner"></div>
-              <Random/>
+              <Random map={map} />
               <Share/>
           </div>
         }

@@ -1,5 +1,6 @@
 import React from 'react'
 import Random from '../Components/Random'
+import {Link} from 'react-router-dom'
 
 import '../scss/Components/Banner.scss'
 function Banner() {
@@ -11,10 +12,10 @@ function Banner() {
               <strong>Найди</strong> место <strong>поблизости</strong>
             </h3>
             <img src="/images/couple.png" alt="" className="go-to-map__img" />
-            <button className="go-to-map__button">
+            <Link to="/map/" className="go-to-map__button">
               <span>Открыть карту</span>
               <img src="/images/tomap.png" alt="" />
-            </button>
+            </Link>
         </section>
         <Random main/>
       </div>

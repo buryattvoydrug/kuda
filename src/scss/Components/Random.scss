@@ -92,7 +92,14 @@
   #foodcort{
     background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
   }
-  
+  #favs{
+    img{
+      bottom:10px;
+      right:10px;
+    }
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
+  }
+
   .active_button{
     border-radius: 100px;
     img{

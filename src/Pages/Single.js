@@ -84,7 +84,7 @@ function Single({map}) {
           <SingleHead map={map} date={post.date.split('-')} post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
           <SlimBlock map post={post}/>
-          <SingleBottom map author={post.acf["post-author"].data.display_name} post={post}/>
+          <SingleBottom map={map} author={post.acf["post-author"].data.display_name} post={post}/>
           </motion.div>
       
       ):""}

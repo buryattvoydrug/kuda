@@ -15,7 +15,7 @@ class Cart extends Component {
     return (
       <>
       {itemsCart.length? itemsCart.map((item,index)=>(
-            <CafeItem 
+            <CafeItem map={this.props.map}
               key={item.id} wide={isMobile? index%3===0: (index%9)%4===0} post={item}
                 toDelete={() => this.props.removeCartItem(item)} isCart
               />
