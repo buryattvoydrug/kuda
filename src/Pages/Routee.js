@@ -1,27 +1,65 @@
-import axios from 'axios';
 import React from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import Random from '../Components/Random';
 import Share from '../Components/Share';
-import DoubleSlim from '../Components/Single/DoubleSlim';
+import Maps from '../Components/Maps';
 import Nearby from '../Components/Single/Nearby';
-import PlaceHead from '../Components/Single/PlaceHead';
-import WideBlock from '../Components/Single/WideBlock';
-import WidePlaces from '../Components/Single/WidePlaces';
-import SocialLinks from '../Components/SocialLinks';
-import { fetchFoodcorts } from '../redux/actions/foodcorts';
-import { fetchNews } from '../redux/actions/news';
-import { fetchPosts } from '../redux/actions/posts';
 import { fetchRandom } from '../redux/actions/random';
 import { motion } from 'framer-motion';
+import PageNotFound from './PageNotFound';
+import {Link as ScrolLink} from 'react-scroll';
+import renderHTML from "react-render-html";
+
+import '../scss/Pages/Routes.scss'
+import SingleHead from '../Components/Single/SingleHead';
+
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 
-function Routee() {
+function Place({top,item,index,length,map}){
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
+  return (
+    <>
+      <div className={top? "place__item top_place__item":"place__item"}>
+      {isMobile?
+      <img src="/images/m-top-line.svg" alt="" className="m-top-line" />
+      :
+      <>
+      {top?
+      null
+      :
+      <>
+      
+      {length===index+1 || (length%2===0 && length===index)? 
+        <img src="/images/d-top-line2.svg" alt="" className="top-line2" />
+      : <img src="/images/d-top-line.svg" alt="" className="top-line" />} 
+      {length===index+1 || length-3===index || (length%2===0 && (length===index || length-2===index))? null:<img src="/images/d-bottom-line.svg" alt="" className="bottom-line" />}
+      
+      </>}
+      </>
+      }
+      
+        <div className="place-block">
+          <span className="place__number">{index+1}</span>
+          <p className="place__text">{renderHTML(item.text_place)}</p>
+        </div>
+        <img src={item.img_place   } alt="" className="place__img" />
+      </div>
+    </>
+  )
+}
+ 
+
+function Routee({map}) {
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
+  window.scrollTo(0, 0)
+
   const dispatch = useDispatch();
 
   const routes=useSelector(({random})=>random.routes);
@@ -61,8 +99,12 @@ function Routee() {
   };
   return (
     <>
-      <section className="single-page page">
+    {route===undefined? <PageNotFound/>: 
+
+      <section className="main-page route-page page">
         <div className="container">
+        
+
       { isLoadedRoutes ? (
 
           <motion.div  initial="initial"
@@ -70,67 +112,52 @@ function Routee() {
               exit="out"
               variants={pageVariants}
               transition={pageTransition}>
-          <div className="main-banner"></div>
-          <PlaceHead place={route}/>
-          <WidePlaces text={route.acf["wide-text1"]} img={route.acf["wide-img1"]}/>
-          <DoubleSlim place={route}/>
-          <WidePlaces text={route.acf["wide-text2"]} img={route.acf["wide-img2"]}/>
+          {map? null : 
+          <div className="map" id="map">
+            <Maps center={route.acf.map.center} left={route.acf.map.left}
+              right={route.acf.map.right} overlay={route.acf.map.overlay}
+            />
+          </div>}
+          <SingleHead route date={route.date.split('-')} post={route}/>
+          <div className="places">
+            {Object.keys(route.acf.places).map((item,index)=>(
+              <Place map={map} key={index} top={index%2!==0 && !isMobile} item={route.acf.places[item]} length={Object.keys(route.acf.places).length} index={index}/>
 
-          {isMobile? 
-          <div className="main-banner"></div>
-          :null
-          }
-          <Nearby data={route.acf["places-nearby"]}/>
-          <Share wide/>
-
-                    {isMobile? 
-          <div className="right-banner"></div> : null
-          }
-          {isMobile? <Random/> : null}
-          </motion.div>
-      ):""}
-
+            ))}
           </div>
-        {isMobile? null:
+         
+          <Nearby data={route.acf["places-nearby"]}/>
+
+          </motion.div>
+          
+      ):""}
+      {(isMobile)? 
+          <>
+            <div className="routes-bottom">
+            <Random single/>
+            <Share/>
+            </div>
+          </>
+          :''}
+          </div>
+          {isMobile? null:
           <div className="sidebar-container">
-            <Random/>
-            <SocialLinks/>
-            <div className="right-banner"></div>
+              <div div className="right-banner"></div>
+              <Random/>
+              <Share/>
           </div>
         }
-      </section>
+        <ScrolLink spy={true}
+            smooth={true}
+            offset={-75}
+            duration= {500} className="to-random" to="random">
+        <div className="to-random__button">
+          <img src="/images/shuffle.svg" alt="" />
+        </div>
+      </ScrolLink>
+      </section>}
     </>
   )
 }
 
 export default Routee
-
-
-// export default class Routee extends React.Component {
-//   constructor(props){
-//     super(props);
-//     this.state={
-//       loading:false,
-//       route:{},
-//       error:''
-//     }
-//   }
-//   componentDidMount(){
-//     const wordPressSiteUrl="https://localhost/wordpress/";
-//     this.setState({loading:true},
-//       ()=>{
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/routes/${this.props.match.params.id}`)
-//         .then(res=>{this.setState({loading:false, route:res.data})})
-//         .catch(error=>this.setState({loading:false,error:error.responce}))
-//       }
-//     );
-//   }
-//   render() {
-//     const route=this.state.route
-//     console.log(route)
-
-//     return (
-      
-//     )
-//   }
-// }

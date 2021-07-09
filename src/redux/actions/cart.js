@@ -35,7 +35,7 @@ export const addPizzaToCart = (product) => (dispatch, getState) => {
   if (!alreadyExists) {
     itemsCart.push({ ...product, count: 1 });
   }
-  console.log(itemsCart)
+  // console.log(itemsCart)
   store.dispatch({
     type: 'ADD_PIZZA_CART',
     payload: {itemsCart},

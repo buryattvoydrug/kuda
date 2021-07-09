@@ -1,13 +1,13 @@
 import React from 'react'
 import { Dimensions } from 'react-native'
-import CafeItem from '../Components/CafeItem'
 import Cart from '../Components/Cart'
 import Random from '../Components/Random'
 import Share from '../Components/Share'
-import SocialLinks from '../Components/SocialLinks'
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/Favs.scss'
+import Header from '../Components/Header'
+import Footer from '../Components/Footer'
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -42,7 +42,9 @@ export default function Favs() {
 
   return (
     <>
-      <div className="blog-page page">
+    <Header/>
+    <div className="wrapper">
+    <div className="blog-page page">
         <div className="container">
           <motion.div initial="initial"
               animate="in"
@@ -58,9 +60,8 @@ export default function Favs() {
               <div className="items-list">
                 <Cart/>
               </div>
-              {isMobile? <div className="right-banner"></div>:null}
-              {isMobile? <Random/> : null}
           </motion.div>
+          {isMobile? <Random/> : null}
         </div>
         {isMobile? null:
           <div className="sidebar-container">
@@ -70,6 +71,9 @@ export default function Favs() {
           </div>
         }
       </div>
+      <Footer/>
+    </div>
+      
     </>
   )
 }

@@ -1,16 +1,15 @@
 import React from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import CafeItem from '../Components/CafeItem';
 import Random from '../Components/Random';
 import Share from '../Components/Share';
-import NewsItem from '../Components/Single/NewsItem';
-import SocialLinks from '../Components/SocialLinks';
 import { fetchFoodcorts, setVisibleFoodcorts } from '../redux/actions/foodcorts';
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/BlogList.scss'
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -24,7 +23,6 @@ function FoodcortsPage() {
   const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
   const visibleFoodcorts=useSelector(({foodcorts})=>foodcorts.visibleFoodcorts);
   const isLoaded=useSelector(({foodcorts})=>foodcorts.isLoaded);
-  console.log(isLoaded)
 
   React.useEffect(()=>{
     if(!isLoaded){
@@ -54,13 +52,15 @@ function FoodcortsPage() {
     }
   };
   const cart=localStorage.getItem('itemsCart')+''
-  console.log(cart)
   return (
     <>
-      <div className="blog-page page">
+    <Header/>
+    <div className="wrapper">
+    <div className="blog-page page">
         <div className="container">
       { isLoaded ? (
 
+          <>
           <motion.div initial="initial"
               animate="in"
               exit="out"
@@ -68,24 +68,8 @@ function FoodcortsPage() {
               transition={pageTransition}>
           <div className="category-type">
             <h2 className="category__title">Фудкорты</h2>
-            {/* {isMobile? null :
-            <div className="categories">
-              <span className="categorie__name active_name">Все</span>
-              <span className="categorie__name">Пицца</span>
-              <span className="categorie__name">Суши</span>
-              <span className="categorie__name">Говно</span>
-              <span className="categorie__name">Жопа</span>
-            </div>} */}
           </div>
-          {/* {isMobile?
-              <div className="categories">
-                <span className="categorie__name active_name">Все</span>
-                <span className="categorie__name">Тег1</span>
-                <span className="categorie__name">Проект</span>
-                <span className="categorie__name">Говно</span>
-                <span className="categorie__name">Жопа</span>
-              </div>
-          :null} */}
+
           
           <div className="items-list">
           {foodcorts.length? (foodcorts.slice(0, visibleFoodcorts).map((post,index)=>(
@@ -95,8 +79,10 @@ function FoodcortsPage() {
           {visibleFoodcorts < foodcorts.length &&
              <button className="button load-more" onClick={()=>(dispatch(setVisibleFoodcorts()))} type="button">Загрузить ещё</button>
           }
-          {isMobile? <Random/> : null}
           </motion.div>
+          {isMobile? <Random/> : null}
+          </>
+
       ):""}
 
         </div>
@@ -108,6 +94,9 @@ function FoodcortsPage() {
           </div>
         }
       </div>
+      <Footer/>
+    </div>
+    
     </>
   )
 }

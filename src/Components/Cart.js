@@ -11,7 +11,7 @@ class Cart extends Component {
 
   render() {
     const { itemsCart } = this.props;
-    console.log(itemsCart)
+    // console.log(itemsCart)
     return (
       <>
       {itemsCart.length? itemsCart.map((item,index)=>(

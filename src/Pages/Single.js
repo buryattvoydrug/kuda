@@ -9,18 +9,22 @@ import SlimBlock from '../Components/Single/SlimBlock';
 import WideBlock from '../Components/Single/WideBlock';
 import { fetchPosts } from '../redux/actions/posts';
 import { motion } from 'framer-motion';
+import {Link as ScrolLink} from 'react-scroll';
 
 import '../scss/Pages/Single.scss'
-import Random from '../Components/Random';
+import PageNotFound from './PageNotFound';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 
 
 
 
-const windowWidth = Dimensions.get('window').width;
-const isMobile = (windowWidth<1280)
 
-function Single() {
+function Single({map}) {
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
+
   window.scrollTo(0, 0)
   const dispatch = useDispatch();
   const items=useSelector(({posts})=>posts.posts);
@@ -32,14 +36,13 @@ function Single() {
   const postNumber=postLocation[postLocation.length-1]
   const post=items.find((item)=>(item.id==postNumber))
 
-  // const postNumber=23
-  // const post=items.find((item)=>(item.id==postNumber))
 
-  console.log(post)
+  // console.log(post)
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
     }
+    
   },[isLoaded,dispatch]);
   const pageTransition = {
     type: "tween",
@@ -63,22 +66,25 @@ function Single() {
       scale: 1.2
     }
   };
-
+  // console.log(post)
   return (
     <>
+    {map? null:<Header/>}
+    <div className="wrapper">
+    {post===undefined? <PageNotFound/>: 
       <section className="single-page page">
       <div className="container">
-
+      
       { post ? (
           <motion.div  initial="initial"
               animate="in"
               exit="out"
               variants={pageVariants}
               transition={pageTransition}>
-          <SingleHead date={post.date.split('-')} post={post}/>
+          <SingleHead map={map} date={post.date.split('-')} post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
-          <SlimBlock post={post}/>
-          <SingleBottom author={post.acf["post-author"].data.display_name} post={post}/>
+          <SlimBlock map post={post}/>
+          <SingleBottom map author={post.acf["post-author"].data.display_name} post={post}/>
           </motion.div>
       
       ):""}
@@ -95,40 +101,21 @@ function Single() {
             <Share/>
           </div>
         }
+        <ScrolLink spy={true}
+            smooth={true}
+            offset={-75}
+            duration= {500} className="to-random" to="random">
+        {map? '':
+        <div className="to-random__button">
+          <img src="/images/shuffle.svg" alt="" />
+        </div>}
+      </ScrolLink>
       </section>
+    }
+    {map?null:<Footer/>}
+    </div>
+    
     </>
   )
 }
 export default Single
-
-
-
-
-// export default class Single extends React.Component {
-//   constructor(props){
-//     super(props);
-//     this.state={
-//       loading:false,
-//       post:{},
-//       error:''
-//     }
-//   }
-  
-//   componentDidMount(){
-//     const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
-//     this.setState({loading:true},
-//       ()=>{
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts/${this.props.match.params.id}`)
-//         .then(res=>{this.setState({loading:false, post:res.data})})
-//         .catch(error=>this.setState({loading:false,error:error.response}))
-//       }
-//     );
-//   }
-
-//   render() {
-//     const {post}=this.state
-//     return (
-      
-//     )
-//   }
-// }

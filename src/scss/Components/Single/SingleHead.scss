@@ -2,6 +2,34 @@
 .single-head{
   .head-block{
     display: flex;
+    .item-links{
+      position: absolute;
+      right:0;
+      display: flex;
+      flex-direction: row-reverse;
+      .fave__button{
+        height: 40px;
+        width: 40px;
+        img{
+          height: 100%;
+        }
+      }
+      .map__button,
+      .web__button{
+        margin-bottom: 5px;
+        right:40px;
+        height: 40px;
+        img{
+          padding: 5px;
+          height: 100%;
+        }
+      }
+      .web__button{
+        img{
+          padding: 8px;
+        }
+      }
+    }
     .cafe-item{
       height: auto;
       margin-right: 50px;
@@ -21,17 +49,9 @@
               height: 16px;
             }
           }
-          .fave__button{
-            position: absolute;
-            top:auto;
-            bottom: 0;
-            margin-bottom: 5px;
-            height: 40px;
-            width: 40px;
-            img{
-              height: 100%;
-            }
-          }
+          
+
+
         }
       
       
@@ -47,16 +67,10 @@
         // background: $pink;
         background: url('../../../images/grad.png');
       }
-      .map__button,
-      .web__button{
-        margin-top: 10px;
-        display: flex;
-        align-items: center;
-        height: 40px;
-        img{
-          margin-right: 20px;
-        }
-      }
+     
+    }
+    .col:not(.cafe-item){
+      margin-top: 30px;
     }
   }
 
@@ -90,6 +104,85 @@
     font-weight: 800;
   }
 }
+.map-container{
+  .single-head{
+    .head-block{
+      flex-direction: column;
+      
+      .cafe-item{
+        margin-right: 0;
+      }
+      .col{
+        min-width: auto;
+        width: 100%;
+        .item-info{
+          position: relative;
+          .fave__button{
+            top:auto;
+            bottom:0;
+          }
+        }
+        .cafe-item__img{
+          height: 550px;
+          width: 100%;
+          height: 335px;
+        }
+        
+        .head__text{
+          width: 90%;
+        }
+        .accent__text{
+          width: 100%;
+        }
+        .fave__button{
+          position: absolute;
+          top:auto;
+          bottom: 0;
+          margin-bottom: 5px;
+          height: 40px;
+          width: 40px;
+          img{
+            height: 100%;
+          }
+        }
+        .map__button,
+        .web__button{
+          position: absolute;
+          top:auto;
+          bottom: 0;
+          margin-bottom: 5px;
+          right:40px;
+          height: 40px;
+          img{
+            padding: 5px;
+            height: 100%;
+          }
+        }
+        .web__button{
+          right: 80px;
+          img{
+            padding: 8px;
+          }
+        }
+      }
+    }
+
+
+
+    //fonts
+    
+    .item__title{
+      font-size: 22px;
+      width: 80% !important;
+    }
+    .address__text{
+      font-size: 18px;
+    }
+    .head__text,.accent__text{
+      line-height: 130%;
+    }
+  }
+}
 @media(max-width:1279px){
   .single-head{
     .head-block{
@@ -120,14 +213,35 @@
         .accent__text{
           width: 100%;
         }
-        .map__button{
-          float:right;
-          padding-right: 10px;
+        .fave__button{
+          position: absolute;
+          top:auto;
+          bottom: 0;
+          margin-bottom: 5px;
+          height: 40px;
+          width: 40px;
+          img{
+            height: 100%;
+          }
+        }
+        .map__button,
+        .web__button{
+          position: absolute;
+          top:auto;
+          bottom: 0;
+          margin-bottom: 5px;
+          right:40px;
+          height: 40px;
+          img{
+            padding: 5px;
+            height: 100%;
+          }
         }
         .web__button{
-          padding-left: 10px;
-          float: left;
-          margin-bottom: 30px;
+          right: 80px;
+          img{
+            padding: 8px;
+          }
         }
       }
     }

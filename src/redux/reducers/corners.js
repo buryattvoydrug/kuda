@@ -3,14 +3,13 @@ const initialState={
   isLoaded:false
 }
 
-const posts=(state=initialState,action)=>{
+const corners=(state=initialState,action)=>{
   switch (action.type) {
-    case 'SET_POSTS':
+    case 'SET_CORNERS':
       return{
         ...state,
         corners:action.payload,
-
-        isLoaded:true
+         isLoaded:true
       };
     case 'SET_LOADED':
       return{
@@ -22,4 +21,4 @@ const posts=(state=initialState,action)=>{
   }
   
 }
-export default posts;
+export default corners;

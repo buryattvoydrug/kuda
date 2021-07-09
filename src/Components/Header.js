@@ -22,7 +22,6 @@ function Header() {
   function progressBar(e){
     let windowHeight = document.documentElement.scrollHeight-document.documentElement.clientHeight;
     let windowScroll=document.body.scrollTop || document.documentElement.scrollTop;
-    // console.log(document.documentElement.scrollTop)
 
     let per = windowScroll/windowHeight*100;
     const progress=document.querySelector('.row');
@@ -82,11 +81,11 @@ function Header() {
       scale: 1.2
     }
   };
-  console.log(logo)
+  // console.log(logo)
 
   return (
     <>
-      <header>
+      <header className={menu? 'active_header':null}>
         <div className="wrapper">
         <div className="container">
         {logo?
@@ -104,18 +103,17 @@ function Header() {
           {isMobile? 
           <button onClick={toggleMenu} className={menu? "nav-button active__button" : "nav-button "}>
             <span></span><span></span><span></span>
-            {/* <img src="/images/search.svg" alt="" /> */}
           </button>
            : <SocialLinks/>}
           
-          <Link to="/favs/" className="fave__button">
+          <Link onClick={closeMenu}  to="/favs/" className="fave__button">
             <img src="/images/fave.svg" alt="" />
           </Link>
         </div>
         <div className="row"></div>
         </div>
         {menu? 
-          <motion.div id="nav" initial="initial"
+          <motion.div  id="nav" initial="initial"
               animate="in"
               exit="out"
               variants={pageVariants}
@@ -125,8 +123,6 @@ function Header() {
               <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">блог</Link></li>
               <li onClick={closeMenu}><Link to="/foodcorts/" className="navbar__item">фудкорты</Link></li>
               <li onClick={closeMenu}><Link to="/posts/" className="navbar__item">заведения</Link></li>
-              {/* <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">кофе</Link></li> */}
-              {/* <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">о нас</Link></li> */}
             </ul>
             {isMobile? <SocialLinks/>:null}
             </motion.div> : null}
@@ -135,7 +131,6 @@ function Header() {
             smooth={true}
             offset={-75}
             duration= {500} className="to-random" to="random">
-          {/* <span className="to-random__text">Рандом</span> */}
         <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
         </div>

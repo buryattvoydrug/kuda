@@ -1,25 +1,24 @@
 import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import CafeItem from '../Components/CafeItem';
 import Random from '../Components/Random';
 import Share from '../Components/Share';
-import NewsItem from '../Components/Single/NewsItem';
-import SocialLinks from '../Components/SocialLinks';
 import { fetchPosts, setVisiblePosts } from '../redux/actions/posts';
 import { motion } from 'framer-motion';
 
 import '../scss/Pages/BlogList.scss'
-import Cart from '../Components/Cart';
-
-const windowWidth = Dimensions.get('window').width;
-const isMobile = (windowWidth<1280)
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 
-function PostsPage() {
 
-  window.scrollTo(0, 0)
+
+function PostsPage({map}) {
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
+
+  // window.scrollTo(0, 0)
 
   const dispatch = useDispatch();
   const items=useSelector(({posts})=>posts.posts);
@@ -27,18 +26,6 @@ function PostsPage() {
   const isLoaded=useSelector(({posts})=>posts.isLoaded);
 
   
-  const handleAddPizzaToCart=(obj)=>{
-    dispatch({
-        type:'ADD_PIZZA_CART',
-        payload:obj,
-    })
-  }
-  const handleRemoveCartItem=(obj)=>{
-    dispatch({
-        type:'REMOVE_CART_ITEM',
-        payload:obj,
-    })
-  }
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
@@ -103,13 +90,16 @@ function PostsPage() {
     itemsToShow=items.filter((item)=>(filtredItems[items.indexOf(item)]>=0))
   }
   const cart=localStorage.getItem('itemsCart')+''
-  console.log(cart)
+  // console.log(cart)
   return (
     <>
+    {map? null:<Header/>}
+      <div className="wrapper">
       <div className="blog-page page">
         <div className="container">
       { isLoaded? (
           
+          <>
           <motion.div initial="initial"
               animate="in"
               exit="out"
@@ -134,15 +124,17 @@ function PostsPage() {
           
           <div className="items-list">
           {items.length? (itemsToShow.slice(0, visiblePosts).map((item,index)=>(
-            <CafeItem   toDelete={cart.includes('"id":'+item.id)}
+            <CafeItem  map={map} toDelete={cart.includes('"id":'+item.id)}
                          wide={isMobile? index%3===0: (index%9)%4===0} post={item}/>
                   ))):''}
           </div>
           {itemsToShow.length > visiblePosts &&
              <button className="button load-more" onClick={()=>(dispatch(setVisiblePosts()))} type="button">Загрузить ещё</button>
           }
-          {isMobile? <Random/> : null}
+          
           </motion.div>
+          {isMobile? <Random/> : null}
+          </>
       ):""}
 
         </div>
@@ -154,51 +146,10 @@ function PostsPage() {
           </div>
         }
       </div>
+      {map?null:<Footer/>}
+      </div>
     </>
   )
 }
 
 export default PostsPage
-
-// export default class PostsPage extends React.Component {
-
-//   constructor(props){
-//     super(props);
-//     this.state={
-//       loading:false,
-//       posts:[],
-//       visiblePosts: 9,
-//       error:''
-//     }
-//     this.loadMorePosts = this.loadMorePosts.bind(this);
-//   }
-//   loadMorePosts() {
-//     this.setState((prev) => {
-//       return {visiblePosts: prev.visiblePosts + 9};
-//     });
-//   }
-//   componentDidMount(){
-//     // http://nikuda.poydemkuda.ru/index.php
-//     const wordPressSiteUrl="http://nikuda.poydemkuda.ru/index.php";
-//     this.setState({loading:true},
-//       ()=>{
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/posts`)
-//         .then(res=>{this.setState({loading:false, posts:res.data})})
-//         .catch(error=>this.setState({loading:false,error:error.responce.data}))
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/news`)
-//         .then(res=>{this.setState({loading:false, news:res.data})})
-//         .catch(error=>this.setState({loading:false,error:error.responce.data}))
-//         axios.get(`${wordPressSiteUrl}/wp-json/wp/v2/foodcorts`)
-//         .then(res=>{this.setState({loading:false, foodcorts:res.data})})
-//         .catch(error=>this.setState({loading:false,error:error.responce.data}))
-//       }
-//     );
-//   }
-//   render() {
-//     const {posts}=this.state
-//     console.log(posts)
-//     return (
-      
-//     )
-//   }
-// }
