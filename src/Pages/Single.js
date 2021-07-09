@@ -105,9 +105,10 @@ function Single({map}) {
             smooth={true}
             offset={-75}
             duration= {500} className="to-random" to="random">
+        {map? '':
         <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
-        </div>
+        </div>}
       </ScrolLink>
       </section>
     }

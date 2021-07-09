@@ -14,10 +14,11 @@ import '../scss/Pages/Foodcort.scss'
 import '../scss/Pages/Single.scss'
 import PageNotFound from './PageNotFound';
 
-const windowWidth = Dimensions.get('window').width;
-const isMobile = (windowWidth<1280)
 
-function Foodcort() {
+function Foodcort({map}) {
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
+
   window.scrollTo(0, 0)
 
   const dispatch = useDispatch();

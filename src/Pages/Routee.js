@@ -20,7 +20,9 @@ const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 
-function Place({top,item,index,length}){
+function Place({top,item,index,length,map}){
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
   return (
     <>
       <div className={top? "place__item top_place__item":"place__item"}>
@@ -53,7 +55,9 @@ function Place({top,item,index,length}){
 }
  
 
-function Routee() {
+function Routee({map}) {
+  const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280) || map
   window.scrollTo(0, 0)
 
   const dispatch = useDispatch();
@@ -108,15 +112,16 @@ function Routee() {
               exit="out"
               variants={pageVariants}
               transition={pageTransition}>
+          {map? null : 
           <div className="map" id="map">
             <Maps center={route.acf.map.center} left={route.acf.map.left}
               right={route.acf.map.right} overlay={route.acf.map.overlay}
             />
-          </div>
+          </div>}
           <SingleHead route date={route.date.split('-')} post={route}/>
           <div className="places">
             {Object.keys(route.acf.places).map((item,index)=>(
-              <Place key={index} top={index%2!==0 && !isMobile} item={route.acf.places[item]} length={Object.keys(route.acf.places).length} index={index}/>
+              <Place map={map} key={index} top={index%2!==0 && !isMobile} item={route.acf.places[item]} length={Object.keys(route.acf.places).length} index={index}/>
 
             ))}
           </div>

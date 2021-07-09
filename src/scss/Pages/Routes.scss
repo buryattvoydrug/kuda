@@ -81,6 +81,53 @@
   height: 500px;
   width: 100%;
 }
+.map-container{
+  .map{
+    height: 400px;
+  }
+  .route-page{
+    width: 100%;
+    padding-top: 60px;
+    .routes-bottom{
+      // padding: 0 5vw;
+    }
+    .nearby{
+      // padding: 0 5vw;
+    }
+    .container{
+      width: 100%;
+      // transform: translateX(-5vw);
+      .single-head{
+        // padding:0 5vw;
+      }
+      .places{
+        .m-top-line{
+          width: 100%;
+        }
+        margin-top: 0;
+        .place__item{
+          width: 100%;
+          .place-block{
+            // padding: 90px 5vw 50px;
+            .place__number{
+              font-size: 48px;
+            }
+          }
+          img{
+            width: 100%;
+          }
+        }
+      }
+    }
+    .col{
+      .vegan-icon{
+        height: 25px;
+        margin-left: 10px;
+        padding-bottom: 5px;
+      }
+    }
+  }
+}
 @media(max-width:1279px){
   .map{
     height: 400px;

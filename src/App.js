@@ -46,7 +46,9 @@ function App() {
             <Route exact path="/blog/"><BlogList/></Route>
             <Route exact path="/map/"><MapPage/></Route>
             <Route exact path="/posts/" ><PostsPage/></Route>
-            <Route exact path="/map/post/:id"><MapSinglePage/></Route>
+            <Route exact path="/map/post/:id"><MapPage/></Route>
+            <Route exact path="/map/foodcorts/:id"><MapPage/></Route>
+            <Route exact path="/map/routes/:id"><MapPage/></Route>
             <Route exact path="/favs/" ><Favs/></Route>
             <Route exact path="/foodcorts/"><FoodcortsPage/></Route>
             <Route exact path="/post/:id"><Single/></Route>

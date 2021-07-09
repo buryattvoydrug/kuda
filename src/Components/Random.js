@@ -42,7 +42,6 @@ function Random({single,main}) {
   let coffee=[]
   coffee=posts.filter((item)=>(filtredItems[posts.indexOf(item)]>=0))
 
-  console.log(coffee)
 
 
 

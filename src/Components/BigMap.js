@@ -4,19 +4,18 @@ import {
   withScriptjs,
   GoogleMap,
   Marker,
+  InfoWindow,
   GroundOverlay
 } from "react-google-maps";
+import { Link } from 'react-router-dom'
 
-function Map({center,left,right,overlay}) {
-    
+function Map({center,left,right,overlay,posts}) {
+  console.log(posts)
   let google=window.google
   const centerNum1=Number(center.split(',')[0])
   const centerNum2=Number(center.split(',')[1])
-  const leftNum1=left.split(',')[0]
-  const leftNum2=left.split(',')[1]
-  const rightNum1=right.split(',')[0]
-  const rightNum2=right.split(',')[1]
-
+  
+  const [selected, setSelected] = React.useState(null);
   return (
     <GoogleMap
       defaultZoom={14}
@@ -25,31 +24,69 @@ function Map({center,left,right,overlay}) {
             styles: exampleMapStyles, mapTypeControl: false,zoomControl: false,
         }}
     >
-    <Marker
-        position={{ lat:centerNum1, lng: centerNum2 }}
-    />
-    <GroundOverlay
-      defaultUrl={overlay}
-      defaultBounds={new google.maps.LatLngBounds(
-        new google.maps.LatLng( leftNum1,leftNum2),
-        new google.maps.LatLng(rightNum1,rightNum2)
-      )}
-    />
+    {posts.map((item,index)=>(
+      <Marker
+        key={item.id}
+        position={{ lat:Number(posts[index].acf.coordinate.split(',')[0]), lng: Number(posts[index].acf.coordinate.split(',')[1]) }}
+        icon={{
+              url: `/images/pin.png`,
+              origin: new window.google.maps.Point(0, 0),
+              scaledSize: new window.google.maps.Size(20, 35),
+            }}
+        onClick={() => {
+          setSelected(item);
+        }}
+      />
+    ))}
+    
+    {selected ? (
+          <InfoWindow
+            position={{ lat: Number(selected.acf.coordinate.split(',')[0]), lng: Number(selected.acf.coordinate.split(',')[1]) }}
+            onCloseClick={() => {
+              setSelected(null);
+            }}
+          >
+          <div className="info-window">
+            <img className="cafe-item__img" src={selected.acf["cafe-item-main-img"]} alt="" />
+            <div className="item-info">
+            <div className="prefs">
+                        <div className="price">
+                        { [...Array(Number(selected.acf["cafe-item-prices"]))].map((item, index) =>                       
+                        <span className="active_price" key={index}><img src="/images/rub.svg" alt=""/></span>
+                        ) }
+                        { [...Array(5-Number(selected.acf["cafe-item-prices"]))].map((item, index) =>                       
+                        <span key={index}><img src="/images/rub.svg" alt=""/></span>
+                        ) }
+                        </div>
+                        {selected.acf["cafe-item-vegan"]? 
+                        <img src="/images/vegan.svg" alt="" className="vegan-icon" />
+                        : null}
+                    </div>
+                <h3 className="item__title">{selected.title.rendered}</h3>
+            <div className="address">
+                <img src="/images/pin.svg" alt="" className="pin" />
+                <span className="address__text">{selected.acf["cafe-item-address"]}</span>
+            </div>
+            </div>
+          </div>
+          </InfoWindow>
+        ) : null}
+    
     </GoogleMap>
   );
 }
 
 const MapWrapped = withScriptjs(withGoogleMap(Map));
 
-export default function Maps({center,left,right,overlay}) {
-
+export default function BigMap({center,left,right,posts}) {
+    console.log(posts)
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <MapWrapped
-        overlay={overlay}
         left={left}
         right={right}
         center={center}
+        posts={posts}
         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=&key=AIzaSyDJtwCzTFMW8OY6bzLERX3UJdVDeujnP-k`}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `100%` }} />}
