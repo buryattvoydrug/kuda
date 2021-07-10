@@ -62,7 +62,9 @@ function Map({center,left,right,overlay,posts}) {
                         <img src="/images/vegan.svg" alt="" className="vegan-icon" />
                         : null}
                     </div>
+                    <a href={'/#/map/'+selected.type+`/${selected.id}`}>
                         <h3 className="item__title">{selected.title.rendered}</h3>
+                    </a>
             <div className="address">
                 <img src="/images/pin.svg" alt="" className="pin" />
                 <span className="address__text">{selected.acf["cafe-item-address"]}</span>

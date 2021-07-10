@@ -94,6 +94,7 @@ function MapPage() {
     setCart(true)
     setItems(buttons[4].data)
     setActive(-1)
+    setActive(4)
 
   }
   return (
@@ -122,12 +123,11 @@ function MapPage() {
                             <span>Кофе</span>
                             <img src="/images/coffee-button.png" alt="" />
                           </button>
-                          <button id="favs" onClick={()=>toggleCart()} className="random__button">
+                          <button id="favs" onClick={()=>toggleCart()} className={active===4? " random__button active_button" : " random__button"}>
                             <span>Избранное</span>
                             <img src="/images/heart.png" alt="" />
                           </button>
                           {/* )} */}
-          {activeCart? <Cart map/>:null}
 
                     </div>
                     <div className="items-list">
