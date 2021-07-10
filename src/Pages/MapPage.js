@@ -3,7 +3,7 @@ import App from '../App'
 import '../scss/Pages/MapPage.scss'
 import Main from './Main'
 import PostsPage from './PostsPage'
-import { Provider } from 'react-redux';
+import { connect, Provider } from 'react-redux';
 
 import BigMap from '../Components/BigMap'
 import {BrowserRouter, Route,HashRouter, Switch, useLocation } from 'react-router-dom'
@@ -24,7 +24,6 @@ import Cart from '../Components/Cart'
 
 function MapPage() {
   const dispatch = useDispatch();
-  document.body.style.overflowY = "hidden";
 
   const posts=useSelector(({posts})=>posts.posts);
   const isLoadedPosts=useSelector(({posts})=>posts.isLoaded);
@@ -70,20 +69,15 @@ function MapPage() {
       dispatch(fetchPosts());
         dispatch(fetchFoodcorts());
         dispatch(fetchNews());
-      // console.log(isLoadedPlaces,isLoadedRoutes)
-    // else{if(!isLoadedRoutes){
-      // alert(2)
-      // dispatch(fetchFoodcorts());
-    // }}
-      
-    // if(!(isLoadedPlaces && isLoadedRoutes)){
-    //   dispatch(fetchRandom());
-    // }
   },[dispatch]);
+  const cart=localStorage.getItem('itemsCart')+''
+  const cartItems=eval(cart)
+
   const buttons=[{name:"Еда",type:'post',data:posts},
                   {name:"Маршрут прогулки",type:'routes',data:routes},
                  {name:"Фудкорт",type:'foodcorts',data:foodcorts},
-                 {name:"Кофе",type:'post',data:coffee}]
+                 {name:"Кофе",type:'post',data:coffee},
+                 {name:"Избранное",type:'post',data:cartItems}]
   const [active,setActive]=useState(-1)
   const [items,setItems]=useState([])
 
@@ -97,13 +91,11 @@ function MapPage() {
     setCart(false)
   }
   const toggleCart=()=>{
-    setCart(!activeCart)
+    setCart(true)
+    setItems(buttons[4].data)
     setActive(-1)
 
   }
-
-  const cart=localStorage.getItem('itemsCart')+''
-  console.log(posts)
   return (
     <>
       <div className="map-container">
@@ -130,7 +122,7 @@ function MapPage() {
                             <span>Кофе</span>
                             <img src="/images/coffee-button.png" alt="" />
                           </button>
-                          <button id="favs" onClick={()=>(toggleCart())} className="random__button">
+                          <button id="favs" onClick={()=>toggleCart()} className="random__button">
                             <span>Избранное</span>
                             <img src="/images/heart.png" alt="" />
                           </button>
