@@ -108,7 +108,6 @@ function MapPage() {
   console.log(list)
   return (
     <>
-      <Header/>
       <div className="map-container">
 
         <button onClick={()=>setList(!list)} className={list? "to-list__button to-map__button":"to-list__button"}>
