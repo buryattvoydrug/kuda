@@ -20,8 +20,12 @@ import Routee from './Routee'
 import { Link } from 'react-router-dom';
 import store from '../redux/store'      
 import Cart from '../Components/Cart'
+import { addPizzaToCart, removeCartItem } from '../redux/actions/cart'
+import { Dimensions } from 'react-native'
+import Header from '../Components/Header'
 
-
+const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280)
 function MapPage() {
   const dispatch = useDispatch();
 
@@ -82,7 +86,7 @@ function MapPage() {
   const [items,setItems]=useState([])
 
   const [activeCart,setCart]=useState(false)
-
+  const [singleItem,setSingleItem]=useState(0)
 
 
   const toggleButton=(index)=>{
@@ -92,21 +96,32 @@ function MapPage() {
   }
   const toggleCart=()=>{
     setCart(true)
-    setItems(buttons[4].data)
+    setItems(cartItems)
     setActive(-1)
     setActive(4)
 
   }
+  const [activeFav,setActiveFav]=useState(false)
+  const [g,setG]=useState(true)
+
+  const [list,setList]=useState(false)
+  console.log(list)
   return (
     <>
+      <Header/>
       <div className="map-container">
 
-        <section className="map-content">
+        <button onClick={()=>setList(!list)} className={list? "to-list__button to-map__button":"to-list__button"}>
+          <img src={list? "/images/map.svg" :"/images/to-list.svg"} alt="" />
+        </button>
+
+        <section className={list? "map-content": "map-content list-disabled"}>
             <HashRouter>
               <Switch>
                 <Route exact path="/map/">
                         <div className="random-block">
                       {/* {buttons.map((item,index)=> */}
+                          <div className="random-buttons-list">
                           <button id="food" onClick={()=>toggleButton(0)} className={active===0? " random__button active_button" : " random__button"}>
                             <span>Еда</span>
                             <img src="/images/food-button.png" alt="" />
@@ -115,44 +130,84 @@ function MapPage() {
                             <span>Фудкорт</span>
                             <img src="/images/foodcort-button.png" alt="" />
                           </button>
-                          <button id="route" onClick={()=>toggleButton(1)} className={active===1? " random__button active_button" : " random__button"}>
+                          {/* <button id="route" onClick={()=>toggleButton(1)} className={active===1? " random__button active_button" : " random__button"}>
                             <span>Маршрут прогулки</span>
                             <img src="/images/route-button.png" alt="" />
+                          </button> */}
+                          {cartItems.length? 
+                            <button id="favs" onClick={()=>toggleCart()} className={active===4? " random__button active_button" : " random__button"}>
+                            <span>Избранное</span>
+                            <img src="/images/heart.png" alt="" />
                           </button>
+                          : null}
+                          
                           <button id="coffee" onClick={()=>toggleButton(3)} className={active===3? " random__button active_button" : " random__button"}>
                             <span>Кофе</span>
                             <img src="/images/coffee-button.png" alt="" />
                           </button>
-                          <button id="favs" onClick={()=>toggleCart()} className={active===4? " random__button active_button" : " random__button"}>
-                            <span>Избранное</span>
-                            <img src="/images/heart.png" alt="" />
-                          </button>
+                          </div>
+                          
                           {/* )} */}
 
                     </div>
-                    <div className="items-list">
+                    {isMobile && !list? null:
+                      <>
+                      {/* <div className="category-type">
+                        <h2 className="category__title">{buttons[active].name}</h2>
+                      </div> */}
+                      <div className="items-list">
                     { active!==-1 && items.map((item,index)=>(
-                      <CafeItem map toDelete={cart.includes('"id":'+item.id)}
-                                  wide={index%3===0} post={item}/>
+                      <>
+                          <div toDelete={cart.includes('"id":'+item.id)} onClick={()=>setSingleItem(item)} className={index%5===0? "item cafe-item cafe-item-wide" : "item cafe-item"}>
+                                  <Link to={'/map/'+item.type+`/${item.id}`}>
+                                    <img className="cafe-item__img" src={item.acf["cafe-item-main-img"]} alt="" />
+                                  </Link>
+                                  <div className="item-info">
+                                  <div className="prefs">
+                                              <div className="price">
+                                              { [...Array(Number(item.acf["cafe-item-prices"]))].map((i, index) =>                       
+                                              <span className="active_price" key={index}><img src={item.type==='routes'? "/images/people.svg":"/images/rub.svg"} alt=""/></span>
+                                              ) }
+                                              { [...Array(5-Number(item.acf["cafe-item-prices"]))].map((i, index) =>                       
+                                              <span key={index}><img src={item.type==='routes'? "/images/people.svg":"/images/rub.svg"} alt=""/></span>
+                                              ) }
+                                              </div>
+                                              {item.acf["cafe-item-vegan"]? 
+                                              <img src={item.type==='routes'? "/images/bike.svg":"/images/vegan.svg"} alt="" className="vegan-icon" />
+                                              : null}
+                                              
+                                            </div>
+                                    <Link to={'/map/'+item.type+`/${item.id}`}>
+                                      <h3 className="item__title">{item.title.rendered}</h3>
+                                    </Link>
+                                    <div className="address">
+                                      <img src="/images/pin.svg" alt="" className="pin" />
+                                      <span className="address__text">{item.acf["cafe-item-address"]}</span>
+                                    </div>
+                                </div>
+                                </div>
+                      </>
                             ))}
                     </div>
+                      </>}
                 </Route>
                 <Route exact path="/map/post/:id"><Single map/></Route>
                 <Route exact path="/map/foodcorts/:id"><Foodcort map/></Route>
-                <Route exact path="/map/routes/:id"><Routee map/></Route>
+                {/* <Route exact path="/map/routes/:id"><Routee map/></Route> */}
               </Switch>
           </HashRouter>
               
             
         </section>
+        {list? null: 
         <section className="map">
           <div className="map-logo">
             <Link to="/" className="logo">куда <strong>пойдём</strong>?</Link>
           </div>
-          <BigMap posts={items} center={"55.73888474603424,37.624613416794176"} left={"55.72686420065968, 37.59815874589736"}
+          <BigMap posts={items} singleItem={singleItem} center={"55.73888474603424,37.624613416794176"} left={"55.72686420065968, 37.59815874589736"}
                 right={"55.74984851730395, 37.652010279938324"} overlay={"/images/overlay.svg" }
               />
-        </section>
+        </section> }
       </div>
     </>
   )

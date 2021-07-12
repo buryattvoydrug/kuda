@@ -17,7 +17,6 @@ function CafeItem({wide,post,toDelete,isCart,map}) {
     type='map/'+type
   }
   return (
-    <>
       <div className={wide? "item cafe-item cafe-item-wide" : "item cafe-item"}>
         <Link to={'/'+type+`/${post.id}`}>
           <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />
@@ -57,7 +56,6 @@ function CafeItem({wide,post,toDelete,isCart,map}) {
           </button>}
         </div>
       </div>
-    </>
   )
 }
 

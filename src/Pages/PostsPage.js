@@ -90,7 +90,7 @@ function PostsPage({map}) {
     itemsToShow=items.filter((item)=>(filtredItems[items.indexOf(item)]>=0))
   }
   const cart=localStorage.getItem('itemsCart')+''
-  // console.log(cart)
+  console.log(itemsToShow)
   return (
     <>
     {map? null:<Header/>}
