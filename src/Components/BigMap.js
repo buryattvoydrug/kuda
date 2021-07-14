@@ -53,8 +53,8 @@ function Map({center,left,right,overlay,posts,singleItem}) {
             position: google.maps.ControlPosition.RIGHT_CENTER,
             },
             scaleControl: true,
-            streetViewControl: true,
-            streetViewControlOptions: {
+            streetViewControl: false,
+            fullscreenControlOptions:{
             position: google.maps.ControlPosition.RIGHT_CENTER,
             },
         }}
