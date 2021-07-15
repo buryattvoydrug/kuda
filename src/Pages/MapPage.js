@@ -219,9 +219,11 @@ function MapPage() {
                   {/* <h2 className="category__title">Заведения</h2> */}
                   {isMobile? null :
                   <div className="categories">
+                  <>
                   {categoriesNamesUnique.map((item,index)=>(
                     <span key={item.id} onClick={()=>setCategory(item)} className={activeCategory==item? "categorie__name active_name": "categorie__name"}>{item}</span>
                   ))}
+                  </>
                   </div>}
                 </div>
                 {isMobile?

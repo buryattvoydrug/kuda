@@ -39,15 +39,53 @@
   height: 100vh;
   width: 100vw;
   display: flex;
-  
+  .map{
+    .gm-style .gm-style-iw-t::after{
+      background: none;
+    }
+    .gm-style-iw,.gm-style-iw-d{
+      overflow-x: hidden !important;
+      border-radius: 47px;
+      padding: 0 !important;
+      padding-right: 0 !important;
+      max-width: 300px !important;
+      button.gm-ui-hover-effect{
+        right:15px !important;
+        top:15px !important;
+        background: #000;
+      }
+    }
+    .info-window{
+      margin: 0;
+      padding: 40px;
+      border-radius: 47px;
+      width: 300px;
+      height: 340px  ;
+      .cafe-item__img{
+      border-radius: 20px;
+
+        width: 220px;
+        height: 180px;
+        margin-bottom: 10px;
+      }
+    }
+    .map-logo{
+      top:18px;
+      .logo{
+          font-size: 28px;
+      }
+    }
+  }
   .page{
     padding-top: 0;
   }
   .map-content{
+    
     padding: 20px;
     width: 400px;
     height: 100%;
     overflow-y: scroll;
+    
     .random-block{
       .random-buttons-list{
         display: flex;
@@ -90,9 +128,34 @@
           strong{
             font-weight: 300;
           }
-      }
+      }  
     }
   }
+}
+@media(min-width:1280px){
+.map-content{
+  .random-buttons-list{
+    padding-bottom: 10px;
+    border-bottom: 2px solid #000;
+  }
+  .items-list{
+  }
+  .category-type{
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+  .categories{
+    z-index: 100;
+    position: absolute;
+    bottom:20px;
+    display: flex;
+    flex-direction: column;
+    left:400px;
+    font-size: 22px;
+    // flex-wrap: wrap;
+  }
+}
 }
 @media(max-width:1279px){
   body{
@@ -126,40 +189,6 @@
       padding: 0;
       
     }
-    .map{
-      .gm-style .gm-style-iw-t::after{
-        background: none;
-      }
-      .gm-style-iw,.gm-style-iw-d{
-        overflow-x: hidden !important;
-        border-radius: 47px;
-        padding: 0 !important;
-        padding-right: 0 !important;
-        max-width: 300px !important;
-        button.gm-ui-hover-effect{
-          right:15px !important;
-          top:15px !important;
-          background: #000;
-        }
-      }
-      .info-window{
-        margin: 0;
-        padding: 40px;
-        border-radius: 47px;
-        width: 300px;
-        height: 340px  ;
-        .cafe-item__img{
-          width: 220px;
-          height: 180px;
-          margin-bottom: 10px;
-        }
-      }
-      .map-logo{
-        top:18px;
-        .logo{
-            font-size: 28px;
-        }
-      }
-    }
+    
   }
 }
