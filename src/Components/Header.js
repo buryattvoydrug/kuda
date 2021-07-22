@@ -11,7 +11,7 @@ import SocialLinks from './SocialLinks';
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
-function Header() {
+function Header({map}) {
   const [logo,setLogo]=useState(true)
 
 
@@ -36,6 +36,22 @@ function Header() {
     }
 
   }
+  
+  var oldScrollY = 0;
+  
+  window.addEventListener('scroll', function(){
+    var div = document.querySelector('header');
+    var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+    var dY = scrolled - oldScrollY;
+    
+    if ( dY > 0 ){
+      div.classList.add('header_hidden');
+    } else {
+      div.classList.remove('header_hidden');
+    }
+    
+    oldScrollY = scrolled;
+  });
   const [menu,setMenu]=useState(false)
   const toggleMenu=()=>{
     if(menu){document.getElementById('nav').classList.add('nav_hidden')}
@@ -100,15 +116,33 @@ function Header() {
           {!isMobile? <Nav/> : null}
         </div>
         <div className="sidebar-container">
-          {isMobile? 
-          <button onClick={toggleMenu} className={menu? "nav-button active__button" : "nav-button "}>
-            <span></span><span></span><span></span>
-          </button>
-           : <SocialLinks/>}
-          
-          <Link onClick={closeMenu}  to="/favs/" className="fave__button">
-            <img src="/images/fave.svg" alt="" />
-          </Link>
+        {map?
+          <div className="single-map-header">
+            <Link className="back__button" to="/map/">
+              <img src="/images/nazad.png" alt="" />
+            </Link>
+            <button className="to-list__button to-map__button">
+              <img src="/images/map.svg" alt="" />
+            </button>
+            {/* <ScrolLink spy={true}
+                  smooth={true}
+                  offset={-75}
+                  duration= {500}  className="to_random__button" to="random">
+                <img src="/images/shuffle.svg" alt=""/>
+            </ScrolLink> */}
+          </div>
+        :
+          <>
+            {isMobile? 
+            <button onClick={toggleMenu} className={menu? "nav-button active__button" : "nav-button "}>
+              <span></span><span></span><span></span>
+            </button>
+            : <SocialLinks/>}
+            
+            <Link onClick={closeMenu}  to="/favs/" className="fave__button">
+              <img src="/images/fave.svg" alt="" />
+            </Link>
+          </>}
         </div>
         <div className="row"></div>
         </div>
@@ -127,14 +161,14 @@ function Header() {
             {isMobile? <SocialLinks/>:null}
             </motion.div> : null}
       </header>
-      <ScrolLink spy={true}
+      {/* <ScrolLink spy={true}
             smooth={true}
             offset={-75}
             duration= {500} className="to-random" to="random">
         <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
         </div>
-      </ScrolLink>
+      </ScrolLink> */}
     </>
   )
 }

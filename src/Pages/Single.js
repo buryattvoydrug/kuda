@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Share from '../Components/Share';
 import SingleBottom from '../Components/Single/SingleBottom';
 import SingleHead from '../Components/Single/SingleHead';
@@ -69,7 +69,10 @@ function Single({map}) {
   // console.log(post)
   return (
     <>
-    {map? null:<Header/>}
+    {map? 
+    null
+
+    :<Header/>}
     <div className="wrapper">
     {post===undefined? <PageNotFound/>: 
       <section className="single-page page">

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Share from '../Components/Share';
 import CornerItem from '../Components/Single/CornerItem';
 import SingleBottom from '../Components/Single/SingleBottom';
@@ -62,7 +62,9 @@ function Foodcort({map}) {
   // console.log(foodcort)
   return (
     <>
-    {map? null:<Header/>}
+    {map?
+      null
+    :<Header/>}
     <div className="wrapper">
     {foodcort===undefined? <PageNotFound/>: 
 
@@ -96,14 +98,14 @@ function Foodcort({map}) {
             <Share/>
           </div>
         }
-        <ScrolLink spy={true}
+        {/* <ScrolLink spy={true}
             smooth={true}
             offset={-75}
             duration= {500} className="to-random" to="random">
         <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
         </div>
-      </ScrolLink>
+      </ScrolLink> */}
       </section>}
       {map?null:<Footer/>}
     </div>

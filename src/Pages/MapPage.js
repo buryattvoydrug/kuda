@@ -23,12 +23,15 @@ import Cart from '../Components/Cart'
 import { addPizzaToCart, removeCartItem } from '../redux/actions/cart'
 import { Dimensions } from 'react-native'
 import Header from '../Components/Header'
+import {Link as ScrolLink} from 'react-scroll';
+import MapHeader from '../Components/MapHeader'
 
 const windowWidth = Dimensions.get('window').width;
   const isMobile = (windowWidth<1280)
+  
 function MapPage() {
   const dispatch = useDispatch();
-
+  const location = useLocation();
   const posts=useSelector(({posts})=>posts.posts);
   const isLoadedPosts=useSelector(({posts})=>posts.isLoaded);
   const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
@@ -69,6 +72,7 @@ function MapPage() {
   coffee=posts.filter((item)=>(filtredItems[posts.indexOf(item)]>=0))
 
 
+  const [activeHeart,setActiveHeart]=useState(false)
 
 
   const isLoadedRoutes=useSelector(({random})=>random.isLoadedRoutes);
@@ -79,7 +83,9 @@ function MapPage() {
         dispatch(fetchFoodcorts());
         dispatch(fetchNews());
   },[dispatch]);
+
   const cart=localStorage.getItem('itemsCart')+''
+
   const cartItems=eval(cart)
 
   const buttons=[{name:"Еда",type:'post',data:posts},
@@ -93,7 +99,7 @@ function MapPage() {
   const [activeCart,setCart]=useState(false)
   const [singleItem,setSingleItem]=useState(0)
 
-
+  // console.log(singleItem)
   
 
   const toggleButton=(index)=>{
@@ -115,26 +121,122 @@ function MapPage() {
   }
 
   let itemsToShow=[]
-  if(isLoadedPosts){
+  // if(isLoadedPosts){
     itemsToShow=items.filter((item)=>(filtredItems[items.indexOf(item)]>=0))
+  // }
+  if(itemsToShow.length===0){
+    itemsToShow=posts.concat(foodcorts)
   }
 
-  const [activeFav,setActiveFav]=useState(false)
   const [g,setG]=useState(true)
 
   const [list,setList]=useState(false)
+
+
+  console.log(itemsToShow)
+  const [logo,setLogo]=useState(true)
+
+
+  window.addEventListener('scroll', progressBar);
+
+  
+
+  function progressBar(e){
+    let windowHeight = document.documentElement.scrollHeight-document.documentElement.clientHeight;
+    let windowScroll=document.body.scrollTop || document.documentElement.scrollTop;
+
+    let per = windowScroll/windowHeight*100;
+    const progress=document.querySelector('.row');
+    if(progress){
+      progress.style.width=per+'vw';
+    }
+
+
+  }
+  
+  if(list){
+    var oldScrollY = 0;
+  
+  window.addEventListener('scroll', function(){
+    var div = document.querySelector('.map-header');
+    var scrolled = window.pageYOffset || document.documentElement.scrollTop;
+    var dY = scrolled - oldScrollY;
+    
+    if ( dY > 0 ){
+      div.classList.add('header_hidden');
+    } else {
+      div.classList.remove('header_hidden');
+    }
+    oldScrollY = scrolled;
+  });
+  }
   return (
     <>
+      {list?
+        <header className="map-header">
+        <div className="wrapper">
+        <div className="container">
+        <h2 className="category__title">{buttons[active]? buttons[active].name :"Все"}</h2>
+        </div>
+        <div className="sidebar-container">
+        
+          <div className="single-map-header">
+            
+            {location.pathname==='/map/'?
+            <Link to="/" className="home__button">
+              <img src="/images/home.svg" alt=""/>
+            </Link>
+            :
+            <Link className="back__button" to="/map/">
+              <img src="/images/nazad.png" alt="" />
+            </Link>
+            }
+            
+              <button onClick={()=>setList(!list)} className="to-map__button">
+                <img src="/images/map.svg" alt="" />
+              </button>
+          </div>
+        </div>
+        <div className="row"></div>
+        </div>
+        
+      </header>
+      :null}
       <div className="map-container">
-        <Link to="/" className="home-button">
-          <img src="/images/home.svg" alt=""/>
-        </Link>
-        {isMobile? 
-        <button onClick={()=>setList(!list)} className={list? "to-list__button to-map__button":"to-list__button"}>
-          <img src={list? "/images/map.svg" :"/images/to-list.svg"} alt="" />
+        {isMobile && !list? 
+        <button onClick={()=>setList(!list)} className="to-list__button">
+          <img src="/images/to-list.svg" alt="" />
         </button> : null}
 
         <section className={list? "map-content": "map-content list-disabled"}>
+        {/* <header className="map-header">
+        <div className="wrapper">
+        <div className="container">
+        <h2 className="category__title">{buttons[active]? buttons[active].name :"Все"}</h2>
+        </div>
+        <div className="sidebar-container">
+        
+          <div className="single-map-header">
+            
+            {location.pathname==='/map/'?
+            <Link to="/" className="home__button">
+              <img src="/images/home.svg" alt=""/>
+            </Link>
+            :
+            <Link className="back__button" to="/map/">
+              <img src="/images/nazad.png" alt="" />
+            </Link>
+            }
+            
+              <button onClick={()=>setList(!list)} className="to-map__button">
+                <img src="/images/map.svg" alt="" />
+              </button>
+          </div>
+        </div>
+        <div className="row"></div>
+        </div>
+        
+      </header> */}
             <HashRouter>
               <Switch>
                 <Route exact path="/map/">
@@ -210,13 +312,13 @@ function MapPage() {
                     </div> */}
                     <div className="blog-page page">
           <div className="container">
-        { isLoadedPosts? (
+            
             
             <>
+            
             {active!==-1 && (buttons[active].name==="Еда")?
               <>
-                <div className="category-type">
-                  {/* <h2 className="category__title">Заведения</h2> */}
+               
                   {isMobile? null :
                   <div className="categories">
                   <>
@@ -225,7 +327,6 @@ function MapPage() {
                   ))}
                   </>
                   </div>}
-                </div>
                 {isMobile?
                   <div className="categories">
                   {categoriesNamesUnique.map((item,index)=>(
@@ -237,13 +338,46 @@ function MapPage() {
               :null}
             
             <div className="items-list" id="items-list">
-            {items.length? (itemsToShow.map((item,index)=>(
-              <CafeItem  map toDelete={cart.includes('"id":'+item.id)}
-                          wide={index%5===0} post={item}/>
+            {itemsToShow.length? (itemsToShow.map((post,index)=>(
+              <div className={index%5===0? "item cafe-item cafe-item-wide" : "item cafe-item"} onClick={()=>setSingleItem(post)}>
+                  <Link to={'/map/'+post.type+`/${post.id}`}>
+                    <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />
+                  </Link>
+                  <div className="item-info">
+                  <div className="prefs">
+                              <div className="price">
+                              { [...Array(Number(post.acf["cafe-item-prices"]))].map((item, index) =>                       
+                              <span className="active_price" key={index}><img src={post.type==='routes'? "/images/people.svg":"/images/rub.svg"} alt=""/></span>
+                              ) }
+                              { [...Array(5-Number(post.acf["cafe-item-prices"]))].map((item, index) =>                       
+                              <span key={index}><img src={post.type==='routes'? "/images/people.svg":"/images/rub.svg"} alt=""/></span>
+                              ) }
+                              </div>
+                              {post.acf["cafe-item-vegan"]? 
+                              <img src={post.type==='routes'? "/images/bike.svg":"/images/vegan.svg"} alt="" className="vegan-icon" />
+                              : null}
+                              
+                            </div>
+                    <Link to={'/map/'+post.type+`/${post.id}`}>
+                      <h3 className="item__title">{post.title.rendered}</h3>
+                    </Link>
+                    <div className="address">
+                      <img src="/images/pin.svg" alt="" className="pin" />
+                      <span className="address__text">{post.acf["cafe-item-address"]}</span>
+                    </div>
+
+                    
+                    {/* <button className="fave__button" onClick={cart.includes('"id":'+post.id)? removeCartItem(post): addPizzaToCart(post)}>
+                      {cart.includes('"id":'+post.id)? 
+                        <img onClick={()=>{setG(!g)}} src={g? "/images/fave_active.svg":"/images/fave.svg"} alt="" />
+                      : <img onClick={()=>setActiveHeart(!activeHeart)} src={activeHeart? "/images/fave_active.svg":"/images/fave.svg"} alt="" />}
+                    </button> */}
+                  </div>
+                </div>
+              
                     ))):''}
             </div>
             </>
-        ):""}
 
           </div>
           {isMobile? null:

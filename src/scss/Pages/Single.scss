@@ -4,7 +4,27 @@
     width: 100%;
   }
 }
-
+.single-map-header{
+  display: flex;
+  justify-content: space-between;
+  .back__button,
+  .home__button,.to_random__button{
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    img{
+      height: 100%;
+    }
+  }
+  .back__button{
+    padding: 6px;
+  }
+  .to_random__button{
+    img{
+      filter: invert(1);
+    }
+  }
+}
 @media(max-width:1279px){
   
 }

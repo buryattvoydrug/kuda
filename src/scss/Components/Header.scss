@@ -1,6 +1,24 @@
 @import '../Constants';
 
-
+.header_hidden {
+  transform: translateY(-100%);
+}
+.single-map-header{
+  padding: 10px 0;
+}
+.to-map__button{
+  margin-left: 10px;
+  height: 40px;
+  width: 40px;
+  border-radius: 100px;
+  img{
+    height: 100%;
+    padding-bottom: 10px;
+  }
+}
+.home__button{
+  margin-left: 10px;
+}
 header{
   transition: all .7s;
   .logo{
