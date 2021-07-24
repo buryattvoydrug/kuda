@@ -43,7 +43,7 @@ function Header({map}) {
     var div = document.querySelector('header');
     var scrolled = window.pageYOffset || document.documentElement.scrollTop;
     var dY = scrolled - oldScrollY;
-    
+    console.log(div.classList)
     if ( dY > 0 ){
       div.classList.add('header_hidden');
     } else {
@@ -67,6 +67,7 @@ function Header({map}) {
     }
   }
   const closeMenu = () => {
+    console.log(document.getElementById('nav'))
     if(menu){document.getElementById('nav').classList.add('nav_hidden')}
     setTimeout(function() {
         if(menu) document.getElementById('nav').classList.remove('nav_hidden')

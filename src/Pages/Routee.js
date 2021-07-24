@@ -14,6 +14,8 @@ import renderHTML from "react-render-html";
 
 import '../scss/Pages/Routes.scss'
 import SingleHead from '../Components/Single/SingleHead';
+import Header from '../Components/Header';
+import Footer from '../Components/Footer';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -99,6 +101,12 @@ function Routee({map}) {
   };
   return (
     <>
+    {map? 
+    null
+
+    :<Header/>}
+    <div className="wrapper">
+      
     {route===undefined? <PageNotFound/>: 
 
       <section className="main-page route-page page">
@@ -156,6 +164,8 @@ function Routee({map}) {
         </div>
       </ScrolLink>
       </section>}
+      {map?null:<Footer/>}
+    </div>
     </>
   )
 }

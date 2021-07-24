@@ -36,7 +36,6 @@ function Single({map}) {
   const postNumber=postLocation[postLocation.length-1]
   const post=items.find((item)=>(item.id==postNumber))
 
-
   // console.log(post)
   React.useEffect(()=>{
     if(!isLoaded){

@@ -83,6 +83,7 @@ function MapPage() {
         dispatch(fetchFoodcorts());
         dispatch(fetchNews());
   },[dispatch]);
+  
 
   const cart=localStorage.getItem('itemsCart')+''
 
@@ -139,7 +140,7 @@ function MapPage() {
 
   window.addEventListener('scroll', progressBar);
 
-  
+ 
 
   function progressBar(e){
     let windowHeight = document.documentElement.scrollHeight-document.documentElement.clientHeight;
@@ -161,7 +162,6 @@ function MapPage() {
     var div = document.querySelector('.map-header');
     var scrolled = window.pageYOffset || document.documentElement.scrollTop;
     var dY = scrolled - oldScrollY;
-    
     if ( dY > 0 ){
       div.classList.add('header_hidden');
     } else {
@@ -170,6 +170,13 @@ function MapPage() {
     oldScrollY = scrolled;
   });
   }
+  React.useEffect(()=>{
+    if(location.pathname.split('/').length>=4 && isMobile){
+      setList(true)
+    }
+  },[location.pathname])
+ 
+  console.log(list)
   return (
     <>
       {list?
@@ -191,10 +198,16 @@ function MapPage() {
               <img src="/images/nazad.png" alt="" />
             </Link>
             }
-            
-              <button onClick={()=>setList(!list)} className="to-map__button">
+            {location.pathname.split('/').length>=4 && isMobile?
+            <Link onClick={()=>setList(!list)} className="back__button" to="/map/">
+              <img src="/images/map.svg" alt="" />
+            </Link>
+            :
+            <button onClick={()=>setList(!list)} className="to-map__button">
                 <img src="/images/map.svg" alt="" />
               </button>
+            }
+              
           </div>
         </div>
         <div className="row"></div>
@@ -206,7 +219,11 @@ function MapPage() {
         {isMobile && !list? 
         <button onClick={()=>setList(!list)} className="to-list__button">
           <img src="/images/to-list.svg" alt="" />
+          {location.pathname.split('/').length>=4?
+          <span>Перейти к описанию заведения</span>
+          :null}
         </button> : null}
+
 
         <section className={list? "map-content": "map-content list-disabled"}>
         {/* <header className="map-header">
