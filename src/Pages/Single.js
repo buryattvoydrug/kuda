@@ -24,8 +24,12 @@ import Footer from '../Components/Footer';
 function Single({map}) {
   const windowWidth = Dimensions.get('window').width;
   const isMobile = (windowWidth<1280) || map
-
   window.scrollTo(0, 0)
+  if(map){
+    document.querySelector('.map-content').scrollTo(0,0)
+  }
+
+
   const dispatch = useDispatch();
   const items=useSelector(({posts})=>posts.posts);
   const isLoaded=useSelector(({posts})=>posts.isLoaded);

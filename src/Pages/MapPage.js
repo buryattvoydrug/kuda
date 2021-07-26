@@ -27,7 +27,7 @@ import {Link as ScrolLink} from 'react-scroll';
 import MapHeader from '../Components/MapHeader'
 
 const windowWidth = Dimensions.get('window').width;
-  const isMobile = (windowWidth<1280)
+const isMobile = (windowWidth<1280)
   
 function MapPage() {
   const dispatch = useDispatch();
@@ -96,9 +96,9 @@ function MapPage() {
                  {name:"Избранное",type:'post',data:cartItems}]
   const [active,setActive]=useState(-1)
   const [items,setItems]=useState([])
-
+  
   const [activeCart,setCart]=useState(false)
-  const [singleItem,setSingleItem]=useState(0)
+  const [singleItem,setSingleItem]=useState(null)
 
   // console.log(singleItem)
   
@@ -107,6 +107,7 @@ function MapPage() {
     setActive(index)
     setItems(buttons[index].data)
     setCart(false)
+    setSingleItem(null)
     if(index===3){
       setCategory("Кофе")
     } else {
@@ -124,17 +125,23 @@ function MapPage() {
   let itemsToShow=[]
   // if(isLoadedPosts){
     itemsToShow=items.filter((item)=>(filtredItems[items.indexOf(item)]>=0))
+    // setItemsToShow(i)
   // }
+  // let j=posts.concat(foodcorts)
   if(itemsToShow.length===0){
     itemsToShow=posts.concat(foodcorts)
   }
-
+  if(singleItem){
+    itemsToShow=[]
+    itemsToShow.push(singleItem)
+  }
+  
+ console.log(itemsToShow,singleItem)
   const [g,setG]=useState(true)
 
   const [list,setList]=useState(false)
 
 
-  console.log(itemsToShow)
   const [logo,setLogo]=useState(true)
 
 
@@ -173,10 +180,24 @@ function MapPage() {
   React.useEffect(()=>{
     if(location.pathname.split('/').length>=4 && isMobile){
       setList(true)
+      
+    }
+    else{
+      if(isMobile){
+        setSingleItem(null)
+      }
+    }
+    if(location.pathname.split('/')[1]=='map' && location.pathname.split('/').length<4){
+      
+      setSingleItem(null)
     }
   },[location.pathname])
- 
-  console.log(list)
+  // const locType=location.pathname.split('/')[2]
+  // const locId=location.pathname.split('/')[3]
+  // if(location.pathname.split('/').length>=4 && isMobile){
+  //   console.log(items,locType,locId)
+  //   itemsToShow=items.filter((item)=>(item.type==locType && locId==item.id))
+  // }
   return (
     <>
       {list?
@@ -198,7 +219,7 @@ function MapPage() {
               <img src="/images/nazad.png" alt="" />
             </Link>
             }
-            {location.pathname.split('/').length>=4 && isMobile?
+            {location.pathname.split('/').length>=4 && isMobile && !singleItem?
             <Link onClick={()=>setList(!list)} className="back__button" to="/map/">
               <img src="/images/map.svg" alt="" />
             </Link>
@@ -420,7 +441,7 @@ function MapPage() {
           <div className="map-logo">
             <Link to="/" className="logo">куда <strong>пойдём</strong>?</Link>
           </div>
-          <BigMap posts={itemsToShow} singleItem={singleItem} center={"55.73888474603424,37.624613416794176"} left={"55.72686420065968, 37.59815874589736"}
+          <BigMap posts={itemsToShow} center={"55.73888474603424,37.624613416794176"} left={"55.72686420065968, 37.59815874589736"}
                 right={"55.74984851730395, 37.652010279938324"} overlay={"/images/overlay.svg" }
               />
         </section> }

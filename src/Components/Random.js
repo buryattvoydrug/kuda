@@ -115,7 +115,7 @@ function Random({single,main,map}) {
               </button>
               {/* )} */}
         </div>
-        <Link to={active!==-1? '/'+`${map? 'map/':''}`+buttons[active].type +'/'+randomItem(buttons[active].data) : "/"} className="button random__generate" onClick={(posts)=>randomItem(posts)}>Сгенерировать</Link>
+        <Link to={active!==-1? '/'+`${map && buttons[active].type!=="routes"? 'map/':''}`+buttons[active].type +'/'+randomItem(buttons[active].data) : "/"} className="button random__generate" onClick={(posts)=>randomItem(posts)}>Сгенерировать</Link>
       </div>
       {/* {single?
       null:

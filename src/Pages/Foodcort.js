@@ -22,7 +22,9 @@ function Foodcort({map}) {
   const isMobile = (windowWidth<1280) || map
 
   window.scrollTo(0, 0)
-
+  if(map){
+    document.querySelector('.map-content').scrollTo(0,0)
+  }
   const dispatch = useDispatch();
   const foodcorts=useSelector(({foodcorts})=>foodcorts.foodcorts);
   const isLoaded=useSelector(({foodcorts})=>foodcorts.isLoaded);

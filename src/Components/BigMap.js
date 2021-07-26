@@ -7,24 +7,19 @@ import {
   InfoWindow,
   GroundOverlay
 } from "react-google-maps";
+import { Dimensions } from "react-native";
 import { Link, useLocation } from 'react-router-dom'
-
-function Map({center,left,right,overlay,posts,singleItem}) {
+const windowWidth = Dimensions.get('window').width;
+  const isMobile = (windowWidth<1280)
+function Map({center,left,right,overlay,posts}) {
   let google=window.google
   const location = useLocation();
   const coordinates={lat:Number(center.split(',')[0]),lng:Number(center.split(',')[1])}
 
+  const mapRef = useRef(null);
 
-    let postsToShow=[]
-    if(singleItem===0 || location.pathname=="/map/"){
-        postsToShow=posts
-    }
-    else{
-        postsToShow.push(singleItem)
-    }
-  
-    console.log(postsToShow)
-    const mapRef = useRef(null);
+    const postsToShow=posts
+    
 
       const fitBounds = () => {
         const bounds = new window.google.maps.LatLngBounds();
@@ -39,7 +34,17 @@ function Map({center,left,right,overlay,posts,singleItem}) {
       useEffect(() => {
                 fitBounds();
       }, [postsToShow]);
-  const [selected, setSelected] = React.useState(null);
+    const [selected, setSelected] = React.useState(null);
+    // if(location.pathname=="/map/"){
+    // }
+    // React.useEffect(()=>{
+    //     if(selected){
+    //         postsToShow.push(selected)
+    //         singleItem=selected
+    //         console.log('sdflksd;fj')
+    //     }
+    // })
+    console.log('postsToShow',postsToShow,'posts',posts)
   return (
     <>
     <GoogleMap  defaultCenter={coordinates}  ref={mapRef}
@@ -121,7 +126,7 @@ function Map({center,left,right,overlay,posts,singleItem}) {
 
 const MapWrapped = withScriptjs(withGoogleMap(Map));
 
-export default function BigMap({center,left,right,posts,singleItem}) {
+export default function BigMap({center,left,right,posts}) {
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <MapWrapped
@@ -129,7 +134,6 @@ export default function BigMap({center,left,right,posts,singleItem}) {
         right={right}
         center={center}
         posts={posts}
-        singleItem={singleItem}
         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=&key=AIzaSyDJtwCzTFMW8OY6bzLERX3UJdVDeujnP-k`}
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<div style={{ height: `100%` }} />}

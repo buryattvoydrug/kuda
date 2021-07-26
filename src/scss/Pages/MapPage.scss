@@ -30,6 +30,9 @@
 .map-container{
   width: 100vw;
   display: flex;
+  .single-page{
+    
+  }
   .map{
     .gm-style .gm-style-iw-t::after{
       background: none;
@@ -71,7 +74,9 @@
     padding-top: 0;
   }
   .map-content{
-    
+    .categories{
+      padding: 5px 0;
+    }
     padding: 20px;
     // max-width: 400px;
     height: 100%;
@@ -164,7 +169,18 @@
       flex-direction: column;
       left:400px;
       font-size: 22px;
+      transition: all .7s;
+      .categorie__name{
+        cursor: pointer;
+        transition: all .7s;
+      }
+      .categorie__name:hover{
+        transform: scale(1.2)  translateX(12px);
+      }
       // flex-wrap: wrap;
+    }
+    .categories:hover{
+      transform: scale(1.2) translateX(20px);
     }
   }
 }
@@ -177,6 +193,9 @@
   }
   .map-container{
     .map-content{
+      .categories{
+
+      }
       .random-block{
         box-shadow: 0px 15.9064px 34.7585px rgba(0, 0, 0, 0.36);
        background: rgba(255, 255, 255, 0.15);
