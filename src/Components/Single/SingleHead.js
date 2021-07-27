@@ -103,7 +103,7 @@ function SingleHead({corners,post,date,route,map}) {
                 {/* <a href={post.acf["cafe-item-map__link"]} className="map__button">
                   <img src="/images/tomap.png" alt="" />
                 </a> */}
-                
+
               </div>}
             </div>
           </section>

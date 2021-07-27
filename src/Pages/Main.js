@@ -47,7 +47,7 @@ function Main() {
         dispatch(fetchNews());
       } 
     },[dispatch]);
-  console.log(posts,foodcorts,news) 
+  // console.log(posts,foodcorts,news) 
   const cart=localStorage.getItem('itemsCart')+''
   return (
     <>

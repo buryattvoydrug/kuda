@@ -15,6 +15,7 @@ import '../scss/Pages/Single.scss'
 import PageNotFound from './PageNotFound';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import ToMapSingle from '../Components/ToMapSingle';
 
 
 
@@ -25,10 +26,14 @@ function Single({map}) {
   const windowWidth = Dimensions.get('window').width;
   const isMobile = (windowWidth<1280) || map
   window.scrollTo(0, 0)
-  if(map){
-    document.querySelector('.map-content').scrollTo(0,0)
+  window.onload=function(){
+    if(map){
+      document.querySelector('.map-content').scrollTo(0,0)
+    }
   }
-
+  function scrollToBottom(){
+    document.querySelector('.map-content').scrollTo(0,100000)
+  }
 
   const dispatch = useDispatch();
   const items=useSelector(({posts})=>posts.posts);
@@ -87,7 +92,7 @@ function Single({map}) {
               exit="out"
               variants={pageVariants}
               transition={pageTransition}>
-          <SingleHead map={map} date={post.date.split('-')} post={post}/>
+          <SingleHead location={location} map={map} date={post.date.split('-')} post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
           <SlimBlock map post={post}/>
           <SingleBottom map={map} author={post.acf["post-author"].data.display_name} post={post}/>
@@ -104,6 +109,7 @@ function Single({map}) {
         {isMobile? null:
           <div className="sidebar-container">
             <div className="right-banner"></div>
+            <ToMapSingle location={location}/>
             <Share/>
           </div>
         }
@@ -111,14 +117,20 @@ function Single({map}) {
             smooth={true}
             offset={-75}
             duration= {500} className="to-random" to="random">
-        {map? '':
+        {map?
+          <div onClick={()=>(scrollToBottom())} className="to-random__button">
+            <img src="/images/shuffle.svg" alt="" />
+          </div>:
         <div className="to-random__button">
           <img src="/images/shuffle.svg" alt="" />
         </div>}
       </ScrolLink>
+      
       </section>
     }
-    {map?null:<Footer/>}
+    {map?
+      <>{windowWidth<1280? <Footer/>:null}</>
+    :<Footer/>}
     </div>
     
     </>

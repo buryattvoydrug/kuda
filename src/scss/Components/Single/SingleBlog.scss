@@ -1,8 +1,12 @@
 @import '../../Constants';
 .single-blog{
   .news__item{
+    border-radius: 0;
     padding-left: 85px;
     margin: 0;
+    .news__img{
+      border-radius: 0;
+    }
     .news-top{
       position: absolute;
       top:20px;

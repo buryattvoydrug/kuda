@@ -95,7 +95,7 @@ function Random({single,main,map}) {
         <h3 className="random__title">Рандомайзер</h3>
         <span>Если не можете определиться</span>
         </>}
-        <div className="random-block">
+        <div className="random-block rrr">
           {/* {buttons.map((item,index)=> */}
               <button id="food" onClick={()=>toggleButton(0)} className={active===0? " random__button active_button" : " random__button"}>
                 <span>Еда</span>

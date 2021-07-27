@@ -13,6 +13,7 @@ import PageNotFound from './PageNotFound';
 import {Link as ScrolLink} from 'react-scroll';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
+import ToMapSingle from '../Components/ToMapSingle';
 
 
 
@@ -93,6 +94,7 @@ function SingleBlog() {
   {isMobile? null:
     <div className="sidebar-container">
       <div className="right-banner"></div>
+      <ToMapSingle blog/>
       <Share/>
     </div>
   }

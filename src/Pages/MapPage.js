@@ -136,7 +136,7 @@ function MapPage() {
     itemsToShow.push(singleItem)
   }
   
- console.log(itemsToShow,singleItem)
+//  console.log(itemsToShow,singleItem)
   const [g,setG]=useState(true)
 
   const [list,setList]=useState(false)
@@ -144,7 +144,7 @@ function MapPage() {
 
   const [logo,setLogo]=useState(true)
 
-
+ 
   window.addEventListener('scroll', progressBar);
 
  
@@ -162,7 +162,7 @@ function MapPage() {
 
   }
   
-  if(list){
+  if(list && document.querySelector('.map-header')){
     var oldScrollY = 0;
   
   window.addEventListener('scroll', function(){
@@ -171,7 +171,7 @@ function MapPage() {
     var dY = scrolled - oldScrollY;
     if ( dY > 0 ){
       div.classList.add('header_hidden');
-    } else {
+    } else if(document.querySelector('.map-header')){
       div.classList.remove('header_hidden');
     }
     oldScrollY = scrolled;
@@ -238,7 +238,7 @@ function MapPage() {
       :null}
       <div className="map-container">
         {isMobile && !list? 
-        <button onClick={()=>setList(!list)} className="to-list__button">
+        <button onClick={()=>setList(!list)} className={location.pathname.split("/").length>=4? "to-list__button single_to-list__button":"to-list__button"}>
           <img src="/images/to-list.svg" alt="" />
           {location.pathname.split('/').length>=4?
           <span>Перейти к описанию заведения</span>
@@ -441,6 +441,16 @@ function MapPage() {
           <div className="map-logo">
             <Link to="/" className="logo">куда <strong>пойдём</strong>?</Link>
           </div>
+          {isMobile?null:
+            <div className="map-buttons">
+              <Link className="back__button" to="/map/">
+                <img src="/images/nazad.png" alt="" />
+              </Link>
+              <Link to="/" className="home__button">
+                <img src="/images/home.svg" alt=""/>
+              </Link>
+            </div>
+          }
           <BigMap posts={itemsToShow} center={"55.73888474603424,37.624613416794176"} left={"55.72686420065968, 37.59815874589736"}
                 right={"55.74984851730395, 37.652010279938324"} overlay={"/images/overlay.svg" }
               />

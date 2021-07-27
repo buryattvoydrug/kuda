@@ -1,4 +1,5 @@
 @import '../Constants';
+
 .share{
   position: sticky;
   top:75px;
@@ -17,6 +18,11 @@
     }
   }
   letter-spacing: -0.065em;
+}
+.single-page{
+  .share{
+  top:340px;
+  }
 }
 .wide_share{
   margin: 45px 0 0 0;

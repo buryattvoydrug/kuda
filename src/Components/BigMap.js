@@ -18,8 +18,11 @@ function Map({center,left,right,overlay,posts}) {
 
   const mapRef = useRef(null);
 
-    const postsToShow=posts
-    
+    let postsToShow=posts
+    const loc=location.pathname.split('/')
+    if(loc.length>=4){
+        postsToShow=posts.filter((item)=>(item.id==loc[3] && item.type==loc[2]))
+    }
 
       const fitBounds = () => {
         const bounds = new window.google.maps.LatLngBounds();
@@ -44,7 +47,7 @@ function Map({center,left,right,overlay,posts}) {
     //         console.log('sdflksd;fj')
     //     }
     // })
-    console.log('postsToShow',postsToShow,'posts',posts)
+    
   return (
     <>
     <GoogleMap  defaultCenter={coordinates}  ref={mapRef}

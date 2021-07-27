@@ -39,7 +39,7 @@ function Header({map}) {
   
   var oldScrollY = 0;
   
-  window.addEventListener('scroll', function(){
+  if(document.querySelector('header')){window.addEventListener('scroll', function(){
     var div = document.querySelector('header');
     var scrolled = window.pageYOffset || document.documentElement.scrollTop;
     var dY = scrolled - oldScrollY;
@@ -51,7 +51,7 @@ function Header({map}) {
     }
     
     oldScrollY = scrolled;
-  });
+  });}
   const [menu,setMenu]=useState(false)
   const toggleMenu=()=>{
     if(menu){document.getElementById('nav').classList.add('nav_hidden')}
@@ -70,7 +70,7 @@ function Header({map}) {
     console.log(document.getElementById('nav'))
     if(menu){document.getElementById('nav').classList.add('nav_hidden')}
     setTimeout(function() {
-        if(menu) document.getElementById('nav').classList.remove('nav_hidden')
+        if(menu && document.getElementById('nav')) document.getElementById('nav').classList.remove('nav_hidden')
         setMenu(!menu);
    },600);
     document.body.style.overflowY = "scroll";
@@ -155,6 +155,7 @@ function Header({map}) {
               transition={pageTransition} className="nav">
             <ul className="navbar">
               <li onClick={closeMenu}><Link to="/" className="navbar__item">главная</Link></li>
+              <li onClick={closeMenu}><Link to="/map/" className="navbar__item">карта</Link></li>
               <li onClick={closeMenu}><Link to="/blog/" className="navbar__item">блог</Link></li>
               <li onClick={closeMenu}><Link to="/foodcorts/" className="navbar__item">фудкорты</Link></li>
               <li onClick={closeMenu}><Link to="/posts/" className="navbar__item">заведения</Link></li>

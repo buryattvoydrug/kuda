@@ -8,6 +8,7 @@ function Nav() {
     <>
       <div className="nav">
       <ul className="navbar">
+        <li><Link to="/map/" className="navbar__item">карта</Link></li>
         <li><Link to="/blog/" className="navbar__item">блог</Link></li>
         <li><Link to="/foodcorts/" className="navbar__item">фудкорты</Link></li>
         <li><Link to="/posts/" className="navbar__item">заведения</Link></li>

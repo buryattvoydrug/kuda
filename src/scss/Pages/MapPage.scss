@@ -83,7 +83,7 @@
     padding-top: 70px;
     overflow-y: scroll;
     
-    .random-block{
+    .random-block:not(.rrr){
       .random-buttons-list{
         display: flex;
         flex-wrap: wrap;
@@ -132,6 +132,24 @@
 @media(min-width:1280px){
 .map-container{
   height: 100vh;
+  .map-buttons{
+    position: absolute;
+    top:10px;
+    right:10px;
+    z-index: 1000000;
+    .back__button,
+    .home__button{
+      width: 30px;
+      height: 30px;
+      padding: 5px;
+      img{
+        height: 30px;
+      }
+    }
+    .back__button{
+      padding: 6px;
+    }
+  }
   .map-content{
     padding-top: 0;
     width: 375px;
@@ -196,7 +214,7 @@
       .categories{
 
       }
-      .random-block{
+      .random-block:not(.rrr){
         box-shadow: 0px 15.9064px 34.7585px rgba(0, 0, 0, 0.36);
        background: rgba(255, 255, 255, 0.15);
        backdrop-filter: blur(5px);
