@@ -26,11 +26,15 @@ function Single({map}) {
   const windowWidth = Dimensions.get('window').width;
   const isMobile = (windowWidth<1280) || map
   window.scrollTo(0, 0)
-  window.onload=function(){
-    if(map){
-      document.querySelector('.map-content').scrollTo(0,0)
-    }
+  if(document.querySelector('.map-content') && map){
+    document.querySelector('.map-content').scrollTo(0,0)
   }
+  // window.onload=function(){
+  //   if(map){
+  //     console.log('reload')
+  //     document.querySelector('.map-content').scrollTo(0,0)
+  //   }
+  // }
   function scrollToBottom(){
     document.querySelector('.map-content').scrollTo(0,100000)
   }

@@ -10,8 +10,10 @@ import { motion } from 'framer-motion';
 import '../scss/Pages/BlogList.scss'
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import '../scss/Transitions.scss'
 
 
+import { CSSTransition } from 'react-transition-group';
 
 
 function PostsPage({map}) {
@@ -24,39 +26,22 @@ function PostsPage({map}) {
   const items=useSelector(({posts})=>posts.posts);
   const visiblePosts=useSelector(({posts})=>posts.visiblePosts);
   const isLoaded=useSelector(({posts})=>posts.isLoaded);
+  const [showPosts,setShowPost]=useState(false)
 
+  
   
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
     }
-  },[isLoaded,dispatch]);
-
-
-  
-  
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 0.5
-  };
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      x: "-100vw",
-      scale: 0.8
-    },
-    in: {
-      opacity: 1,
-      x: 0,
-      scale: 1
-    },
-    out: {
-      opacity: 0,
-      x: "100vw",
-      scale: 1.2
+  },[dispatch]);
+  React.useEffect(()=>{
+    if(isLoaded){
+      setShowPost(true)
     }
-  };
+    console.log(isLoaded,showPosts)
+  })
+  
 
   let categories=[]
   let categoriesNames=[]
@@ -97,15 +82,15 @@ function PostsPage({map}) {
       <div className="wrapper">
       <div className="blog-page page">
         <div className="container">
-      { isLoaded? (
-          
-          <>
-          <motion.div initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}>
-          <div className="category-type">
+      
+          <CSSTransition
+                in={showPosts}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+          <div>
+            <div className="category-type">
             <h2 className="category__title">Заведения</h2>
             {isMobile? null :
             <div className="categories">
@@ -121,21 +106,33 @@ function PostsPage({map}) {
             ))}
             </div>
           :null}
+
           
+          <CSSTransition
+                in={showPosts}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+          <div>
           <div className="items-list">
-          {items.length? (itemsToShow.slice(0, visiblePosts).map((item,index)=>(
+          {(itemsToShow.slice(0, visiblePosts).map((item,index)=>(
+
             <CafeItem  map={map} toDelete={cart.includes('"id":'+item.id)}
                          wide={isMobile? index%3===0: (index%9)%4===0} post={item}/>
-                  ))):''}
+                  )))}
+                  
           </div>
+          </div>
+          </CSSTransition>
           {itemsToShow.length > visiblePosts &&
              <button className="button load-more" onClick={()=>(dispatch(setVisiblePosts()))} type="button">Загрузить ещё</button>
           }
+          </div>
           
-          </motion.div>
+          </CSSTransition>
           {isMobile? <Random/> : null}
-          </>
-      ):""}
+          
 
         </div>
         {isMobile? null:

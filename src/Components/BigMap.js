@@ -47,7 +47,7 @@ function Map({center,left,right,overlay,posts}) {
     //         console.log('sdflksd;fj')
     //     }
     // })
-    
+    console.log(postsToShow)
   return (
     <>
     <GoogleMap  defaultCenter={coordinates}  ref={mapRef}
