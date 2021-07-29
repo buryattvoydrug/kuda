@@ -10,13 +10,16 @@ import { motion } from 'framer-motion';
 import '../scss/Pages/BlogList.scss'
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+
 import '../scss/Transitions.scss'
-
-
 import { CSSTransition } from 'react-transition-group';
 
-
+  
 function PostsPage({map}) {
+
+  const [categoryIsChanged,setCategoryIsChanged]=useState(true)
+
+
   const windowWidth = Dimensions.get('window').width;
   const isMobile = (windowWidth<1280) || map
 
@@ -29,12 +32,13 @@ function PostsPage({map}) {
   const [showPosts,setShowPost]=useState(false)
 
   
-  
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
     }
   },[dispatch]);
+
+
   React.useEffect(()=>{
     if(isLoaded){
       setShowPost(true)
@@ -66,6 +70,8 @@ function PostsPage({map}) {
   const [active,setActive]=useState("Все")
   function setCategory(cat){
     setActive(cat)
+    setCategoryIsChanged(false)
+    setTimeout(()=>{setCategoryIsChanged(true)},100)
   }
   const filtredItems=arrayCat.map((item,index)=>(
     item.findIndex(i=>i===active)
@@ -75,6 +81,8 @@ function PostsPage({map}) {
     itemsToShow=items.filter((item)=>(filtredItems[items.indexOf(item)]>=0))
   }
   const cart=localStorage.getItem('itemsCart')+''
+
+
   console.log(itemsToShow)
   return (
     <>
@@ -85,6 +93,7 @@ function PostsPage({map}) {
       
           <CSSTransition
                 in={showPosts}
+                out={showPosts}
                 timeout={1000}
                 classNames="newstransition"
                 unmountOnExit
@@ -109,7 +118,7 @@ function PostsPage({map}) {
 
           
           <CSSTransition
-                in={showPosts}
+                in={categoryIsChanged}
                 timeout={1000}
                 classNames="newstransition"
                 unmountOnExit

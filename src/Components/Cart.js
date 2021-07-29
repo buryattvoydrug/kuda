@@ -8,7 +8,7 @@ const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
 
 class Cart extends Component {
-
+  
   render() {
     const { itemsCart } = this.props;
     // console.log(itemsCart)
