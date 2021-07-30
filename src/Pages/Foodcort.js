@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
@@ -16,6 +16,7 @@ import PageNotFound from './PageNotFound';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ToMapSingle from '../Components/ToMapSingle';
+import { CSSTransition } from 'react-transition-group';
 
 
 function Foodcort({map}) {
@@ -36,29 +37,17 @@ function Foodcort({map}) {
     if(!isLoaded){
       dispatch(fetchFoodcorts());
     }
-  },[isLoaded,dispatch]);
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 0.5
-  };
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      x: "-100vw",
-      scale: 0.8
-    },
-    in: {
-      opacity: 1,
-      x: 0,
-      scale: 1
-    },
-    out: {
-      opacity: 0,
-      x: "100vw",
-      scale: 1.2
+    if(isLoaded){
+      setShowPost(true)
+      setTimeout(()=>{
+        setShowSidebar(true)
+      },100)
     }
-  };
+  },[isLoaded,dispatch]);
+  const [showPosts,setShowPost]=useState(false)
+  const [showSidebar,setShowSidebar]=useState(false)
+
+
 
   const location = useLocation();
   const foodcortLocation=location.pathname.split('/')
@@ -76,12 +65,13 @@ function Foodcort({map}) {
 
       <section className="single-page page">
         <div className="container">
-      { foodcort ? (
-          <motion.div initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}>
+        <CSSTransition
+                in={showPosts}
+                timeout={3000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+          <div>
           <SingleHead date={foodcort.date.split('-')} post={foodcort} corners map={map}/>
           <section className="corners-page">
             <h2 className="corners__title">Корнеры</h2>
@@ -90,13 +80,19 @@ function Foodcort({map}) {
             </div>
           </section>
           <SingleBottom map={map} author={foodcort.acf["post-author"].data.display_name} post={foodcort} />
-          </motion.div>
-      ):""}
-      {isMobile? 
-          <>
-            <Share/>
-          </>
-          :''}
+          </div></CSSTransition>
+          {isMobile? 
+                  <CSSTransition
+                in={showSidebar}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+                <div>
+                  <Share/>
+                </div>
+              </CSSTransition>
+                 : null}
         </div>
         {isMobile? null:
           <div className="sidebar-container">

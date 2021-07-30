@@ -30,6 +30,7 @@ function PostsPage({map}) {
   const visiblePosts=useSelector(({posts})=>posts.visiblePosts);
   const isLoaded=useSelector(({posts})=>posts.isLoaded);
   const [showPosts,setShowPost]=useState(false)
+  const [showSidebar,setShowSidebar]=useState(false)
 
   
   React.useEffect(()=>{
@@ -42,6 +43,10 @@ function PostsPage({map}) {
   React.useEffect(()=>{
     if(isLoaded){
       setShowPost(true)
+      setTimeout(()=>{
+        setShowSidebar(true)
+        console.log('sidebar!')
+      },100)
     }
     console.log(isLoaded,showPosts)
   })
@@ -94,7 +99,7 @@ function PostsPage({map}) {
           <CSSTransition
                 in={showPosts}
                 out={showPosts}
-                timeout={1000}
+                timeout={100}
                 classNames="newstransition"
                 unmountOnExit
               >
@@ -140,16 +145,29 @@ function PostsPage({map}) {
           </div>
           
           </CSSTransition>
-          {isMobile? <Random/> : null}
+          {isMobile? 
+            <><CSSTransition
+                in={showSidebar}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+                <div>
+                  <Random/>
+                </div>
+              </CSSTransition></>
+           : null}
           
 
         </div>
         {isMobile? null:
           <div className="sidebar-container">
-              <div div className="right-banner"></div>
-              <Random/>
-              <Share/>
-          </div>
+              
+                  <div div className="right-banner"></div>
+                  <Random/>
+                  <Share/>
+                </div>
+              
         }
       </div>
       {map?null:<Footer/>}

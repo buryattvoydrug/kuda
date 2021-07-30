@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -16,6 +16,7 @@ import '../scss/Pages/Routes.scss'
 import SingleHead from '../Components/Single/SingleHead';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import { CSSTransition } from 'react-transition-group';
 
 
 const windowWidth = Dimensions.get('window').width;
@@ -72,33 +73,23 @@ function Routee({map}) {
   const postNumber=postLocation[postLocation.length-1]
   const route=routes.find((item)=>(item.id==postNumber))
 
+  const [showPosts,setShowPost]=useState(false)
+  const [showSidebar,setShowSidebar]=useState(false)
+
   React.useEffect(()=>{
     if(!isLoadedRoutes){
       dispatch(fetchRandom());
     }
-  },[isLoadedRoutes,dispatch]);
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 0.5
-  };
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      x: "-100vw",
-      scale: 0.8
-    },
-    in: {
-      opacity: 1,
-      x: 0,
-      scale: 1
-    },
-    out: {
-      opacity: 0,
-      x: "100vw",
-      scale: 1.2
-    }
-  };
+  },[dispatch]);
+
+  React.useEffect(()=>{
+      setShowPost(true)
+      setTimeout(()=>{
+        setShowSidebar(true)
+      },100)
+    // }
+  })
+
   return (
     <>
     {map? 
@@ -113,13 +104,13 @@ function Routee({map}) {
         <div className="container">
         
 
-      { isLoadedRoutes ? (
-
-          <motion.div  initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}>
+        <CSSTransition
+                in={showPosts}
+                timeout={3000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+          <div >
           {map? null : 
           <div className="map" id="map">
             <Maps center={route.acf.map.center} left={route.acf.map.left}
@@ -136,14 +127,23 @@ function Routee({map}) {
          
           <Nearby data={route.acf["places-nearby"]}/>
 
-          </motion.div>
-          
-      ):""}
+          </div>
+          </CSSTransition>
       {(isMobile)? 
           <>
             <div className="routes-bottom">
-            <Random  map={map} single/>
-            <Share/>
+            <CSSTransition
+                in={showSidebar}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+                <div>
+                  <Random  map={map} single/>
+                  <Share/>
+                </div>
+              </CSSTransition>
+           
             </div>
           </>
           :''}

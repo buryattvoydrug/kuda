@@ -6,6 +6,7 @@ import Menu from './Menu'
 import renderHTML from "react-render-html";
 import { addPizzaToCart, removeCartItem } from '../../redux/actions/cart';
 import { Dimensions } from 'react-native';
+import { CSSTransition } from 'react-transition-group';
 
 function SingleHead({corners,post,date,route,map}) {
   const windowWidth = Dimensions.get('window').width;
@@ -28,6 +29,7 @@ function SingleHead({corners,post,date,route,map}) {
   const activeTitle=titles.find((item)=>(item.type==post.type)).name
   return (
     <>
+    
       <section className="single-head">
             <div className="top">
               <span className="category">{activeTitle}</span>

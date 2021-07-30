@@ -25,6 +25,7 @@ function FoodcortsPage() {
   const visibleFoodcorts=useSelector(({foodcorts})=>foodcorts.visibleFoodcorts);
   const isLoaded=useSelector(({foodcorts})=>foodcorts.isLoaded);
   const [showPosts,setShowPost]=useState(false)
+  const [showSidebar,setShowSidebar]=useState(false)
 
   React.useEffect(()=>{
     if(!isLoaded){
@@ -34,6 +35,9 @@ function FoodcortsPage() {
   React.useEffect(()=>{
     if(isLoaded){
       setShowPost(true)
+      setTimeout(()=>{
+        setShowSidebar(true)
+      },100)
     }
     console.log(isLoaded,showPosts)
   })
@@ -49,7 +53,7 @@ function FoodcortsPage() {
           <CSSTransition
                 in={showPosts}
                 out={showPosts}
-                timeout={1000}
+                timeout={100}
                 classNames="newstransition"
                 unmountOnExit
               >
@@ -67,7 +71,18 @@ function FoodcortsPage() {
                 {visibleFoodcorts < foodcorts.length &&
                   <button className="button load-more" onClick={()=>(dispatch(setVisibleFoodcorts()))} type="button">Загрузить ещё</button>
                 }
-                {isMobile? <Random/> : null}
+                {isMobile? 
+                  <CSSTransition
+                in={showSidebar}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+                <div>
+                  <Random/>
+                </div>
+              </CSSTransition>
+                 : null}
                 </div>
               </CSSTransition>
           

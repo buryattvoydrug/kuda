@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
@@ -16,6 +16,7 @@ import PageNotFound from './PageNotFound';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ToMapSingle from '../Components/ToMapSingle';
+import { CSSTransition } from 'react-transition-group';
 
 
 
@@ -50,35 +51,26 @@ function Single({map}) {
   const post=items.find((item)=>(item.id==postNumber))
 
   // console.log(post)
+  const [showPosts,setShowPost]=useState(false)
+  const [showSidebar,setShowSidebar]=useState(false)
+  
   React.useEffect(()=>{
     if(!isLoaded){
       dispatch(fetchPosts());
     }
-    
-  },[isLoaded,dispatch]);
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 0.5
-  };
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      x: "-100vw",
-      scale: 0.8
-    },
-    in: {
-      opacity: 1,
-      x: 0,
-      scale: 1
-    },
-    out: {
-      opacity: 0,
-      x: "100vw",
-      scale: 1.2
-    }
-  };
-  // console.log(post)
+  },[dispatch]);
+  React.useEffect(()=>{
+    // console.log(isLoaded)
+
+    // if(isLoaded){
+    // console.log("loaded")
+
+      setShowPost(true)
+      setTimeout(()=>{
+        setShowSidebar(true)
+      },100)
+    // }
+  })
   return (
     <>
     {map? 
@@ -90,24 +82,31 @@ function Single({map}) {
       <section className="single-page page">
       <div className="container">
       
-      { post ? (
-          <motion.div  initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}>
-          <SingleHead location={location} map={map} date={post.date.split('-')} post={post}/>
+        <CSSTransition
+                in={showPosts}
+                timeout={3000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+          <div >
+          <SingleHead  location={location} map={map} date={post.date.split('-')} post={post}/>
           <WideBlock img={post.acf["cafe-item-img1"]} text={post.acf["cafe-item-text1"]} />
           <SlimBlock map post={post}/>
           <SingleBottom map={map} author={post.acf["post-author"].data.display_name} post={post}/>
-          </motion.div>
-      
-      ):""}
-      {isMobile? 
-          <>
-            <Share/>
-          </>
-          :''}
+          </div>
+          </CSSTransition>
+          {isMobile? 
+                  <CSSTransition
+                in={showSidebar}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+                <div>
+                  <Share/>
+                </div>
+              </CSSTransition>
+                 : null}
       </div>
         
         {isMobile? null:

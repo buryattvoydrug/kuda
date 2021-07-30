@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 
 import '../../scss/Components/Single/NewsItem.scss'
 
 function NewsItem({post,single}) {
   const isDark=post.acf["black-text"]
 
+  const [show,setShow]=useState(false)
+
+  React.useEffect(() => {
+    setTimeout(()=>{
+      setShow(true)
+    },200)
+  }, [])
 
   const day=Number(post.date.split('-')[2].slice(0,2))
   const month=Number(post.date.split('-')[1])
@@ -18,7 +26,12 @@ function NewsItem({post,single}) {
 
 
   return (
-    <>
+    <><CSSTransition
+                in={show}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
       <Link to={`/news/${post.id}`} className={isDark? "news__item dark_news":"news__item"}>
           
           <div className="news-top">
@@ -43,6 +56,7 @@ function NewsItem({post,single}) {
           <h1 className="news__title">{post.acf.news__title}</h1>
           {single? <span className="news__text">{post.acf.news__text}</span> : null}
         </Link>
+        </CSSTransition>
     </>
   )
 }

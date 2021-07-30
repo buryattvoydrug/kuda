@@ -1,13 +1,20 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { CSSTransition } from 'react-transition-group'
 import {addPizzaToCart, removeCartItem} from '../redux/actions/cart'
 import '../scss/Components/CafeItem.scss'
+import '../scss/Transitions.scss'
 
 function CafeItem({wide,post,toDelete,isCart,map}) {
   const price=Number(post.acf["cafe-item-prices"])
 
-    
-
+  const [show,setShow]=useState(false)
+  
+  React.useEffect(() => {
+    setTimeout(()=>{
+      setShow(true)
+    },200)
+  }, [])
   const [active,setActive]=useState(false)
   const [g,setG]=useState(true)
 
@@ -16,7 +23,15 @@ function CafeItem({wide,post,toDelete,isCart,map}) {
   if(map){
     type='map/'+type
   }
+
+  // console.log(show)
   return (
+    <CSSTransition
+                in={show}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
       <div className={wide? "item cafe-item cafe-item-wide" : "item cafe-item"}>
         <Link to={'/'+type+`/${post.id}`}>
           <img className="cafe-item__img" src={post.acf["cafe-item-main-img"]} alt="" />
@@ -45,7 +60,7 @@ function CafeItem({wide,post,toDelete,isCart,map}) {
           </div>
 
           {isCart?
-            <button className="fave__button" onClick={removeCartItem(post)}>
+            <button className="fave__button" onClick={()=>{setTimeout(removeCartItem(post),200);setShow(false)}}>
             <img src="/images/fave_active.svg" alt="" />
           </button>
           :
@@ -56,6 +71,7 @@ function CafeItem({wide,post,toDelete,isCart,map}) {
           </button>}
         </div>
       </div>
+      </CSSTransition>
   )
 }
 

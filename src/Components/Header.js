@@ -43,7 +43,7 @@ function Header({map}) {
     var div = document.querySelector('header');
     var scrolled = window.pageYOffset || document.documentElement.scrollTop;
     var dY = scrolled - oldScrollY;
-    console.log(div.classList)
+    // console.log(div.classList)
     if ( dY > 0 ){
       div.classList.add('header_hidden');
     } else {

@@ -13,9 +13,8 @@ import SingleBlog from './Pages/SingleBlog';
 import {Route, Switch, useLocation } from 'react-router-dom'
 import PostsPage from './Pages/PostsPage';
 import FoodcortsPage from './Pages/FoodcortsPage';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { AnimatePresence } from "framer-motion";
 import MapSinglePage from './Pages/MapSinglePage';
 
 
@@ -25,22 +24,23 @@ function App() {
   const isLoadedPosts=useSelector(({posts})=>posts.isLoaded);
   const isLoadedFoodcorts=useSelector(({foodcorts})=>foodcorts.isLoaded);
   const isLoadedNews=useSelector(({news})=>news.isLoaded);
-  const isLoadedPlaces=useSelector(({random})=>random.isLoadedPlaces);
 
   
 
   const [active,setActive] = useState(true)
-
-    if(isLoadedNews || isLoadedFoodcorts || isLoadedPosts||isLoadedPlaces){
+  // console.log(isLoadedNews,isLoadedFoodcorts,isLoadedPosts)
+  React.useEffect(()=>{
+    if(isLoadedNews && isLoadedFoodcorts && isLoadedPosts){
       setTimeout(function() {
         setActive(false)
-     },700);
+     },10);
     }
+  })
+    
     
   return (
     <>
       {/* <Header/> */}
-        <AnimatePresence>
           <Switch location={location} key={location.key}>
             <Route exact path="/"><Main/></Route>
             <Route exact path="/blog/"><BlogList/></Route>
@@ -57,7 +57,6 @@ function App() {
             <Route exact path="/routes/:id"><Routee/></Route>
             <Route path="*" component={PageNotFound}/>
           </Switch>
-        </AnimatePresence>
         {/* <Footer/> */}
       {/* {!!active ? '':  */}
           <div className={!active ? "preloader hidden_preloader" : "preloader"}>

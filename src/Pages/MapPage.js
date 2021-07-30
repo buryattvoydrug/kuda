@@ -1,30 +1,18 @@
 import React, { useState } from 'react'
-import App from '../App'
 import '../scss/Pages/MapPage.scss'
-import Main from './Main'
-import PostsPage from './PostsPage'
-import { connect, Provider } from 'react-redux';
 
 import BigMap from '../Components/BigMap'
 import {BrowserRouter, Route,HashRouter, Switch, useLocation } from 'react-router-dom'
-import PageNotFound from './PageNotFound'
 import Single from './Single'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchRandom } from '../redux/actions/random'
-import CafeItem from '../Components/CafeItem'
 import { fetchPosts, setVisiblePosts } from '../redux/actions/posts'
 import { fetchFoodcorts } from '../redux/actions/foodcorts'
 import { fetchNews } from '../redux/actions/news'
 import Foodcort from './Foodcort'
-import Routee from './Routee'
 import { Link } from 'react-router-dom';
-import store from '../redux/store'      
-import Cart from '../Components/Cart'
-import { addPizzaToCart, removeCartItem } from '../redux/actions/cart'
 import { Dimensions } from 'react-native'
-import Header from '../Components/Header'
-import {Link as ScrolLink} from 'react-scroll';
-import MapHeader from '../Components/MapHeader'
+import { CSSTransition } from 'react-transition-group'
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -64,6 +52,8 @@ function MapPage() {
   const [activeCategory,setActiveCategory]=useState("Все")
   function setCategory(cat){
     setActiveCategory(cat)
+    setCategoryIsChanged(false)
+    setTimeout(()=>{setCategoryIsChanged(true)},100)
   }
   const filtredItems=arrayCat.map((item,index)=>(
     item.findIndex(i=>i===activeCategory)
@@ -108,6 +98,8 @@ function MapPage() {
     setItems(buttons[index].data)
     setCart(false)
     setSingleItem(null)
+    setCategoryIsChanged(false)
+    setTimeout(()=>{setCategoryIsChanged(true)},100)
     if(index===3){
       setCategory("Кофе")
     } else {
@@ -119,7 +111,8 @@ function MapPage() {
     setItems(cartItems)
     setActive(-1)
     setActive(4)
-
+    setCategoryIsChanged(false)
+    setTimeout(()=>{setCategoryIsChanged(true)},100)
   }
 
   let itemsToShow=[]
@@ -146,7 +139,14 @@ function MapPage() {
 
  
   window.addEventListener('scroll', progressBar);
+  const [showPosts,setShowPost]=useState(false)
+  const [categoryIsChanged,setCategoryIsChanged]=useState(true)
 
+  React.useEffect(()=>{
+    if(isLoadedPosts && isLoadedFoodcorts){
+      setShowPost(true)
+    }
+  })
  
 
   function progressBar(e){
@@ -278,8 +278,13 @@ function MapPage() {
             <HashRouter>
               <Switch>
                 <Route exact path="/map/">
+                      <CSSTransition
+                      in={showPosts}
+                      timeout={1000}
+                      classNames="newstransition"
+                      unmountOnExit
+                    >
                         <div className="random-block">
-                      {/* {buttons.map((item,index)=> */}
                           <div className="random-buttons-list">
                           <button id="food" onClick={()=>toggleButton(0)} className={active===0? " random__button active_button" : " random__button"}>
                             <span>Еда</span>
@@ -289,10 +294,6 @@ function MapPage() {
                             <span>Фудкорт</span>
                             <img src="/images/foodcort-button.png" alt="" />
                           </button>
-                          {/* <button id="route" onClick={()=>toggleButton(1)} className={active===1? " random__button active_button" : " random__button"}>
-                            <span>Маршрут прогулки</span>
-                            <img src="/images/route-button.png" alt="" />
-                          </button> */}
                           {cartItems.length? 
                             <button id="favs" onClick={()=>toggleCart()} className={active===4? " random__button active_button" : " random__button"}>
                             <span>Избранное</span>
@@ -309,45 +310,11 @@ function MapPage() {
                           {/* )} */}
 
                     </div>
+                   </CSSTransition>
+
                     {isMobile && !list? null:
                       <>
-                      {/* <div className="category-type">
-                        <h2 className="category__title">{buttons[active].name}</h2>
-                      </div> */}
-                      {/* <div className="items-list">
-                    { active!==-1 && items.map((item,index)=>(
-                      <>
-                          <div toDelete={cart.includes('"id":'+item.id)} onClick={()=>setSingleItem(item)} className={index%5===0? "item cafe-item cafe-item-wide" : "item cafe-item"}>
-                                  <Link to={'/map/'+item.type+`/${item.id}`}>
-                                    <img className="cafe-item__img" src={item.acf["cafe-item-main-img"]} alt="" />
-                                  </Link>
-                                  <div className="item-info">
-                                  <div className="prefs">
-                                              <div className="price">
-                                              { [...Array(Number(item.acf["cafe-item-prices"]))].map((i, index) =>                       
-                                              <span className="active_price" key={index}><img src={item.type==='routes'? "/images/people.svg":"/images/rub.svg"} alt=""/></span>
-                                              ) }
-                                              { [...Array(5-Number(item.acf["cafe-item-prices"]))].map((i, index) =>                       
-                                              <span key={index}><img src={item.type==='routes'? "/images/people.svg":"/images/rub.svg"} alt=""/></span>
-                                              ) }
-                                              </div>
-                                              {item.acf["cafe-item-vegan"]? 
-                                              <img src={item.type==='routes'? "/images/bike.svg":"/images/vegan.svg"} alt="" className="vegan-icon" />
-                                              : null}
-                                              
-                                            </div>
-                                    <Link to={'/map/'+item.type+`/${item.id}`}>
-                                      <h3 className="item__title">{item.title.rendered}</h3>
-                                    </Link>
-                                    <div className="address">
-                                      <img src="/images/pin.svg" alt="" className="pin" />
-                                      <span className="address__text">{item.acf["cafe-item-address"]}</span>
-                                    </div>
-                                </div>
-                                </div>
-                      </>
-                            ))}
-                    </div> */}
+                      
                     <div className="blog-page page">
           <div className="container">
             
@@ -374,7 +341,13 @@ function MapPage() {
                 :null}
                 </>
               :null}
-            
+              <CSSTransition
+                      in={categoryIsChanged}
+                      timeout={1000}
+                      classNames="newstransition"
+                      unmountOnExit
+                    >
+                    <div>
             <div className="items-list" id="items-list">
             {itemsToShow.length? (itemsToShow.map((post,index)=>(
               <div className={index%5===0? "item cafe-item cafe-item-wide" : "item cafe-item"} onClick={()=>setSingleItem(post)}>
@@ -415,6 +388,8 @@ function MapPage() {
               
                     ))):''}
             </div>
+            </div>
+          </CSSTransition>
             </>
 
           </div>

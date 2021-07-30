@@ -134,15 +134,23 @@ function Main() {
           {(isMobile)? 
           <>
             {/* <Random/> */}
-            <Share/>
+            <CSSTransition
+                in={showFoodcorts}
+                timeout={3000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+                <div><Share/></div>
+          </CSSTransition>
           </>
           :''}
         </div>
         {isMobile? null:
-          <div className="sidebar-container">
-              <div div className="right-banner"></div>
-              <Share/>
-          </div>
+          
+            <div className="sidebar-container">
+                <div div className="right-banner"></div>
+                <Share/>
+            </div>
         }
       </div>
       <Footer/>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Dimensions } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
@@ -14,6 +14,7 @@ import {Link as ScrolLink} from 'react-scroll';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import ToMapSingle from '../Components/ToMapSingle';
+import { CSSTransition } from 'react-transition-group';
 
 
 
@@ -32,37 +33,23 @@ function SingleBlog() {
     if(!isLoadedNews){
       dispatch(fetchNews());
     }
-  },[isLoadedNews,dispatch]);
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 0.5
-  };
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      x: "-100vw",
-      scale: 0.8
-    },
-    in: {
-      opacity: 1,
-      x: 0,
-      scale: 1
-    },
-    out: {
-      opacity: 0,
-      x: "100vw",
-      scale: 1.2
-    }
-  };
+  },[dispatch]);
+  const [showPosts,setShowPost]=useState(false)
+  const [showSidebar,setShowSidebar]=useState(false)
+
+  React.useEffect(()=>{
+      setShowPost(true)
+      setTimeout(()=>{
+        setShowSidebar(true)
+      },100)
+    // }
+  })
 
   const location = useLocation();
   const newsLocation=location.pathname.split('/')
   const newsNumber=newsLocation[newsLocation.length-1]
   const newsitem=news.find((item)=>(item.id==newsNumber))
-
-
-
+  
   // console.log(newsitem)
   return (
     <>
@@ -72,12 +59,13 @@ function SingleBlog() {
 
 <section className="single-page single-blog page">
   <div className="container">
-  {newsitem? (
-    <motion.div  initial="initial"
-        animate="in"
-        exit="out"
-        variants={pageVariants}
-        transition={pageTransition}>
+    <CSSTransition
+                in={showPosts}
+                timeout={3000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+          <div >
     <NewsItem single post={newsitem}/>
    
 
@@ -85,11 +73,20 @@ function SingleBlog() {
 
     <SingleBottom author={newsitem.acf["news-author"].data.display_name} post={newsitem}/>
     {isMobile? 
-    <Share wide/>
+      <CSSTransition
+                in={showSidebar}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+                <div>
+      <Share wide/>
+    </div>
+    </CSSTransition>
     : null
     }
-    </motion.div>
-    ):""}
+    </div>
+              </CSSTransition>
   </div>
   {isMobile? null:
     <div className="sidebar-container">

@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import '../scss/Pages/BlogList.scss'
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import { CSSTransition } from 'react-transition-group';
 
 const windowWidth = Dimensions.get('window').width;
 const isMobile = (windowWidth<1280)
@@ -18,6 +19,7 @@ const isMobile = (windowWidth<1280)
 function BlogList() {
   window.scrollTo(0, 0)
 
+  const [categoryIsChanged,setCategoryIsChanged]=useState(true)
 
   const dispatch = useDispatch();
 
@@ -25,34 +27,25 @@ function BlogList() {
   const visibleNews=useSelector(({news})=>news.visibleNews);
   const isLoadedNews=useSelector(({news})=>news.isLoaded);
 
+  const [showPosts,setShowPost]=useState(false)
+  const [showSidebar,setShowSidebar]=useState(false)
+
   React.useEffect(()=>{
     if(!isLoadedNews){
       dispatch(fetchNews());
     }
-  },[isLoadedNews,dispatch]);
+  },[dispatch]);
 
-  const pageTransition = {
-    type: "tween",
-    ease: "anticipate",
-    duration: 0.5
-  };
-  const pageVariants = {
-    initial: {
-      opacity: 0,
-      x: "-100vw",
-      scale: 0.8
-    },
-    in: {
-      opacity: 1,
-      x: 0,
-      scale: 1
-    },
-    out: {
-      opacity: 0,
-      x: "100vw",
-      scale: 1.2
+  React.useEffect(()=>{
+    if(isLoadedNews){
+      setShowPost(true)
+      setTimeout(()=>{
+        setShowSidebar(true)
+      },2000)
     }
-  };
+    console.log(isLoadedNews,showPosts)
+  })
+  
   
   let categories=[]
   let categoriesNames=[]
@@ -77,6 +70,8 @@ function BlogList() {
   const [active,setActive]=useState("Все")
   function setCategory(cat){
     setActive(cat)
+    setCategoryIsChanged(false)
+    setTimeout(()=>{setCategoryIsChanged(true)},100)
   }
   const filtredItems=arrayCat.map((item,index)=>(
     item.findIndex(i=>i===active)
@@ -93,14 +88,14 @@ function BlogList() {
      <div className="wrapper">
      <div className="blog-page page">
         <div className="container">
-      { isLoadedNews ? (
-
-          <>
-          <motion.div initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}>
+          <CSSTransition  
+                in={showPosts}
+                out={showPosts}
+                timeout={100}
+                classNames="newstransition"
+                unmountOnExit
+              >
+          <div>
           <div className="category-type">
             <h2 className="category__title">Блог</h2>
             {isMobile? null :
@@ -118,19 +113,35 @@ function BlogList() {
             </div>
           :null}
           
+          <CSSTransition
+                in={categoryIsChanged}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
           <div className="items-list blog-list">
           {isLoadedNews? (itemsToShow.slice(0, visibleNews).map((item,index)=>(
             <NewsItem key={index} post={item}/>
                   ))):''}
           </div>
+          </CSSTransition>
           {visibleNews < news.length &&
              <button className="button load-more" onClick={()=>(dispatch(setVisibleNews()))} type="button">Загрузить ещё</button>
           }
-          </motion.div>
-          {isMobile? <Random/> : null}
-          </>
-
-      ):""}
+          </div>
+          </CSSTransition>
+          {isMobile? 
+                  <CSSTransition
+                in={showSidebar}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+                <div>
+                  <Random/>
+                </div>
+              </CSSTransition>
+                 : null}
 
         </div>
         {isMobile? null:

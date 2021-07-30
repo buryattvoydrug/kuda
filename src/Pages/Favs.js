@@ -19,8 +19,14 @@ export default function Favs() {
   window.scrollTo(0, 0)
 
   const [showPosts,setShowPost]=useState(false)
+  const [showSidebar,setShowSidebar]=useState(false)
+
+
   setTimeout(()=>{
     setShowPost(true)
+    setTimeout(()=>{
+      setShowSidebar(true)
+    },100)
   },100)
 
   return (
@@ -31,7 +37,6 @@ export default function Favs() {
         <div className="container">
         <CSSTransition
                 in={showPosts}
-                out={showPosts}
                 timeout={1000}
                 classNames="newstransition"
                 unmountOnExit
@@ -46,7 +51,18 @@ export default function Favs() {
                 <div className="items-list">
                   <Cart/>
                 </div>
-            {isMobile? <Random/> : null}
+                {isMobile? 
+                  <CSSTransition
+                in={showSidebar}
+                timeout={1000}
+                classNames="newstransition"
+                unmountOnExit
+              >
+                <div>
+                  <Random/>
+                </div>
+              </CSSTransition>
+                 : null}
           </div>
           </CSSTransition>
         </div>
