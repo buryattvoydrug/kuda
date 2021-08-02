@@ -95,6 +95,14 @@
     margin-bottom: 20px;
   }
 }
+.single-blog{
+  .news__title{
+    font-size: 42px;
+  }
+  .news__text{
+    font-size: 16px !important;
+  }
+}
 @media(max-width:1279px){
   .single-blog{
     padding-top: 60px;

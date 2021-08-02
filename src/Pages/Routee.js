@@ -28,6 +28,7 @@ function Place({top,item,index,length,map}){
   const isMobile = (windowWidth<1280) || map
   return (
     <>
+    
       <div className={top? "place__item top_place__item":"place__item"}>
       {isMobile?
       <img src="/images/m-top-line.svg" alt="" className="m-top-line" />

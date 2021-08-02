@@ -67,9 +67,7 @@ function Main() {
       if(isLoadedNews){
         setShowNews(true)
       }
-      console.log(showPosts,showFoodcorts,showNews)
     })
-  // console.log(posts,foodcorts,news) 
   const cart=localStorage.getItem('itemsCart')+''
   return (
     <>

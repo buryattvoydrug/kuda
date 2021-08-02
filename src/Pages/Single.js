@@ -17,6 +17,7 @@ import Header from '../Components/Header';
 import Footer from '../Components/Footer';
 import ToMapSingle from '../Components/ToMapSingle';
 import { CSSTransition } from 'react-transition-group';
+import MetaDecorator from '../Components/MetaDecorator';
 
 
 
@@ -79,7 +80,9 @@ function Single({map}) {
     :<Header/>}
     <div className="wrapper">
     {post===undefined? <PageNotFound/>: 
+    
       <section className="single-page page">
+
       <div className="container">
       
         <CSSTransition

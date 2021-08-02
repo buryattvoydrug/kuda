@@ -30,7 +30,7 @@ function App() {
   const [active,setActive] = useState(true)
   // console.log(isLoadedNews,isLoadedFoodcorts,isLoadedPosts)
   React.useEffect(()=>{
-    if(isLoadedNews && isLoadedFoodcorts && isLoadedPosts){
+    if(isLoadedNews || isLoadedFoodcorts || isLoadedPosts){
       setTimeout(function() {
         setActive(false)
      },10);

@@ -15,6 +15,7 @@ import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import ToMapSingle from '../Components/ToMapSingle';
 import { CSSTransition } from 'react-transition-group';
+import MetaDecorator from '../Components/MetaDecorator';
 
 
 
@@ -53,6 +54,7 @@ function SingleBlog() {
   // console.log(newsitem)
   return (
     <>
+    
     <Header/>
     <div className="wrapper">
     {newsitem===undefined? <PageNotFound/>: 
